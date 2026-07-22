@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600&display=swap");
+
+:root {
+  font-family: "Cormorant Garamond", serif;
+  color: #252525;
+  background: #ffffff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+.font-script {
+  font-family: "Allura", cursive;
+}
+
+/* Hero background movement */
+
+.hero-background {
+  animation: heroZoom 14s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.06);
+  }
+}
+
+/* Initial content animations */
+
+.animate-navbar {
+  animation: navbarReveal 900ms ease forwards;
+}
+
+.animate-subtitle {
+  opacity: 0;
+  animation: fadeUp 900ms ease 300ms forwards;
+}
+
+.animate-title {
+  opacity: 0;
+  animation: fadeUp 1000ms ease 500ms forwards;
+}
+
+.animate-scroll {
+  opacity: 0;
+  animation:
+    fadeUp 900ms ease 800ms forwards,
+    scrollBounce 2s ease-in-out 1.8s infinite;
+}
+
+@keyframes navbarReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Respect accessibility preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .hero-background {
+    transform: none;
+  }
+}
