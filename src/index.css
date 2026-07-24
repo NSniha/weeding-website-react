@@ -1,24 +1,41 @@
-@import "tailwindcss";
-
 @import url("https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600&display=swap");
 
+@import "tailwindcss";
+
 :root {
-  font-family: "Cormorant Garamond", serif;
-  color: #252525;
-  background: #ffffff;
+  color: #222;
+  background: #fff;
+  font-family: "Cormorant Garamond", Georgia, serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
+  min-width: 320px;
   scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  margin: 0;
   overflow-x: hidden;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
 button,
@@ -27,99 +44,22 @@ a {
 }
 
 button {
-  font: inherit;
+  color: inherit;
 }
 
-.font-script {
-  font-family: "Allura", cursive;
+img,
+svg {
+  display: block;
+  max-width: 100%;
 }
 
-/* Hero background movement */
-
-.hero-background {
-  animation: heroZoom 14s ease-in-out infinite alternate;
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(157, 125, 97, 0.85);
+  outline-offset: 4px;
 }
 
-@keyframes heroZoom {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(1.06);
-  }
-}
-
-/* Initial content animations */
-
-.animate-navbar {
-  animation: navbarReveal 900ms ease forwards;
-}
-
-.animate-subtitle {
-  opacity: 0;
-  animation: fadeUp 900ms ease 300ms forwards;
-}
-
-.animate-title {
-  opacity: 0;
-  animation: fadeUp 1000ms ease 500ms forwards;
-}
-
-.animate-scroll {
-  opacity: 0;
-  animation:
-    fadeUp 900ms ease 800ms forwards,
-    scrollBounce 2s ease-in-out 1.8s infinite;
-}
-
-@keyframes navbarReveal {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(35px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scrollBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(8px);
-  }
-}
-
-/* Respect accessibility preferences */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-  }
-
-  .hero-background {
-    transform: none;
-  }
+::selection {
+  color: #fff;
+  background: #a5876d;
 }
