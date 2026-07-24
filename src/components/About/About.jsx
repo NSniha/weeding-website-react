@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import awardLeaf from "../../assets/icons/award-leaf.svg";
 import quoteMark from "../../assets/icons/quote-mark.svg";
 import floralDivider from "../../assets/icons/floral-divider.svg";
-import photographerImage from "../../assets/images/photographer.jpg";
+import photographerImage from "../../assets/images/photographer.png";
 
 import "./about.css";
 
