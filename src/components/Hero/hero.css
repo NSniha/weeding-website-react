@@ -4,87 +4,97 @@
   height: 100svh;
   min-height: 760px;
   overflow: hidden;
-  background: #d8d5ce;
+  background: #d6d2cb;
+}
+
+.wedding-hero__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
 }
 
 .wedding-hero__image {
-  position: absolute;
-  inset: 0;
-  background-image: url("/public/images/wedding-hero.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  transform: scale(1.001);
-  animation: hero-image-enter 1.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center center;
+  opacity: 0;
+  transform: scale(1.06);
+  animation: hero-image-reveal 1.7s cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
 }
 
-.wedding-hero__light {
+.wedding-hero__overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.035) 0%,
-      rgba(255, 255, 255, 0.015) 45%,
-      rgba(28, 23, 19, 0.035) 100%
+      rgba(255, 255, 255, 0.025) 0%,
+      rgba(255, 255, 255, 0.012) 45%,
+      rgba(30, 25, 21, 0.04) 100%
     );
   pointer-events: none;
 }
 
 .wedding-hero__content {
   position: absolute;
-  top: 39.4%;
+  top: 39.5%;
   left: 50%;
   z-index: 2;
-  width: min(calc(100% - 80px), 1120px);
+  width: min(calc(100% - 70px), 1120px);
   text-align: center;
   transform: translateX(-50%);
 }
 
 .wedding-hero__subtitle {
   margin: 0;
-  color: #c8a889;
+  color: #c5a586;
   font-family: "Allura", cursive;
-  font-size: clamp(58px, 4.85vw, 70px);
+  font-size: clamp(56px, 4.7vw, 68px);
   font-weight: 400;
   line-height: 1;
-  letter-spacing: 0.004em;
-  text-shadow: 0 2px 12px rgba(64, 45, 30, 0.05);
+  letter-spacing: 0;
+  text-shadow: 0 2px 12px rgba(67, 45, 29, 0.04);
   opacity: 0;
-  animation: hero-text-enter 1s 350ms cubic-bezier(0.22, 1, 0.36, 1)
-    forwards;
+  transform: translateY(30px);
+  animation: hero-content-reveal 1s 350ms
+    cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .wedding-hero__title {
-  margin: 34px 0 0;
+  max-width: 1100px;
+  margin: 34px auto 0;
   color: #fff;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(63px, 5.3vw, 77px);
-  font-weight: 500;
+  font-size: clamp(62px, 5.25vw, 76px);
+  font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.015em;
-  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.07);
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.065);
   opacity: 0;
-  animation: hero-text-enter 1s 550ms cubic-bezier(0.22, 1, 0.36, 1)
-    forwards;
+  transform: translateY(35px);
+  animation: hero-content-reveal 1s 520ms
+    cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes hero-image-enter {
+@keyframes hero-image-reveal {
   from {
     opacity: 0;
-    transform: scale(1.075);
+    transform: scale(1.06);
   }
 
   to {
     opacity: 1;
-    transform: scale(1.001);
+    transform: scale(1);
   }
 }
 
-@keyframes hero-text-enter {
+@keyframes hero-content-reveal {
   from {
     opacity: 0;
-    transform: translateY(36px);
+    transform: translateY(35px);
   }
 
   to {
@@ -102,16 +112,16 @@
 @media (max-width: 1280px) {
   .wedding-hero__content {
     top: 40%;
-    width: min(calc(100% - 60px), 1000px);
+    width: min(calc(100% - 56px), 1000px);
   }
 
   .wedding-hero__subtitle {
-    font-size: clamp(52px, 5.1vw, 64px);
+    font-size: clamp(50px, 5vw, 62px);
   }
 
   .wedding-hero__title {
     margin-top: 28px;
-    font-size: clamp(57px, 5.7vw, 70px);
+    font-size: clamp(56px, 5.7vw, 69px);
   }
 }
 
@@ -121,7 +131,7 @@
   }
 
   .wedding-hero__image {
-    background-position: 43% center;
+    object-position: 43% center;
   }
 
   .wedding-hero__content {
@@ -130,12 +140,12 @@
   }
 
   .wedding-hero__subtitle {
-    font-size: clamp(48px, 7vw, 61px);
+    font-size: clamp(46px, 7vw, 59px);
   }
 
   .wedding-hero__title {
     margin-top: 25px;
-    font-size: clamp(54px, 7.5vw, 68px);
+    font-size: clamp(53px, 7.4vw, 67px);
   }
 }
 
@@ -145,33 +155,35 @@
   }
 
   .wedding-hero__image {
-    background-position: 39% center;
+    object-position: 39% center;
   }
 
-  .wedding-hero__light {
+  .wedding-hero__overlay {
     background:
       linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.02) 0%,
-        rgba(20, 16, 13, 0.02) 50%,
-        rgba(20, 16, 13, 0.16) 100%
+        rgba(255, 255, 255, 0.015) 0%,
+        rgba(23, 18, 15, 0.025) 50%,
+        rgba(23, 18, 15, 0.15) 100%
       );
   }
 
   .wedding-hero__content {
-    top: 42.5%;
+    top: 42%;
     width: calc(100% - 34px);
   }
 
   .wedding-hero__subtitle {
-    font-size: clamp(42px, 10vw, 57px);
+    max-width: 620px;
+    margin-inline: auto;
+    font-size: clamp(41px, 9.8vw, 56px);
     line-height: 0.98;
   }
 
   .wedding-hero__title {
     max-width: 650px;
-    margin: 24px auto 0;
-    font-size: clamp(47px, 10.5vw, 62px);
+    margin-top: 23px;
+    font-size: clamp(46px, 10.4vw, 61px);
     line-height: 0.98;
   }
 }
@@ -182,36 +194,35 @@
   }
 
   .wedding-hero__image {
-    background-position: 36% center;
+    object-position: 36% center;
   }
 
   .wedding-hero__content {
-    top: 40%;
-    width: calc(100% - 30px);
+    top: 39.5%;
+    width: calc(100% - 28px);
   }
 
   .wedding-hero__subtitle {
-    max-width: 350px;
-    margin-inline: auto;
-    font-size: clamp(38px, 12vw, 50px);
-    line-height: 0.95;
+    max-width: 360px;
+    font-size: clamp(37px, 11.6vw, 48px);
+    line-height: 0.94;
   }
 
   .wedding-hero__title {
     max-width: 390px;
-    margin-top: 25px;
-    font-size: clamp(43px, 13.3vw, 57px);
+    margin-top: 24px;
+    font-size: clamp(42px, 13vw, 55px);
     line-height: 0.95;
   }
 }
 
 @media (max-width: 360px) {
   .wedding-hero__subtitle {
-    font-size: 37px;
+    font-size: 36px;
   }
 
   .wedding-hero__title {
-    font-size: 41px;
+    font-size: 40px;
   }
 }
 

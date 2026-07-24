@@ -13,19 +13,38 @@ const rightNavigation = [
   { id: 6, label: "Contact", href: "#contact" },
 ];
 
-const allNavigation = [...leftNavigation, ...rightNavigation];
+const mobileNavigation = [...leftNavigation, ...rightNavigation];
 
-function BrandLogo({ onClick }) {
+function Logo({ onClick }) {
   return (
     <a
       href="#home"
-      className="header-brand"
+      className="header-logo"
       aria-label="Tessa Morgan Photography home"
       onClick={onClick}
     >
-      <span className="header-brand__name">Tessa Morgan</span>
-      <span className="header-brand__caption">Photography</span>
+      <span className="header-logo__name">Tessa Morgan</span>
+      <span className="header-logo__caption">Photography</span>
     </a>
+  );
+}
+
+function DesktopNavigation({ links, position }) {
+  return (
+    <nav
+      className={`desktop-nav desktop-nav--${position}`}
+      aria-label={`${position} primary navigation`}
+    >
+      {links.map((link) => (
+        <a
+          key={link.id}
+          href={link.href}
+          className="desktop-nav__link"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
   );
 }
 
@@ -33,7 +52,7 @@ function MenuButton({ isOpen, onClick }) {
   return (
     <button
       type="button"
-      className={`mobile-menu-button ${isOpen ? "is-open" : ""}`}
+      className={`menu-button ${isOpen ? "is-active" : ""}`}
       aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
       aria-expanded={isOpen}
       aria-controls="mobile-navigation"
@@ -64,17 +83,29 @@ export default function Header() {
       }
     };
 
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        closeMenu();
+      }
+    };
+
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   useEffect(() => {
+    if (!isMenuOpen) {
+      return undefined;
+    }
+
     const previousOverflow = document.body.style.overflow;
 
-    document.body.style.overflow = isMenuOpen ? "hidden" : previousOverflow;
+    document.body.style.overflow = "hidden";
 
     return () => {
       document.body.style.overflow = previousOverflow;
@@ -84,79 +115,79 @@ export default function Header() {
   return (
     <>
       <header className="site-header">
-        <div className="header-surface">
+        <div className="header-background">
           <div className="header-container">
-            <nav
-              className="desktop-navigation desktop-navigation--left"
-              aria-label="Primary left navigation"
-            >
-              {leftNavigation.map((item) => (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  className="desktop-navigation__link"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
+            <DesktopNavigation
+              links={leftNavigation}
+              position="left"
+            />
 
-            <BrandLogo onClick={closeMenu} />
+            <Logo onClick={closeMenu} />
 
-            <nav
-              className="desktop-navigation desktop-navigation--right"
-              aria-label="Primary right navigation"
-            >
-              {rightNavigation.map((item) => (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  className="desktop-navigation__link"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
+            <DesktopNavigation
+              links={rightNavigation}
+              position="right"
+            />
 
-            <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
+            <MenuButton
+              isOpen={isMenuOpen}
+              onClick={toggleMenu}
+            />
           </div>
         </div>
       </header>
 
-      <div
-        className={`mobile-menu-overlay ${isMenuOpen ? "is-visible" : ""}`}
-        aria-hidden="true"
+      <button
+        type="button"
+        className={`mobile-overlay ${
+          isMenuOpen ? "is-visible" : ""
+        }`}
+        aria-label="Close navigation menu"
+        tabIndex={isMenuOpen ? 0 : -1}
         onClick={closeMenu}
       />
 
       <aside
         id="mobile-navigation"
-        className={`mobile-navigation ${isMenuOpen ? "is-open" : ""}`}
+        className={`mobile-navigation ${
+          isMenuOpen ? "is-open" : ""
+        }`}
         aria-label="Mobile navigation"
         aria-hidden={!isMenuOpen}
       >
-        <nav className="mobile-navigation__links">
-          {allNavigation.map((item, index) => (
+        <nav className="mobile-navigation__menu">
+          {mobileNavigation.map((link, index) => (
             <a
-              key={item.id}
-              href={item.href}
+              key={link.id}
+              href={link.href}
               className="mobile-navigation__link"
               onClick={closeMenu}
+              tabIndex={isMenuOpen ? 0 : -1}
               style={{
-                "--mobile-link-delay": `${100 + index * 55}ms`,
+                "--link-delay": `${120 + index * 55}ms`,
               }}
             >
-              <span>{item.label}</span>
-              <span aria-hidden="true">↗</span>
+              <span>{link.label}</span>
+
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M7 17L17 7M9 7H17V15"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </a>
           ))}
         </nav>
 
         <div className="mobile-navigation__footer">
-          <span className="mobile-navigation__signature">
-            Tessa Morgan
-          </span>
-
+          <span>Tessa Morgan</span>
           <p>Artistic wedding photography</p>
         </div>
       </aside>

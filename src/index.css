@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500&family=Italianno&display=swap");
 
 @import "tailwindcss";
 
@@ -55,11 +55,11 @@ svg {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid rgba(157, 125, 97, 0.85);
+  outline: 2px solid rgba(148, 118, 94, 0.8);
   outline-offset: 4px;
 }
 
 ::selection {
   color: #fff;
-  background: #a5876d;
+  background: #9f8067;
 }
