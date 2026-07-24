@@ -4,7 +4,7 @@
 
 :root {
   color: #222;
-  background: #fff;
+  background: #ffffff;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -43,10 +43,6 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-button {
-  color: inherit;
-}
-
 img,
 svg {
   display: block;
@@ -55,11 +51,11 @@ svg {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid rgba(148, 118, 94, 0.8);
+  outline: 2px solid rgba(185, 144, 108, 0.75);
   outline-offset: 4px;
 }
 
 ::selection {
-  color: #fff;
-  background: #9f8067;
+  color: #ffffff;
+  background: #b9906e;
 }
