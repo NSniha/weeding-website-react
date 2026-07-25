@@ -195,6 +195,7 @@
 
   .wedding-hero__image {
     object-position: 36% center;
+    height: 100%;
   }
 
   .wedding-hero__content {
