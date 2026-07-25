@@ -3,6 +3,7 @@ import Hero from "./components/Hero/Hero";
 import About from "./components/About/About";
 import Services from "./components/Services/Services";
 import CreativeStory from "./components/CreativeStory/CreativeStory";
+import FeaturedStory from "./components/FeaturedStory/FeaturedStory";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <About />
         <Services/>
         <CreativeStory/>
+        <FeaturedStory/>
       </main>
     </>
   );
