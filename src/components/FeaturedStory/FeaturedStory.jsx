@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
-import coupleImage from "../../assets/images/featured-couple.jpg";
-import brideImage from "../../assets/images/featured-bride.jpg";
+import coupleImage from "../../assets/images/featured-couple.png";
+import brideImage from "../../assets/images/featured-bride.png";
 
 import "./featured-story.css";
 
@@ -67,8 +67,9 @@ export default function FeaturedStory() {
             </h3>
 
             <p className="featured-story__description">
-              Lorem ipsum dolor sit amet consecte Dignissim consectetur
-              tristique purus vehicula felis velit.
+              A romantic celebration filled with quiet glances, joyful
+              laughter, and beautifully captured moments that will remain
+              timeless forever.
             </p>
           </div>
         </article>
@@ -76,7 +77,7 @@ export default function FeaturedStory() {
         <figure className="featured-story__image-frame featured-story__image-frame--main">
           <img
             src={coupleImage}
-            alt="Ricardo and Michelle standing together near a waterfall"
+            alt="Ricardo and Michelle sharing a romantic moment near a waterfall"
             className="featured-story__image"
             loading="lazy"
             decoding="async"
@@ -86,7 +87,7 @@ export default function FeaturedStory() {
         <figure className="featured-story__image-frame featured-story__image-frame--secondary">
           <img
             src={brideImage}
-            alt="Bride holding a wedding bouquet"
+            alt="Michelle holding an elegant wedding bouquet"
             className="featured-story__image"
             loading="lazy"
             decoding="async"

@@ -99,7 +99,7 @@
 .featured-story__couple-name {
   margin: 26px 0 0;
   color: #595755;
-  font-family: "Allura", "Italianno", cursive;
+  font-family: "Italianno", "Allura", cursive;
   font-size: 46px;
   font-weight: 400;
   line-height: 1;
@@ -156,6 +156,7 @@
 }
 
 .featured-story__image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -258,6 +259,10 @@
     margin-top: 57px;
   }
 
+  .featured-story__eyebrow {
+    font-size: 16px;
+  }
+
   .featured-story__heading {
     font-size: 59px;
   }
@@ -278,11 +283,13 @@
   }
 
   .featured-story__couple-name {
+    margin-top: 24px;
     font-size: 40px;
   }
 
   .featured-story__description {
     max-width: 350px;
+    margin-top: 17px;
     font-size: 22px;
   }
 
@@ -313,11 +320,20 @@
 @media (max-width: 1050px) {
   .featured-story {
     min-height: 790px;
+    padding-top: 70px;
   }
 
   .featured-story__stage {
     height: 560px;
     margin-top: 52px;
+  }
+
+  .featured-story__eyebrow {
+    font-size: 15px;
+  }
+
+  .featured-story__heading {
+    font-size: 55px;
   }
 
   .featured-story__information {
@@ -327,6 +343,7 @@
   }
 
   .featured-story__information-inner {
+    width: calc(100% - 48px);
     margin-left: 38px;
   }
 
@@ -335,12 +352,14 @@
   }
 
   .featured-story__couple-name {
+    margin-top: 22px;
     font-size: 36px;
     white-space: normal;
   }
 
   .featured-story__description {
     max-width: 315px;
+    margin-top: 16px;
     font-size: 20px;
   }
 
@@ -379,6 +398,8 @@
 
   .featured-story__eyebrow {
     font-size: 14px;
+    letter-spacing: 0.26em;
+    text-indent: 0.26em;
   }
 
   .featured-story__heading {
@@ -516,10 +537,12 @@
   .featured-story__couple-name {
     margin-top: 22px;
     font-size: 40px;
+    line-height: 1;
   }
 
   .featured-story__description {
     max-width: 330px;
+    margin-top: 17px;
     font-size: 19px;
     line-height: 1.4;
   }
@@ -539,12 +562,21 @@
 =================================== */
 
 @media (max-width: 380px) {
+  .featured-story {
+    padding: 54px 0;
+  }
+
   .featured-story__heading {
     font-size: 43px;
   }
 
   .featured-story__stage {
     width: calc(100% - 22px);
+    margin-top: 38px;
+  }
+
+  .featured-story__information {
+    padding: 39px 18px;
   }
 
   .featured-story__number {
@@ -557,6 +589,12 @@
 
   .featured-story__description {
     font-size: 18px;
+  }
+
+  .featured-story__button {
+    width: 165px;
+    min-height: 57px;
+    font-size: 20px;
   }
 }
 
