@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import coupleImage from "../../assets/images/creative-couple.jpg";
+import coupleImage from "../../assets/images/creative-couple.png";
 import creativeLeaf from "../../assets/icons/creative-leaf.svg";
 
 import "./creative-story.css";
