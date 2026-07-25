@@ -1,0 +1,409 @@
+/* ===================================
+   Contact Section
+=================================== */
+
+.contact-section {
+  width: 100%;
+  padding: 74px 0 92px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.contact-section__container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(calc(100% - 140px), 1100px);
+  min-height: 704px;
+  margin-inline: auto;
+}
+
+/* ===================================
+   Form Panel
+=================================== */
+
+.contact-section__form-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 65px 55px 62px;
+  background: #f7f7f7;
+  opacity: 0;
+  transform: translateX(-55px);
+  transition:
+    opacity 950ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 950ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-section.is-visible .contact-section__form-panel {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.contact-section__eyebrow {
+  margin: 0;
+  color: #bd9673;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.contact-section__heading {
+  max-width: 450px;
+  margin: 17px 0 0;
+  color: #585654;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(46px, 4vw, 57px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.005em;
+}
+
+.contact-section__intro {
+  max-width: 440px;
+  margin: 24px 0 0;
+  color: #6b6865;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+/* ===================================
+   Contact Form
+=================================== */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 54px;
+}
+
+.contact-form__field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 27px;
+}
+
+.contact-form__field label {
+  color: #555351;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.contact-form__field input,
+.contact-form__field textarea {
+  width: 100%;
+  padding: 10px 0 8px;
+  color: #3f3d3b;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #cbc8c5;
+  border-radius: 0;
+  outline: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 19px;
+  transition:
+    border-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.contact-form__field textarea {
+  min-height: 115px;
+  padding-top: 15px;
+  resize: vertical;
+}
+
+.contact-form__field input:focus,
+.contact-form__field textarea:focus {
+  border-color: #b68d69;
+  box-shadow: 0 1px 0 #b68d69;
+}
+
+.contact-form__field input[aria-invalid="true"],
+.contact-form__field textarea[aria-invalid="true"] {
+  border-color: #a45858;
+}
+
+.contact-form__error {
+  margin-top: 6px;
+  color: #945454;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.contact-form__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  min-width: 170px;
+  min-height: 55px;
+  margin-top: 1px;
+  padding: 13px 25px;
+  color: #55514e;
+  background: #e9e1da;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+  transition:
+    color 300ms ease,
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    transform 300ms ease;
+}
+
+.contact-form__button:hover,
+.contact-form__button:focus-visible {
+  color: #ffffff;
+  background: #b78e6b;
+  border-color: #b78e6b;
+  box-shadow: 0 13px 28px rgba(91, 67, 48, 0.15);
+  transform: translateY(-3px);
+}
+
+.contact-form__status {
+  min-height: 18px;
+  margin: 11px 0 0;
+  color: #947253;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* ===================================
+   Contact Image
+=================================== */
+
+.contact-section__media {
+  min-width: 0;
+  min-height: 704px;
+  margin: 0;
+  overflow: hidden;
+  background: #ded8cf;
+  opacity: 0;
+  transform: translateX(55px);
+  transition:
+    opacity 1s 150ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s 150ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-section.is-visible .contact-section__media {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.contact-section__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.07);
+  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-section.is-visible .contact-section__image {
+  transform: scale(1);
+}
+
+/* ===================================
+   Content Reveal
+=================================== */
+
+.contact-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 750ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 750ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-section.is-visible .contact-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-section.is-visible .contact-section__heading {
+  transition-delay: 110ms;
+}
+
+.contact-section.is-visible .contact-section__intro {
+  transition-delay: 190ms;
+}
+
+.contact-section.is-visible .contact-form {
+  transition-delay: 280ms;
+}
+
+/* ===================================
+   Laptop
+=================================== */
+
+@media (max-width: 1200px) {
+  .contact-section__container {
+    width: min(calc(100% - 80px), 1050px);
+    min-height: 650px;
+  }
+
+  .contact-section__form-panel {
+    padding: 55px 45px;
+  }
+
+  .contact-section__media {
+    min-height: 650px;
+  }
+
+  .contact-section__heading {
+    font-size: 51px;
+  }
+}
+
+/* ===================================
+   Tablet
+=================================== */
+
+@media (max-width: 850px) {
+  .contact-section {
+    padding: 65px 0 75px;
+  }
+
+  .contact-section__container {
+    grid-template-columns: 1fr;
+    width: calc(100% - 56px);
+    min-height: auto;
+  }
+
+  .contact-section__form-panel {
+    grid-row: 2;
+    padding: 60px 55px;
+  }
+
+  .contact-section__media {
+    grid-row: 1;
+    min-height: auto;
+    aspect-ratio: 4 / 3.2;
+  }
+
+  .contact-section__image {
+    object-position: center 43%;
+  }
+
+  .contact-section__heading {
+    max-width: 530px;
+  }
+
+  .contact-form {
+    max-width: 580px;
+  }
+}
+
+/* ===================================
+   Mobile
+=================================== */
+
+@media (max-width: 560px) {
+  .contact-section {
+    padding: 54px 0 62px;
+  }
+
+  .contact-section__container {
+    width: calc(100% - 28px);
+  }
+
+  .contact-section__media {
+    aspect-ratio: 4 / 4.4;
+  }
+
+  .contact-section__image {
+    object-position: center;
+  }
+
+  .contact-section__form-panel {
+    padding: 47px 25px 43px;
+  }
+
+  .contact-section__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.24em;
+  }
+
+  .contact-section__heading {
+    margin-top: 14px;
+    font-size: clamp(41px, 12vw, 50px);
+    line-height: 1.02;
+  }
+
+  .contact-section__intro {
+    margin-top: 20px;
+    font-size: 17px;
+  }
+
+  .contact-form {
+    margin-top: 42px;
+  }
+
+  .contact-form__field {
+    margin-bottom: 24px;
+  }
+
+  .contact-form__field label {
+    font-size: 16px;
+  }
+
+  .contact-form__field input,
+  .contact-form__field textarea {
+    font-size: 18px;
+  }
+
+  .contact-form__button {
+    min-width: 155px;
+    min-height: 52px;
+    font-size: 19px;
+  }
+}
+
+/* ===================================
+   Small Mobile
+=================================== */
+
+@media (max-width: 360px) {
+  .contact-section__container {
+    width: calc(100% - 20px);
+  }
+
+  .contact-section__form-panel {
+    padding-inline: 19px;
+  }
+
+  .contact-section__heading {
+    font-size: 39px;
+  }
+}
+
+/* ===================================
+   Reduced Motion
+=================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-section__form-panel,
+  .contact-section__media,
+  .contact-section__image,
+  .contact-reveal,
+  .contact-form__button {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
