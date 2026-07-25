@@ -156,6 +156,7 @@
 
   .wedding-hero__image {
     object-position: 39% center;
+    height: 100%;
   }
 
   .wedding-hero__overlay {
