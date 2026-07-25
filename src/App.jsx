@@ -6,6 +6,7 @@ import CreativeStory from "./components/CreativeStory/CreativeStory";
 import FeaturedStory from "./components/FeaturedStory/FeaturedStory";
 import Testimonials from "./components/Testimonials/Testimonials";
 import Stats from "./components/Stats/Stats";
+import Contact from "./components/Contact/Contact";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <FeaturedStory/>
         <Testimonials/>
         <Stats/>
+        <Contact/>
       </main>
     </>
   );
