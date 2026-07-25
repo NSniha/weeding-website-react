@@ -5,6 +5,7 @@ import Services from "./components/Services/Services";
 import CreativeStory from "./components/CreativeStory/CreativeStory";
 import FeaturedStory from "./components/FeaturedStory/FeaturedStory";
 import Testimonials from "./components/Testimonials/Testimonials";
+import Stats from "./components/Stats/Stats";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <CreativeStory/>
         <FeaturedStory/>
         <Testimonials/>
+        <Stats/>
       </main>
     </>
   );
