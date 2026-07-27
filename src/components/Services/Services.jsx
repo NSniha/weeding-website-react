@@ -1,8 +1,7 @@
-import { useEffect, useRef } from "react";
-
 import weddingIcon from "../../assets/icons/wedding-service.svg";
 import portraitIcon from "../../assets/icons/portrait-service.svg";
 import engagementIcon from "../../assets/icons/engagement-service.svg";
+import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 
 import "./services.css";
 
@@ -30,99 +29,97 @@ const services = [
   },
 ];
 
+function getRevealStyle(delay) {
+  return {
+    "--services-delay": `${delay}ms`,
+  };
+}
+
+function ServiceCard({ service, index }) {
+  return (
+    <article
+      style={getRevealStyle(220 + index * 150)}
+      className="services-card-reveal group flex min-h-[552px] min-w-0 flex-col items-center bg-surface px-[34px] pb-9 pt-11 text-center transition-shadow duration-[350ms] hover:shadow-[0_22px_55px_rgba(71,57,45,0.07)] max-[1280px]:min-h-[530px] max-[1280px]:px-[25px] max-[1024px]:min-h-[525px] max-[480px]:min-h-[500px] max-[480px]:px-[22px] max-[480px]:pb-8 max-[480px]:pt-9 max-[360px]:min-h-[480px]"
+    >
+      <div className="flex h-[162px] w-full items-center justify-center max-[480px]:h-[150px]">
+        <img
+          src={service.icon}
+          alt=""
+          aria-hidden="true"
+          className="h-[155px] w-auto object-contain transition-transform duration-500 ease-elegant group-hover:-translate-y-[7px] max-[480px]:h-[143px] motion-reduce:transform-none motion-reduce:transition-none"
+        />
+      </div>
+
+      <h3 className="mb-0 mt-1 font-script text-[61px] font-normal leading-[0.95] tracking-[0.01em] text-[#5a5957] max-[1280px]:text-[55px] max-[480px]:text-[53px] max-[360px]:text-[49px]">
+        {service.title}
+      </h3>
+
+      <div className="mt-[49px] max-[480px]:mt-10">
+        <p className="m-0 font-primary text-[23px] font-normal leading-none tracking-[0.08em] text-[#666462] max-[480px]:text-[20px]">
+          Per Session
+        </p>
+
+        <p className="mb-0 mt-[9px] font-primary text-[37px] font-normal leading-none tracking-[0.06em] text-[#666462] max-[480px]:text-[34px]">
+          {service.price}
+        </p>
+      </div>
+
+      <a
+        href={service.href}
+        aria-label={`View more details about ${service.title} photography`}
+        className="mt-[51px] inline-flex min-h-[70px] w-[212px] items-center justify-center border border-transparent bg-accent-soft px-6 py-[14px] font-primary text-[26px] font-normal leading-none text-[#53514f] no-underline transition-[color,background-color,border-color,box-shadow,transform] duration-300 hover:-translate-y-[3px] hover:border-[#b89372] hover:bg-[#b89372] hover:text-white hover:shadow-[0_13px_28px_rgba(92,67,47,0.16)] focus-visible:-translate-y-[3px] focus-visible:border-[#b89372] focus-visible:bg-[#b89372] focus-visible:text-white focus-visible:shadow-[0_13px_28px_rgba(92,67,47,0.16)] max-[1280px]:w-[195px] max-[1280px]:text-[24px] max-[480px]:mt-[43px] max-[480px]:min-h-[62px] max-[480px]:w-[185px] max-[480px]:text-[23px] motion-reduce:transform-none"
+      >
+        More Details
+      </a>
+    </article>
+  );
+}
+
 export default function Services() {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-
-    if (!section) {
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
-
-        section.classList.add("is-visible");
-        observer.unobserve(section);
-      },
-      {
-        threshold: 0.14,
-        rootMargin: "0px 0px -60px",
-      },
-    );
-
-    observer.observe(section);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  const { elementRef, isVisible } = useRevealOnScroll({
+    threshold: 0.14,
+    rootMargin: "0px 0px -60px",
+  });
 
   return (
     <section
       id="services"
-      ref={sectionRef}
-      className="services-section"
+      ref={elementRef}
       aria-labelledby="services-heading"
+      className={`services-reveal-scope w-full overflow-hidden bg-white pb-[82px] pt-[84px] max-[1024px]:py-[75px] max-[760px]:py-[67px] max-[480px]:py-[58px] ${
+        isVisible ? "is-visible" : ""
+      }`}
     >
-      <div className="services-container">
-        <header className="services-header">
-          <p className="services-eyebrow services-reveal">
+      <div className="site-container">
+        <header className="section-header">
+          <p
+            style={getRevealStyle(0)}
+            className="services-heading-reveal section-eyebrow"
+          >
             Services
           </p>
 
           <h2
             id="services-heading"
-            className="services-heading services-reveal"
+            style={getRevealStyle(100)}
+            className="services-heading-reveal section-title"
           >
             What I Offer
           </h2>
         </header>
 
-        <div className="services-grid">
+        <div className="mx-auto mt-[65px] grid grid-cols-3 gap-[66px] max-[1280px]:gap-[38px] max-[1024px]:mt-14 max-[1024px]:max-w-[820px] max-[1024px]:grid-cols-2 max-[1024px]:gap-8 max-[760px]:mt-12 max-[760px]:max-w-[450px] max-[760px]:grid-cols-1 max-[760px]:gap-7 max-[480px]:mt-[41px] max-[480px]:gap-6">
           {services.map((service, index) => (
-            <article
+            <div
               key={service.id}
-              className="service-card"
-              style={{
-                "--service-delay": `${220 + index * 150}ms`,
-              }}
+              className={
+                index === services.length - 1
+                  ? "max-[1024px]:col-span-2 max-[1024px]:mx-auto max-[1024px]:w-[calc((100%-32px)/2)] max-[760px]:col-span-1 max-[760px]:w-full"
+                  : ""
+              }
             >
-              <div className="service-card__icon-wrapper">
-                <img
-                  src={service.icon}
-                  alt=""
-                  className="service-card__icon"
-                  aria-hidden="true"
-                />
-              </div>
-
-              <h3 className="service-card__title">
-                {service.title}
-              </h3>
-
-              <div className="service-card__pricing">
-                <p className="service-card__label">
-                  Per Session
-                </p>
-
-                <p className="service-card__price">
-                  {service.price}
-                </p>
-              </div>
-
-              <a
-                href={service.href}
-                className="service-card__button"
-                aria-label={`View more details about ${service.title} photography`}
-              >
-                More Details
-              </a>
-            </article>
+              <ServiceCard service={service} index={index} />
+            </div>
           ))}
         </div>
       </div>
