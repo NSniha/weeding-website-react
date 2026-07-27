@@ -1,256 +1,33 @@
-/* ===================================
-   Statistics Section
-=================================== */
+/* Reveal Animation */
 
-.stats-section {
-  width: 100%;
-  min-height: 485px;
-  padding: 68px 0 78px;
-  overflow: hidden;
-  background: #ffffff;
-}
-
-.stats-container {
-  width: min(calc(100% - 100px), 1240px);
-  margin-inline: auto;
-}
-
-/* ===================================
-   Section Heading
-=================================== */
-
-.stats-heading {
-  max-width: 770px;
-  margin: 0 auto;
-  color: #171717;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(35px, 3vw, 43px);
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: 0.075em;
-  text-align: center;
-  text-transform: uppercase;
+.stats-heading-reveal {
   opacity: 0;
   transform: translateY(35px);
   transition:
-    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 900ms var(--ease-elegant),
+    transform 900ms var(--ease-elegant);
 }
 
-.stats-heading span {
-  display: block;
-}
-
-.stats-section.is-visible .stats-heading {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===================================
-   Statistics Grid
-=================================== */
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  align-items: start;
-  gap: 50px;
-  margin-top: 72px;
-}
-
-.stat-item {
-  min-width: 0;
-  text-align: center;
+.stats-item-reveal {
   opacity: 0;
   transform: translateY(45px);
   transition:
-    opacity 850ms var(--stat-delay) cubic-bezier(0.22, 1, 0.36, 1),
-    transform 850ms var(--stat-delay) cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 850ms var(--ease-elegant),
+    transform 850ms var(--ease-elegant);
+  transition-delay: var(--stat-delay, 0ms);
 }
 
-.stats-section.is-visible .stat-item {
+.stats-reveal-scope.is-visible .stats-heading-reveal,
+.stats-reveal-scope.is-visible .stats-item-reveal {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ===================================
-   Number
-=================================== */
-
-.stat-item__number {
-  margin: 0;
-  color: #c1a082;
-  font-family: "Bodoni Moda", "Times New Roman", serif;
-  font-size: clamp(82px, 7vw, 104px);
-  font-weight: 400;
-  line-height: 0.82;
-  letter-spacing: 0.015em;
-  font-variant-numeric: lining-nums tabular-nums;
-}
-
-/* ===================================
-   Script Label
-=================================== */
-
-.stat-item__label {
-  margin: 18px 0 0;
-  color: #545250;
-  font-family: "Italianno", "Allura", cursive;
-  font-size: clamp(35px, 3.15vw, 46px);
-  font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: 0.005em;
-}
-
-/* ===================================
-   Large Laptop
-=================================== */
-
-@media (max-width: 1280px) {
-  .stats-section {
-    min-height: 455px;
-    padding: 64px 0 72px;
-  }
-
-  .stats-container {
-    width: min(calc(100% - 70px), 1160px);
-  }
-
-  .stats-heading {
-    max-width: 720px;
-    font-size: 39px;
-  }
-
-  .stats-grid {
-    gap: 32px;
-    margin-top: 68px;
-  }
-
-  .stat-item__number {
-    font-size: clamp(76px, 7.4vw, 94px);
-  }
-
-  .stat-item__label {
-    font-size: clamp(32px, 3.3vw, 42px);
-  }
-}
-
-/* ===================================
-   Tablet
-=================================== */
-
-@media (max-width: 900px) {
-  .stats-section {
-    min-height: auto;
-    padding: 65px 0 75px;
-  }
-
-  .stats-container {
-    width: calc(100% - 56px);
-  }
-
-  .stats-heading {
-    max-width: 650px;
-    font-size: clamp(31px, 4.6vw, 38px);
-    letter-spacing: 0.065em;
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 65px 35px;
-    max-width: 700px;
-    margin: 67px auto 0;
-  }
-
-  .stat-item__number {
-    font-size: clamp(78px, 11vw, 94px);
-  }
-
-  .stat-item__label {
-    margin-top: 17px;
-    font-size: clamp(35px, 5vw, 43px);
-  }
-}
-
-/* ===================================
-   Mobile
-=================================== */
-
-@media (max-width: 600px) {
-  .stats-section {
-    padding: 58px 0 66px;
-  }
-
-  .stats-container {
-    width: calc(100% - 32px);
-  }
-
-  .stats-heading {
-    max-width: 430px;
-    font-size: clamp(27px, 7.3vw, 34px);
-    line-height: 1.2;
-    letter-spacing: 0.055em;
-  }
-
-  .stats-heading span {
-    display: inline;
-  }
-
-  .stats-grid {
-    grid-template-columns: 1fr;
-    gap: 52px;
-    max-width: 400px;
-    margin-top: 58px;
-  }
-
-  .stat-item__number {
-    font-size: clamp(80px, 25vw, 100px);
-  }
-
-  .stat-item__label {
-    margin-top: 16px;
-    font-size: clamp(37px, 12vw, 46px);
-  }
-}
-
-/* ===================================
-   Small Mobile
-=================================== */
-
-@media (max-width: 380px) {
-  .stats-section {
-    padding: 52px 0 60px;
-  }
-
-  .stats-container {
-    width: calc(100% - 24px);
-  }
-
-  .stats-heading {
-    font-size: 25px;
-  }
-
-  .stats-grid {
-    gap: 47px;
-    margin-top: 52px;
-  }
-
-  .stat-item__number {
-    font-size: 78px;
-  }
-
-  .stat-item__label {
-    font-size: 37px;
-  }
-}
-
-/* ===================================
-   Reduced Motion
-=================================== */
+/* Reduced Motion */
 
 @media (prefers-reduced-motion: reduce) {
-  .stats-heading,
-  .stat-item {
+  .stats-heading-reveal,
+  .stats-item-reveal {
     opacity: 1;
     transform: none;
     transition: none;

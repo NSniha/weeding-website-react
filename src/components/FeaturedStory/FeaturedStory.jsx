@@ -5,9 +5,7 @@ import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 import "./featured-story.css";
 
 function getRevealStyle(delay) {
-  return {
-    "--featured-delay": `${delay}ms`,
-  };
+  return { "--featured-delay": `${delay}ms` };
 }
 
 export default function FeaturedStory() {
@@ -21,7 +19,7 @@ export default function FeaturedStory() {
       id="portfolio"
       ref={elementRef}
       aria-labelledby="featured-story-heading"
-      className={`featured-story-scope relative min-h-[932px] w-full overflow-hidden bg-white pt-[84px] max-[1280px]:min-h-[850px] max-[1280px]:pt-[76px] max-[1050px]:min-h-[790px] max-[1050px]:pt-[70px] max-[850px]:min-h-0 max-[850px]:py-[70px] max-[600px]:py-[59px] max-[380px]:py-[54px] ${
+      className={`featured-story-scope section-shell relative overflow-hidden bg-white ${
         isVisible ? "is-visible" : ""
       }`}
     >
@@ -42,12 +40,12 @@ export default function FeaturedStory() {
         </h2>
       </header>
 
-      <div className="relative mt-[65px] h-[655px] w-full max-[1280px]:mt-[57px] max-[1280px]:h-[600px] max-[1050px]:mt-[52px] max-[1050px]:h-[560px] max-[850px]:mx-auto max-[850px]:grid max-[850px]:h-auto max-[850px]:w-[calc(100%-56px)] max-[850px]:grid-cols-2 max-[850px]:gap-7 max-[600px]:mt-[42px] max-[600px]:w-[calc(100%-30px)] max-[600px]:grid-cols-1 max-[600px]:gap-5 max-[380px]:mt-[38px] max-[380px]:w-[calc(100%-22px)]">
+      <div className="relative mt-[65px] h-[590px] w-full max-[1280px]:mt-[57px] max-[1280px]:h-[590px] max-[1050px]:mt-[52px] max-[1050px]:h-[560px] max-[850px]:mx-auto max-[850px]:grid max-[850px]:h-auto max-[850px]:w-[calc(100%_-_56px)] max-[850px]:grid-cols-2 max-[850px]:gap-7 max-[600px]:mt-[42px] max-[600px]:w-[calc(100%_-_30px)] max-[600px]:grid-cols-1 max-[600px]:gap-5 max-[380px]:mt-[38px] max-[380px]:w-[calc(100%_-_22px)]">
         <article
           style={getRevealStyle(180)}
-          className="featured-story-reveal featured-story-reveal--left absolute left-0 top-[146px] z-[1] flex h-[324px] w-[39.05%] items-center bg-surface max-[1280px]:top-[130px] max-[1280px]:h-[300px] max-[1280px]:w-[38%] max-[1050px]:top-[115px] max-[1050px]:h-[285px] max-[1050px]:w-[40%] max-[850px]:relative max-[850px]:inset-auto max-[850px]:col-span-2 max-[850px]:col-start-1 max-[850px]:row-start-2 max-[850px]:h-auto max-[850px]:min-h-[300px] max-[850px]:w-full max-[850px]:px-[45px] max-[850px]:py-12 max-[600px]:col-span-1 max-[600px]:row-start-3 max-[600px]:min-h-[290px] max-[600px]:px-[23px] max-[600px]:py-[43px] max-[380px]:px-[18px] max-[380px]:py-[39px]"
+          className="featured-story-reveal featured-story-reveal--left absolute left-0 top-[146px] z-[1] flex h-[324px] w-[39.05%] items-center bg-surface max-[1280px]:top-[130px] max-[1280px]:h-[300px] max-[1280px]:w-[38%] max-[1050px]:top-[115px] max-[1050px]:h-[285px] max-[1050px]:w-[40%] max-[850px]:relative max-[850px]:inset-auto max-[850px]:col-span-2 max-[850px]:row-start-2 max-[850px]:h-auto max-[850px]:min-h-[300px] max-[850px]:w-full max-[850px]:px-[45px] max-[850px]:py-12 max-[600px]:col-span-1 max-[600px]:row-start-3 max-[600px]:min-h-[290px] max-[600px]:px-[23px] max-[600px]:py-[43px] max-[380px]:px-[18px] max-[380px]:py-[39px]"
         >
-          <div className="ml-[clamp(52px,7.3vw,105px)] w-[min(calc(100%-80px),455px)] pb-[3px] max-[1280px]:ml-[55px] max-[1280px]:w-[calc(100%-60px)] max-[1050px]:ml-[38px] max-[1050px]:w-[calc(100%-48px)] max-[850px]:mx-auto max-[850px]:w-full max-[850px]:max-w-[600px] max-[850px]:p-0 max-[850px]:text-center">
+          <div className="ml-[clamp(52px,7.3vw,105px)] w-[min(calc(100%_-_80px),455px)] pb-[3px] max-[1280px]:ml-[55px] max-[1280px]:w-[calc(100%_-_60px)] max-[1050px]:ml-[38px] max-[1050px]:w-[calc(100%_-_48px)] max-[850px]:mx-auto max-[850px]:w-full max-[850px]:max-w-[600px] max-[850px]:p-0 max-[850px]:text-center">
             <p className="m-0 font-number text-[73px] font-medium leading-[0.82] tracking-[0.09em] text-[#bd8e60] max-[1280px]:text-[66px] max-[1050px]:text-[60px] max-[850px]:text-[64px] max-[600px]:text-[59px] max-[380px]:text-[54px]">
               01
             </p>
@@ -66,7 +64,7 @@ export default function FeaturedStory() {
 
         <figure
           style={getRevealStyle(310)}
-          className="featured-story-reveal featured-story-reveal--up group absolute left-[39.05%] top-0 z-[2] m-0 h-[472px] w-[27.36%] overflow-hidden bg-[#e3dfd8] max-[1280px]:left-[38%] max-[1280px]:h-[430px] max-[1280px]:w-[28%] max-[1050px]:left-[40%] max-[1050px]:h-[400px] max-[1050px]:w-[28%] max-[850px]:relative max-[850px]:inset-auto max-[850px]:col-start-1 max-[850px]:row-start-1 max-[850px]:h-auto max-[850px]:w-full max-[850px]:aspect-[4/5] max-[600px]:col-start-1 max-[600px]:row-start-1 max-[600px]:aspect-[4/4.8]"
+          className="featured-story-reveal featured-story-reveal--up group absolute left-[39.05%] top-0 z-[2] m-0 h-[472px] w-[27.36%] overflow-hidden bg-[#e3dfd8] max-[1280px]:left-[38%] max-[1280px]:h-[430px] max-[1280px]:w-[28%] max-[1050px]:left-[40%] max-[1050px]:h-[400px] max-[1050px]:w-[28%] max-[850px]:relative max-[850px]:inset-auto max-[850px]:col-start-1 max-[850px]:row-start-1 max-[850px]:h-auto max-[850px]:w-full max-[850px]:aspect-[4/5] max-[600px]:row-start-1 max-[600px]:aspect-[4/4.8]"
         >
           <img
             src={coupleImage}
@@ -92,7 +90,7 @@ export default function FeaturedStory() {
 
         <div
           style={getRevealStyle(650)}
-          className="featured-story-reveal absolute right-[5.05%] top-[529px] z-[3] max-[1280px]:right-[5%] max-[1280px]:top-[485px] max-[1050px]:right-[3.5%] max-[1050px]:top-[450px] max-[850px]:relative max-[850px]:inset-auto max-[850px]:col-span-2 max-[850px]:col-start-1 max-[850px]:row-start-3 max-[850px]:mt-2 max-[850px]:justify-self-center max-[600px]:col-span-1 max-[600px]:row-start-4 max-[600px]:mt-[5px]"
+          className="featured-story-reveal absolute right-[5.05%] top-[529px] z-[3] max-[1280px]:right-[5%] max-[1280px]:top-[485px] max-[1050px]:right-[3.5%] max-[1050px]:top-[450px] max-[850px]:relative max-[850px]:inset-auto max-[850px]:col-span-2 max-[850px]:row-start-3 max-[850px]:mt-2 max-[850px]:justify-self-center max-[600px]:col-span-1 max-[600px]:row-start-4 max-[600px]:mt-[5px]"
         >
           <a
             href="#gallery"

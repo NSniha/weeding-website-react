@@ -9,10 +9,14 @@
     transform 850ms var(--ease-elegant);
 }
 
+.testimonials-heading-delay {
+  transition-delay: 100ms;
+}
+
 .testimonials-slider-reveal {
   transform: translateY(45px);
   transition-duration: 950ms;
-  transition-delay: 150ms;
+  transition-delay: 180ms;
 }
 
 .testimonials-reveal-scope.is-visible .testimonials-heading-reveal,

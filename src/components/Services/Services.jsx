@@ -30,16 +30,14 @@ const services = [
 ];
 
 function getRevealStyle(delay) {
-  return {
-    "--services-delay": `${delay}ms`,
-  };
+  return { "--services-delay": `${delay}ms` };
 }
 
 function ServiceCard({ service, index }) {
   return (
     <article
       style={getRevealStyle(220 + index * 150)}
-      className="services-card-reveal group flex min-h-[552px] min-w-0 flex-col items-center bg-surface px-[34px] pb-9 pt-11 text-center transition-shadow duration-[350ms] hover:shadow-[0_22px_55px_rgba(71,57,45,0.07)] max-[1280px]:min-h-[530px] max-[1280px]:px-[25px] max-[1024px]:min-h-[525px] max-[480px]:min-h-[500px] max-[480px]:px-[22px] max-[480px]:pb-8 max-[480px]:pt-9 max-[360px]:min-h-[480px]"
+      className="services-card-reveal group flex min-h-[552px] w-full min-w-0 flex-col items-center bg-surface px-[34px] pb-9 pt-11 text-center transition-shadow duration-[350ms] hover:shadow-[0_22px_55px_rgba(71,57,45,0.07)] max-[1280px]:min-h-[530px] max-[1280px]:px-[25px] max-[1024px]:min-h-[525px] max-[480px]:min-h-[500px] max-[480px]:px-[22px] max-[480px]:pb-8 max-[480px]:pt-9 max-[360px]:min-h-[480px]"
     >
       <div className="flex h-[162px] w-full items-center justify-center max-[480px]:h-[150px]">
         <img
@@ -114,7 +112,7 @@ export default function Services() {
               key={service.id}
               className={
                 index === services.length - 1
-                  ? "max-[1024px]:col-span-2 max-[1024px]:mx-auto max-[1024px]:w-[calc((100%-32px)/2)] max-[760px]:col-span-1 max-[760px]:w-full"
+                  ? "max-[1024px]:col-span-2 max-[1024px]:mx-auto max-[1024px]:w-[calc((100%_-_32px)/2)] max-[760px]:col-span-1 max-[760px]:w-full"
                   : ""
               }
             >
