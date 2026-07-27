@@ -1,6 +1,6 @@
-import weddingIcon from "../../assets/icons/wedding-service.svg";
-import portraitIcon from "../../assets/icons/portrait-service.svg";
 import engagementIcon from "../../assets/icons/engagement-service.svg";
+import portraitIcon from "../../assets/icons/portrait-service.svg";
+import weddingIcon from "../../assets/icons/wedding-service.svg";
 import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 
 import "./services.css";
@@ -55,7 +55,7 @@ function ServiceCard({ service, index }) {
       </h3>
 
       <div className="mt-[49px] max-[480px]:mt-10">
-        <p className="m-0 font-primary text-[23px] font-normal leading-none tracking-[0.08em] text-[#666462] max-[480px]:text-[20px]">
+        <p className="m-0 font-primary text-[21px] font-normal leading-[1.38] tracking-[0.06em] text-[#666462] max-[1200px]:text-[19px] max-[600px]:text-[17px] max-[380px]:text-[16px]">
           Per Session
         </p>
 
@@ -67,7 +67,7 @@ function ServiceCard({ service, index }) {
       <a
         href={service.href}
         aria-label={`View more details about ${service.title} photography`}
-        className="mt-[51px] inline-flex min-h-[70px] w-[212px] items-center justify-center border border-transparent bg-accent-soft px-6 py-[14px] font-primary text-[26px] font-normal leading-none text-[#53514f] no-underline transition-[color,background-color,border-color,box-shadow,transform] duration-300 hover:-translate-y-[3px] hover:border-[#b89372] hover:bg-[#b89372] hover:text-white hover:shadow-[0_13px_28px_rgba(92,67,47,0.16)] focus-visible:-translate-y-[3px] focus-visible:border-[#b89372] focus-visible:bg-[#b89372] focus-visible:text-white focus-visible:shadow-[0_13px_28px_rgba(92,67,47,0.16)] max-[1280px]:w-[195px] max-[1280px]:text-[24px] max-[480px]:mt-[43px] max-[480px]:min-h-[62px] max-[480px]:w-[185px] max-[480px]:text-[23px] motion-reduce:transform-none"
+        className="mt-[51px] inline-flex min-h-[68px] min-w-[181px] items-center justify-center border border-transparent bg-[#e8dfd7] px-7 py-[15px] font-primary text-[21px] font-normal leading-none text-[#504d4a] no-underline transition-[color,background-color,border-color,box-shadow,transform] duration-300 hover:-translate-y-[3px] hover:border-accent hover:bg-accent hover:text-white hover:shadow-[0_14px_28px_rgba(104,79,58,0.16)] focus-visible:-translate-y-[3px] focus-visible:border-accent focus-visible:bg-accent focus-visible:text-white focus-visible:shadow-[0_14px_28px_rgba(104,79,58,0.16)] max-[600px]:mt-[43px] max-[600px]:min-h-[59px] max-[600px]:min-w-[160px] max-[600px]:text-[19px] motion-reduce:transform-none"
       >
         More Details
       </a>
@@ -86,7 +86,7 @@ export default function Services() {
       id="services"
       ref={elementRef}
       aria-labelledby="services-heading"
-      className={`services-reveal-scope w-full overflow-hidden bg-white pb-[82px] pt-[84px] max-[1024px]:py-[75px] max-[760px]:py-[67px] max-[480px]:py-[58px] ${
+      className={`services-reveal-scope section-shell overflow-hidden bg-white ${
         isVisible ? "is-visible" : ""
       }`}
     >
