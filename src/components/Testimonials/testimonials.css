@@ -1,4 +1,6 @@
-/* Reveal Animation */
+/* ===================================
+   Testimonials Reveal
+=================================== */
 
 .testimonials-heading-reveal,
 .testimonials-slider-reveal {
@@ -25,7 +27,9 @@
   transform: translateY(0);
 }
 
-/* Reduced Motion */
+/* ===================================
+   Reduced Motion
+=================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .testimonials-heading-reveal,

@@ -125,7 +125,7 @@ export default function Stats() {
     <section
       ref={elementRef}
       aria-labelledby="stats-heading"
-      className={`stats-reveal-scope section-shell min-h-[485px] w-full overflow-hidden bg-white max-[1280px]:min-h-[455px] max-[900px]:min-h-0 ${
+      className={`stats-reveal-scope section-shell min-h-[400px] w-full overflow-hidden bg-white max-[1280px]:min-h-[455px] max-[900px]:min-h-0 ${
         isVisible ? "is-visible" : ""
       }`}
     >
