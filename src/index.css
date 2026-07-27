@@ -2,8 +2,65 @@
 
 @import "tailwindcss";
 
+/* ===================================
+   Tailwind Theme Tokens
+=================================== */
+
+@theme {
+  /* Font families */
+
+  --font-primary: "Cormorant Garamond", Georgia, serif;
+  --font-script: "Italianno", "Allura", cursive;
+  --font-eyebrow: "Montserrat", Arial, sans-serif;
+  --font-number: "Bodoni Moda", "Times New Roman", serif;
+
+  /* Brand colors */
+
+  --color-page: #ffffff;
+  --color-surface: #f7f7f7;
+  --color-surface-soft: #f4f4f4;
+
+  --color-heading: #5b5a58;
+  --color-body: #575654;
+  --color-muted: #6b6865;
+  --color-dark: #222222;
+
+  --color-accent: #b9906e;
+  --color-accent-text: #c09b7a;
+  --color-accent-soft: #e9e1da;
+  --color-accent-border: #ddcbb9;
+
+  --color-error: #945454;
+
+  /* Animation easing */
+
+  --ease-elegant: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ===================================
+   Project Design Variables
+=================================== */
+
 :root {
-  color: #222;
+  /* Main layout */
+
+  --site-container: 1242px;
+  --site-gutter: 99px;
+
+  /* Shared section spacing */
+
+  --section-padding-top: 84px;
+  --section-padding-bottom: 84px;
+
+  /* Shared section headings */
+
+  --section-eyebrow-size: 15px;
+  --section-eyebrow-spacing: 0.27em;
+
+  --section-title-size: 63px;
+  --section-title-gap: 17px;
+
+  color: #222222;
   background: #ffffff;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-synthesis: none;
@@ -12,50 +69,310 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* ===================================
+   Global Base Styles
+=================================== */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    color: var(--color-dark);
+    background: var(--color-page);
+    font-family: var(--font-primary);
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  body,
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    color: inherit;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button {
+    border: 0;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  img {
+    height: auto;
+  }
+
+  input,
+  textarea,
+  button,
+  select {
+    border-radius: 0;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid rgba(185, 144, 108, 0.8);
+    outline-offset: 4px;
+  }
+
+  ::selection {
+    color: #ffffff;
+    background: #b9906e;
+  }
 }
 
-html {
-  min-width: 320px;
-  scroll-behavior: smooth;
+/* ===================================
+   Shared Layout Components
+
+   These are the small amount of custom
+   CSS reused by every homepage section.
+=================================== */
+
+@layer components {
+  /*
+   * Main homepage container
+   *
+   * Desktop:
+   * max width 1242px
+   * left/right space 99px
+   */
+
+  .site-container {
+    width: min(
+      calc(100% - (var(--site-gutter) * 2)),
+      var(--site-container)
+    );
+    margin-inline: auto;
+  }
+
+  /*
+   * Apply to the outer section.
+   * Example:
+   * <section className="section-shell">
+   */
+
+  .section-shell {
+    width: 100%;
+    padding-top: var(--section-padding-top);
+    padding-bottom: var(--section-padding-bottom);
+  }
+
+  /*
+   * Shared heading wrapper
+   */
+
+  .section-header {
+    width: 100%;
+    text-align: center;
+  }
+
+  /*
+   * Small heading above the main title.
+   * Examples: SERVICES, PORTFOLIO, CONTACT
+   */
+
+  .section-eyebrow {
+    margin: 0;
+    color: var(--color-accent-text);
+    font-family: var(--font-eyebrow);
+    font-size: var(--section-eyebrow-size);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: var(--section-eyebrow-spacing);
+    text-indent: var(--section-eyebrow-spacing);
+    text-transform: uppercase;
+  }
+
+  /*
+   * Main section heading.
+   * Examples: What I Offer, Featured Story
+   */
+
+  .section-title {
+    margin: var(--section-title-gap) 0 0;
+    color: var(--color-heading);
+    font-family: var(--font-primary);
+    font-size: var(--section-title-size);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  /*
+   * Reusable script font.
+   * Examples: Wedding, Ricardo & Michelle
+   */
+
+  .font-wedding-script {
+    font-family: var(--font-script);
+    font-weight: 400;
+  }
+
+  /*
+   * Reusable counter font.
+   */
+
+  .font-wedding-number {
+    font-family: var(--font-number);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
 }
 
-body {
-  min-width: 320px;
-  min-height: 100vh;
-  margin: 0;
-  overflow-x: hidden;
+/* ===================================
+   Large Laptop
+=================================== */
+
+@media (max-width: 1280px) {
+  :root {
+    --site-container: 1160px;
+    --site-gutter: 40px;
+
+    --section-padding-top: 76px;
+    --section-padding-bottom: 76px;
+
+    --section-eyebrow-size: 14px;
+    --section-title-size: 59px;
+    --section-title-gap: 16px;
+  }
 }
 
-body,
-button,
-input,
-textarea,
-select {
-  font: inherit;
+/* ===================================
+   Small Laptop
+=================================== */
+
+@media (max-width: 1024px) {
+  :root {
+    --site-gutter: 28px;
+
+    --section-padding-top: 72px;
+    --section-padding-bottom: 72px;
+
+    --section-eyebrow-size: 13px;
+    --section-title-size: 56px;
+    --section-title-gap: 15px;
+  }
 }
 
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
+/* ===================================
+   Tablet
+=================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --site-gutter: 20px;
+
+    --section-padding-top: 64px;
+    --section-padding-bottom: 64px;
+
+    --section-eyebrow-size: 12px;
+    --section-eyebrow-spacing: 0.23em;
+
+    --section-title-size: 50px;
+    --section-title-gap: 14px;
+  }
+
+  html {
+    scroll-padding-top: 76px;
+  }
 }
 
-img,
-svg {
-  display: block;
-  max-width: 100%;
+/* ===================================
+   Mobile
+=================================== */
+
+@media (max-width: 480px) {
+  :root {
+    --site-gutter: 15px;
+
+    --section-padding-top: 56px;
+    --section-padding-bottom: 56px;
+
+    --section-eyebrow-size: 11px;
+    --section-eyebrow-spacing: 0.21em;
+
+    --section-title-size: 44px;
+    --section-title-gap: 13px;
+  }
 }
 
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid rgba(185, 144, 108, 0.75);
-  outline-offset: 4px;
+/* ===================================
+   Small Mobile
+=================================== */
+
+@media (max-width: 360px) {
+  :root {
+    --site-gutter: 11px;
+
+    --section-padding-top: 52px;
+    --section-padding-bottom: 52px;
+
+    --section-title-size: 40px;
+  }
 }
 
-::selection {
-  color: #ffffff;
-  background: #b9906e;
+/* ===================================
+   Reduced Motion Accessibility
+=================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
 }
