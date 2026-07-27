@@ -2,57 +2,36 @@
 
 @import "tailwindcss";
 
-/* ===================================
-   Tailwind Theme Tokens
-=================================== */
+/* Theme */
 
 @theme {
-  /* Font families */
-
   --font-primary: "Cormorant Garamond", Georgia, serif;
   --font-script: "Italianno", "Allura", cursive;
   --font-eyebrow: "Montserrat", Arial, sans-serif;
   --font-number: "Bodoni Moda", "Times New Roman", serif;
 
-  /* Brand colors */
-
   --color-page: #ffffff;
   --color-surface: #f7f7f7;
   --color-surface-soft: #f4f4f4;
-
   --color-heading: #5b5a58;
   --color-body: #575654;
   --color-muted: #6b6865;
   --color-dark: #222222;
-
   --color-accent: #b9906e;
   --color-accent-text: #c09b7a;
   --color-accent-soft: #e9e1da;
   --color-accent-border: #ddcbb9;
-
   --color-error: #945454;
-
-  /* Animation easing */
 
   --ease-elegant: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ===================================
-   Project Design Variables
-=================================== */
-
 :root {
-  /* Main layout */
-
   --site-container: 1242px;
   --site-gutter: 99px;
 
-  /* Shared section spacing */
-
   --section-padding-top: 84px;
   --section-padding-bottom: 84px;
-
-  /* Shared section headings */
 
   --section-eyebrow-size: 15px;
   --section-eyebrow-spacing: 0.27em;
@@ -69,9 +48,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ===================================
-   Global Base Styles
-=================================== */
+/* Base */
 
 @layer base {
   *,
@@ -163,26 +140,13 @@
 
   ::selection {
     color: #ffffff;
-    background: #b9906e;
+    background: var(--color-accent);
   }
 }
 
-/* ===================================
-   Shared Layout Components
-
-   These are the small amount of custom
-   CSS reused by every homepage section.
-=================================== */
+/* Shared Components */
 
 @layer components {
-  /*
-   * Main homepage container
-   *
-   * Desktop:
-   * max width 1242px
-   * left/right space 99px
-   */
-
   .site-container {
     width: min(
       calc(100% - (var(--site-gutter) * 2)),
@@ -191,31 +155,16 @@
     margin-inline: auto;
   }
 
-  /*
-   * Apply to the outer section.
-   * Example:
-   * <section className="section-shell">
-   */
-
   .section-shell {
     width: 100%;
     padding-top: var(--section-padding-top);
     padding-bottom: var(--section-padding-bottom);
   }
 
-  /*
-   * Shared heading wrapper
-   */
-
   .section-header {
     width: 100%;
     text-align: center;
   }
-
-  /*
-   * Small heading above the main title.
-   * Examples: SERVICES, PORTFOLIO, CONTACT
-   */
 
   .section-eyebrow {
     margin: 0;
@@ -229,11 +178,6 @@
     text-transform: uppercase;
   }
 
-  /*
-   * Main section heading.
-   * Examples: What I Offer, Featured Story
-   */
-
   .section-title {
     margin: var(--section-title-gap) 0 0;
     color: var(--color-heading);
@@ -244,19 +188,10 @@
     letter-spacing: 0.01em;
   }
 
-  /*
-   * Reusable script font.
-   * Examples: Wedding, Ricardo & Michelle
-   */
-
   .font-wedding-script {
     font-family: var(--font-script);
     font-weight: 400;
   }
-
-  /*
-   * Reusable counter font.
-   */
 
   .font-wedding-number {
     font-family: var(--font-number);
@@ -264,9 +199,7 @@
   }
 }
 
-/* ===================================
-   Large Laptop
-=================================== */
+/* Responsive */
 
 @media (max-width: 1280px) {
   :root {
@@ -282,10 +215,6 @@
   }
 }
 
-/* ===================================
-   Small Laptop
-=================================== */
-
 @media (max-width: 1024px) {
   :root {
     --site-gutter: 28px;
@@ -298,10 +227,6 @@
     --section-title-gap: 15px;
   }
 }
-
-/* ===================================
-   Tablet
-=================================== */
 
 @media (max-width: 768px) {
   :root {
@@ -322,10 +247,6 @@
   }
 }
 
-/* ===================================
-   Mobile
-=================================== */
-
 @media (max-width: 480px) {
   :root {
     --site-gutter: 15px;
@@ -341,10 +262,6 @@
   }
 }
 
-/* ===================================
-   Small Mobile
-=================================== */
-
 @media (max-width: 360px) {
   :root {
     --site-gutter: 11px;
@@ -356,9 +273,7 @@
   }
 }
 
-/* ===================================
-   Reduced Motion Accessibility
-=================================== */
+/* Reduced Motion */
 
 @media (prefers-reduced-motion: reduce) {
   html {
