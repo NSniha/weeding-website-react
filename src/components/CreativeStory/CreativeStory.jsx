@@ -29,7 +29,7 @@ export default function CreativeStory() {
             alt="A newly married couple walking together along the beach"
             loading="lazy"
             decoding="async"
-            className="creative-story-image h-full w-full object-cover object-center max-[600px]:object-[51%_center]"
+            className="creative-story-image h-full w-full object-cover object-top max-[600px]:object-[51%_center]"
           />
         </div>
 

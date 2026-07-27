@@ -58,7 +58,7 @@ function PhotographerIntroduction() {
       id="about"
       ref={elementRef}
       aria-labelledby="photographer-heading"
-      className={`about-reveal-scope w-full overflow-hidden bg-white ${
+      className={`about-reveal-scope w-full overflow-hidden md:mb-14 mb-0 bg-white ${
         isVisible ? "is-visible" : ""
       }`}
     >

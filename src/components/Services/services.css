@@ -1,4 +1,6 @@
-/* Reveal Animation */
+/* ===================================
+   Heading and Card Reveal
+=================================== */
 
 .services-heading-reveal,
 .services-card-reveal {
@@ -14,12 +16,8 @@
   transform: translateY(48px);
   transition:
     opacity 850ms var(--ease-elegant),
-    transform 850ms var(--ease-elegant),
-    box-shadow 350ms ease;
-  transition-delay:
-    var(--services-delay, 0ms),
-    var(--services-delay, 0ms),
-    0ms;
+    transform 850ms var(--ease-elegant);
+  transition-delay: var(--services-delay, 0ms);
 }
 
 .services-reveal-scope.is-visible .services-heading-reveal,
@@ -28,12 +26,44 @@
   transform: translateY(0);
 }
 
-/* Reduced Motion */
+/* ===================================
+   Animated Outer Border
+=================================== */
+
+.service-card-frame::before {
+  position: absolute;
+  z-index: 0;
+  inset: -7px;
+  border: 1px solid #c6a586;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.965);
+  transform-origin: center;
+  transition:
+    opacity 450ms ease,
+    transform 650ms var(--ease-elegant);
+}
+
+.service-card-frame:hover::before,
+.service-card-frame:focus-within::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===================================
+   Reduced Motion
+=================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .services-heading-reveal,
   .services-card-reveal {
     opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .service-card-frame::before {
     transform: none;
     transition: none;
   }
