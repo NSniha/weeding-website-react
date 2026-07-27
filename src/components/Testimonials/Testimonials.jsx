@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import quoteMark from "../../assets/icons/quote-mark.svg";
 import testimonialOne from "../../assets/images/testimonial-1.png";
 import testimonialTwo from "../../assets/images/testimonial-2.png";
 import testimonialThree from "../../assets/images/testimonial-3.png";
+import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 
 import "./testimonials.css";
 
@@ -20,7 +21,7 @@ const testimonials = [
     id: 2,
     name: "Amelia & James",
     message:
-      "Every photograph feels warm, elegant, and completely authentic. Tessa made us feel comfortable and turned our memories into timeless art.",
+      "Every photograph feels warm, elegant, and completely authentic. Tessa made us feel comfortable and transformed our memories into timeless art.",
     image: testimonialTwo,
     imageAlt: "Amelia and James smiling together during their wedding celebration",
   },
@@ -28,7 +29,7 @@ const testimonials = [
     id: 3,
     name: "Olivia & Daniel",
     message:
-      "From the quiet moments to the joyful celebrations, every detail was captured beautifully. We could not have imagined a more perfect experience.",
+      "From the quiet moments to the joyful celebrations, every detail was captured beautifully. We could not have imagined a more meaningful experience.",
     image: testimonialThree,
     imageAlt: "Olivia and Daniel enjoying an intimate wedding moment",
   },
@@ -37,75 +38,104 @@ const testimonials = [
 const AUTOPLAY_DELAY = 5000;
 const SWIPE_DISTANCE = 45;
 
+function TestimonialSlide({ testimonial, index, isActive }) {
+  const contentState = isActive
+    ? "translate-y-0 opacity-100"
+    : "translate-y-6 opacity-0";
+
+  return (
+    <article
+      id={`testimonial-slide-${testimonial.id}`}
+      role="group"
+      aria-roledescription="slide"
+      aria-label={`${index + 1} of ${testimonials.length}`}
+      aria-hidden={!isActive}
+      className="w-full shrink-0 basis-full"
+    >
+      <div className="grid min-h-[450px] w-full grid-cols-2 max-[1280px]:min-h-[430px] max-[1024px]:min-h-[405px] max-[800px]:mx-auto max-[800px]:min-h-0 max-[800px]:max-w-[620px] max-[800px]:grid-cols-1">
+        <div className="relative z-[2] min-w-0 border border-[#e2d1c1] bg-white p-px max-[800px]:row-start-2">
+          <div className="flex min-h-[448px] h-full flex-col items-center justify-center px-[52px] pb-[45px] pt-[50px] text-center text-[#575553] max-[1280px]:min-h-[428px] max-[1280px]:px-[42px] max-[1024px]:min-h-[403px] max-[1024px]:px-[35px] max-[1024px]:py-10 max-[800px]:min-h-[370px] max-[800px]:px-[45px] max-[800px]:pb-[42px] max-[800px]:pt-[45px] max-[560px]:min-h-[350px] max-[560px]:px-6 max-[560px]:pb-9 max-[560px]:pt-[39px] max-[380px]:min-h-[335px] max-[380px]:px-[18px]">
+            <img
+              src={quoteMark}
+              alt=""
+              aria-hidden="true"
+              className={`mb-[31px] h-auto w-[58px] transition-[opacity,transform] duration-[650ms] ease-elegant [transition-delay:250ms] max-[1024px]:mb-[25px] max-[1024px]:w-[52px] max-[560px]:mb-[23px] max-[560px]:w-[46px] motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${contentState}`}
+            />
+
+            <blockquote className={`m-0 max-w-[500px] font-primary text-[21px] font-normal leading-[1.38] tracking-[-0.005em] text-[#555351] transition-[opacity,transform] duration-700 ease-elegant [transition-delay:330ms] max-[1200px]:text-[19px] max-[800px]:max-w-[430px] max-[600px]:text-[17px] max-[380px]:max-w-[300px] max-[380px]:text-[16px] motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${contentState}`}>
+              {testimonial.message}
+            </blockquote>
+
+            <p className={`mb-0 mt-[74px] font-primary text-[26px] font-normal uppercase leading-none tracking-[0.015em] text-[#5d5b59] transition-[opacity,transform] duration-700 ease-elegant [transition-delay:420ms] max-[1280px]:mt-[65px] max-[1280px]:text-[24px] max-[1024px]:mt-[52px] max-[1024px]:text-[22px] max-[800px]:mt-[46px] max-[560px]:mt-[39px] max-[560px]:text-[20px] max-[380px]:text-[19px] motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${contentState}`}>
+              {testimonial.name}
+            </p>
+          </div>
+        </div>
+
+        <figure className="m-0 h-[450px] min-w-0 overflow-hidden bg-[#dfd8cf] max-[1280px]:h-[430px] max-[1024px]:h-[405px] max-[800px]:row-start-1 max-[800px]:h-auto max-[800px]:aspect-[4/3.2] max-[560px]:aspect-[4/3.8]">
+          <img
+            src={testimonial.image}
+            alt={testimonial.imageAlt}
+            loading={index === 0 ? "eager" : "lazy"}
+            decoding="async"
+            className={`h-full w-full object-cover object-center transition-transform duration-[1200ms] ease-elegant motion-reduce:scale-100 motion-reduce:transition-none ${
+              isActive ? "scale-100" : "scale-[1.07]"
+            }`}
+          />
+        </figure>
+      </div>
+    </article>
+  );
+}
+
 export default function Testimonials() {
-  const sectionRef = useRef(null);
-  const pointerStartX = useRef(0);
+  const pointerStartX = useRef(null);
+  const { elementRef, isVisible } = useRevealOnScroll({
+    threshold: 0.14,
+    rootMargin: "0px 0px -70px",
+  });
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const showNextSlide = () => {
-    setActiveIndex((currentIndex) =>
-      currentIndex === testimonials.length - 1 ? 0 : currentIndex + 1,
-    );
-  };
+  const showNextSlide = useCallback(() => {
+    setActiveIndex((currentIndex) => (currentIndex + 1) % testimonials.length);
+  }, []);
 
-  const showPreviousSlide = () => {
+  const showPreviousSlide = useCallback(() => {
     setActiveIndex((currentIndex) =>
       currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1,
     );
-  };
-
-  useEffect(() => {
-    const section = sectionRef.current;
-
-    if (!section) {
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
-
-        section.classList.add("is-visible");
-        observer.unobserve(section);
-      },
-      {
-        threshold: 0.14,
-        rootMargin: "0px 0px -70px",
-      },
-    );
-
-    observer.observe(section);
-
-    return () => {
-      observer.disconnect();
-    };
   }, []);
 
   useEffect(() => {
-    if (isPaused) {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (isPaused || prefersReducedMotion) {
       return undefined;
     }
 
-    const autoplayTimer = window.setInterval(
-      showNextSlide,
-      AUTOPLAY_DELAY,
-    );
+    const autoplayTimer = window.setInterval(showNextSlide, AUTOPLAY_DELAY);
 
-    return () => {
-      window.clearInterval(autoplayTimer);
-    };
-  }, [isPaused]);
+    return () => window.clearInterval(autoplayTimer);
+  }, [isPaused, showNextSlide]);
 
   const handlePointerDown = (event) => {
     pointerStartX.current = event.clientX;
+    event.currentTarget.setPointerCapture?.(event.pointerId);
   };
 
   const handlePointerUp = (event) => {
+    if (pointerStartX.current === null) {
+      return;
+    }
+
     const distance = event.clientX - pointerStartX.current;
+    pointerStartX.current = null;
+
+    event.currentTarget.releasePointerCapture?.(event.pointerId);
 
     if (Math.abs(distance) < SWIPE_DISTANCE) {
       return;
@@ -113,109 +143,111 @@ export default function Testimonials() {
 
     if (distance < 0) {
       showNextSlide();
-      return;
+    } else {
+      showPreviousSlide();
+    }
+  };
+
+  const handlePointerCancel = () => {
+    pointerStartX.current = null;
+  };
+
+  const handleBlurCapture = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsPaused(false);
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "ArrowRight") {
+      showNextSlide();
     }
 
-    showPreviousSlide();
+    if (event.key === "ArrowLeft") {
+      showPreviousSlide();
+    }
   };
 
   return (
     <section
-      ref={sectionRef}
-      className="testimonials"
+      ref={elementRef}
       aria-labelledby="testimonials-heading"
+      className={`testimonials-reveal-scope section-shell overflow-hidden bg-white ${
+        isVisible ? "is-visible" : ""
+      }`}
     >
-      <header className="testimonials__header">
+      <header className="site-container text-center">
         <h2
           id="testimonials-heading"
-          className="testimonials__heading"
+          className="testimonials-heading-reveal m-0 font-script text-[clamp(58px,5vw,74px)] font-normal leading-none tracking-[0.01em] text-[#5d5b59] max-[1024px]:text-[64px] max-[800px]:text-[clamp(53px,8vw,62px)] max-[560px]:mx-auto max-[560px]:max-w-[340px] max-[560px]:text-[clamp(47px,14vw,57px)] max-[560px]:leading-[0.95] max-[380px]:text-[45px]"
         >
           Client Testimonials
         </h2>
       </header>
 
       <div
-        className="testimonials__slider"
+        role="region"
         aria-roledescription="carousel"
         aria-label="Client testimonials"
+        aria-live={isPaused ? "polite" : "off"}
+        tabIndex="0"
+        onKeyDown={handleKeyDown}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onFocusCapture={() => setIsPaused(true)}
-        onBlurCapture={() => setIsPaused(false)}
+        onBlurCapture={handleBlurCapture}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+        className="testimonials-slider-reveal mt-[31px] w-full touch-pan-y overflow-hidden bg-[#f6f6f6] pb-[31px] pt-[76px] select-none max-[1280px]:pt-[68px] max-[1024px]:pb-7 max-[1024px]:pt-[58px] max-[800px]:mt-7 max-[800px]:pb-[27px] max-[800px]:pt-[45px] max-[560px]:mt-[26px] max-[560px]:pb-[22px] max-[560px]:pt-6"
       >
-        <div className="testimonials__viewport">
-          <div
-            className="testimonials__track"
-            style={{
-              transform: `translate3d(-${activeIndex * 100}%, 0, 0)`,
-            }}
-          >
-            {testimonials.map((testimonial, index) => (
-              <article
-                key={testimonial.id}
-                className={`testimonial-slide ${
-                  index === activeIndex ? "is-active" : ""
-                }`}
-                aria-hidden={index !== activeIndex}
-                aria-label={`${index + 1} of ${testimonials.length}`}
-              >
-                <div className="testimonial-slide__layout">
-                  <div className="testimonial-slide__card">
-                    <div className="testimonial-slide__card-inner">
-                      <img
-                        src={quoteMark}
-                        alt=""
-                        className="testimonial-slide__quote"
-                        aria-hidden="true"
-                      />
-
-                      <blockquote className="testimonial-slide__message">
-                        {testimonial.message}
-                      </blockquote>
-
-                      <p className="testimonial-slide__name">
-                        {testimonial.name}
-                      </p>
-                    </div>
-                  </div>
-
-                  <figure className="testimonial-slide__media">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.imageAlt}
-                      className="testimonial-slide__image"
-                      loading={index === 0 ? "eager" : "lazy"}
-                      decoding="async"
-                    />
-                  </figure>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div
-          className="testimonials__dots"
-          role="tablist"
-          aria-label="Choose testimonial"
-        >
-          {testimonials.map((testimonial, index) => (
-            <button
-              key={testimonial.id}
-              type="button"
-              className={`testimonials__dot ${
-                index === activeIndex ? "is-active" : ""
-              }`}
-              aria-label={`Show testimonial from ${testimonial.name}`}
-              aria-selected={index === activeIndex}
-              role="tab"
-              onClick={() => setActiveIndex(index)}
+        <div className="site-container">
+          <div className="w-full overflow-hidden">
+            <div
+              className="flex w-full transition-transform duration-[850ms] ease-elegant motion-reduce:transition-none"
+              style={{ transform: `translate3d(-${activeIndex * 100}%, 0, 0)` }}
             >
-              <span />
-            </button>
-          ))}
+              {testimonials.map((testimonial, index) => (
+                <TestimonialSlide
+                  key={testimonial.id}
+                  testimonial={testimonial}
+                  index={index}
+                  isActive={index === activeIndex}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div
+            role="tablist"
+            aria-label="Choose testimonial"
+            className="mt-[27px] flex items-center justify-center gap-[11px] max-[800px]:mt-[23px] max-[560px]:mt-5 max-[560px]:gap-2"
+          >
+            {testimonials.map((testimonial, index) => {
+              const isActive = index === activeIndex;
+
+              return (
+                <button
+                  key={testimonial.id}
+                  type="button"
+                  role="tab"
+                  aria-controls={`testimonial-slide-${testimonial.id}`}
+                  aria-label={`Show testimonial from ${testimonial.name}`}
+                  aria-selected={isActive}
+                  onClick={() => setActiveIndex(index)}
+                  className="group inline-flex h-[22px] w-[28px] items-center justify-center rounded-full bg-transparent p-0"
+                >
+                  <span
+                    className={`block h-[7px] rounded-full transition-[width,background-color,transform] duration-300 group-hover:scale-120 group-hover:bg-[#b99372] group-focus-visible:scale-120 group-focus-visible:bg-[#b99372] ${
+                      isActive
+                        ? "w-6 bg-[#b99372]"
+                        : "w-[7px] bg-[#d8c7b8]"
+                    }`}
+                  />
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
