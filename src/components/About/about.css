@@ -1,0 +1,74 @@
+/* Reveal Animation */
+
+.about-reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 850ms var(--ease-elegant),
+    transform 850ms var(--ease-elegant);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.about-reveal--left {
+  transform: translateX(-60px);
+}
+
+.about-reveal-scope.is-visible .about-reveal {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Image Animation */
+
+.about-photo {
+  transform: scale(1.07);
+  transition: transform 1.2s var(--ease-elegant);
+  will-change: transform;
+}
+
+.about-reveal-scope.is-visible .about-photo {
+  transform: scale(1);
+}
+
+/* Button Animation */
+
+.about-reveal--button {
+  transition:
+    color 300ms ease,
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    opacity 850ms var(--ease-elegant),
+    transform 850ms var(--ease-elegant);
+  transition-delay:
+    0ms,
+    0ms,
+    0ms,
+    0ms,
+    var(--reveal-delay, 0ms),
+    var(--reveal-delay, 0ms);
+}
+
+.about-reveal-scope.is-visible .about-reveal--button:hover,
+.about-reveal-scope.is-visible .about-reveal--button:focus-visible {
+  transform: translateY(-3px);
+}
+
+/* Reduced Motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .about-reveal,
+  .about-reveal--left,
+  .about-photo,
+  .about-reveal--button {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .about-reveal-scope.is-visible .about-reveal--button:hover,
+  .about-reveal-scope.is-visible .about-reveal--button:focus-visible {
+    transform: none;
+  }
+}

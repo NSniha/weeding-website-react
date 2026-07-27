@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function useRevealOnScroll({
-  threshold = 0.15,
+  threshold = 0.18,
   rootMargin = "0px 0px -60px",
 } = {}) {
   const elementRef = useRef(null);
@@ -32,21 +32,13 @@ export default function useRevealOnScroll({
         setIsVisible(true);
         observer.unobserve(element);
       },
-      {
-        threshold,
-        rootMargin,
-      },
+      { threshold, rootMargin },
     );
 
     observer.observe(element);
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [rootMargin, threshold]);
 
-  return {
-    elementRef,
-    isVisible,
-  };
+  return { elementRef, isVisible };
 }
