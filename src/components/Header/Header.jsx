@@ -16,7 +16,23 @@ const rightNavigation = [
 
 const mobileNavigation = [...leftNavigation, ...rightNavigation];
 
-function Logo({ onClick }) {
+function normalizePath(path) {
+  if (!path || path === "/") {
+    return "/";
+  }
+
+  return path.replace(/\/+$/, "");
+}
+
+function getCurrentPath() {
+  if (typeof window === "undefined") {
+    return "/";
+  }
+
+  return normalizePath(window.location.pathname);
+}
+
+function Logo({ onClick, isPageHeader }) {
   return (
     <a
       href="/"
@@ -24,32 +40,53 @@ function Logo({ onClick }) {
       onClick={onClick}
       className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center text-center text-[#191919] no-underline min-[1025px]:static min-[1025px]:translate-x-0 min-[1025px]:translate-y-0"
     >
-      <span className="mt-[-3px] block whitespace-nowrap font-script text-[30px] font-normal leading-[0.8] tracking-[0.015em] min-[481px]:text-[34px] min-[1025px]:text-[36px] min-[1281px]:text-[39px]">
+      <span
+        className={`mt-[-3px] block whitespace-nowrap font-script font-normal leading-[0.8] tracking-[0.015em] ${
+          isPageHeader
+            ? "text-[30px] min-[481px]:text-[33px] min-[1025px]:text-[35px] min-[1281px]:text-[37px]"
+            : "text-[30px] min-[481px]:text-[34px] min-[1025px]:text-[36px] min-[1281px]:text-[39px]"
+        }`}
+      >
         Tessa Morgan
       </span>
 
-      <span className="mt-[9px] block pl-[6px] text-[4.8px] font-medium uppercase leading-none tracking-[0.56em] [font-family:Arial,Helvetica,sans-serif] min-[481px]:mt-[10px] min-[481px]:text-[5.5px] min-[481px]:tracking-[0.62em] min-[1025px]:mt-[13px] min-[1025px]:text-[6px] min-[1025px]:tracking-[0.72em]">
+      <span
+        className={`block pl-[6px] font-medium uppercase leading-none [font-family:Arial,Helvetica,sans-serif] ${
+          isPageHeader
+            ? "mt-[9px] text-[4.8px] tracking-[0.56em] min-[481px]:text-[5.3px] min-[481px]:tracking-[0.62em] min-[1025px]:mt-[10px] min-[1025px]:text-[5.5px] min-[1025px]:tracking-[0.68em]"
+            : "mt-[9px] text-[4.8px] tracking-[0.56em] min-[481px]:mt-[10px] min-[481px]:text-[5.5px] min-[481px]:tracking-[0.62em] min-[1025px]:mt-[13px] min-[1025px]:text-[6px] min-[1025px]:tracking-[0.72em]"
+        }`}
+      >
         Photography
       </span>
     </a>
   );
 }
 
-function DesktopNavigation({ links, position }) {
+function DesktopNavigation({ links, position, currentPath }) {
   return (
     <nav
       aria-label={`${position} primary navigation`}
       className="hidden w-full items-center justify-between min-[1025px]:flex"
     >
-      {links.map((link) => (
-        <a
-          key={link.id}
-          href={link.href}
-          className="relative inline-flex items-center whitespace-nowrap font-primary text-[16px] font-normal uppercase leading-none tracking-[0.045em] text-[#2f2e2d] no-underline transition-colors duration-[250ms] after:absolute after:inset-x-0 after:bottom-[-9px] after:h-px after:origin-center after:scale-x-0 after:bg-current after:opacity-0 after:transition-all after:duration-[250ms] after:content-[''] hover:text-[#111] hover:after:scale-x-100 hover:after:opacity-75 focus-visible:text-[#111] focus-visible:outline-none focus-visible:after:scale-x-100 focus-visible:after:opacity-75 min-[1281px]:text-[17.5px] min-[1281px]:tracking-[0.055em]"
-        >
-          {link.label}
-        </a>
-      ))}
+      {links.map((link) => {
+        const isActive = normalizePath(link.href) === currentPath;
+
+        return (
+          <a
+            key={link.id}
+            href={link.href}
+            aria-current={isActive ? "page" : undefined}
+            className={`relative inline-flex items-center whitespace-nowrap font-primary text-[16px] font-normal uppercase leading-none tracking-[0.045em] no-underline transition-colors duration-[250ms] after:absolute after:inset-x-0 after:bottom-[-9px] after:h-px after:origin-center after:bg-current after:transition-[opacity,transform] after:duration-[250ms] after:content-[''] hover:text-[#9c795d] hover:after:scale-x-100 hover:after:opacity-100 focus-visible:text-[#9c795d] focus-visible:outline-none focus-visible:after:scale-x-100 focus-visible:after:opacity-100 min-[1281px]:text-[17.5px] min-[1281px]:tracking-[0.055em] ${
+              isActive
+                ? "text-[#9c795d] after:scale-x-100 after:opacity-100"
+                : "text-[#2f2e2d] after:scale-x-0 after:opacity-0"
+            }`}
+          >
+            {link.label}
+          </a>
+        );
+      })}
     </nav>
   );
 }
@@ -93,6 +130,7 @@ function MobileNavigationLink({
   link,
   index,
   isMenuOpen,
+  isActive,
   onClick,
   linkRef,
 }) {
@@ -100,12 +138,17 @@ function MobileNavigationLink({
     <a
       ref={linkRef}
       href={link.href}
+      aria-current={isActive ? "page" : undefined}
       onClick={onClick}
       tabIndex={isMenuOpen ? 0 : -1}
       style={{
         transitionDelay: `${120 + index * 55}ms`,
       }}
-      className={`group flex items-center justify-between border-b border-[rgba(31,29,27,0.1)] px-[2px] py-[14px] font-primary text-[18px] font-normal uppercase leading-[1.15] tracking-[0.05em] text-[#33312f] no-underline transition-[color,padding,opacity,transform] duration-[450ms] hover:px-[7px] hover:text-[#94765e] focus-visible:px-[7px] focus-visible:text-[#94765e] focus-visible:outline-none min-[481px]:py-[15px] min-[481px]:text-[20px] min-[481px]:tracking-[0.055em] ${
+      className={`group flex items-center justify-between border-b border-[rgba(31,29,27,0.1)] py-[14px] font-primary text-[18px] font-normal uppercase leading-[1.15] tracking-[0.05em] no-underline transition-[color,padding,opacity,transform] duration-[450ms] hover:px-[7px] hover:text-[#94765e] focus-visible:px-[7px] focus-visible:text-[#94765e] focus-visible:outline-none min-[481px]:py-[15px] min-[481px]:text-[20px] min-[481px]:tracking-[0.055em] ${
+        isActive
+          ? "px-[7px] text-[#94765e]"
+          : "px-[2px] text-[#33312f]"
+      } ${
         isMenuOpen
           ? "translate-x-0 opacity-100"
           : "translate-x-7 opacity-0"
@@ -116,7 +159,9 @@ function MobileNavigationLink({
       <svg
         viewBox="0 0 24 24"
         aria-hidden="true"
-        className="h-[17px] w-[17px] opacity-60 transition-[transform,opacity] duration-[250ms] group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:opacity-100 group-focus-visible:translate-x-[2px] group-focus-visible:-translate-y-[2px] group-focus-visible:opacity-100"
+        className={`h-[17px] w-[17px] transition-[transform,opacity] duration-[250ms] group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:opacity-100 group-focus-visible:translate-x-[2px] group-focus-visible:-translate-y-[2px] group-focus-visible:opacity-100 ${
+          isActive ? "translate-x-[2px] opacity-100" : "opacity-60"
+        }`}
       >
         <path
           d="M7 17L17 7M9 7H17V15"
@@ -131,11 +176,14 @@ function MobileNavigationLink({
   );
 }
 
-export default function Header() {
+export default function Header({ variant = "overlay" }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentPath, setCurrentPath] = useState(getCurrentPath);
 
   const menuButtonRef = useRef(null);
   const firstMobileLinkRef = useRef(null);
+
+  const isPageHeader = variant === "page";
 
   const closeMenu = () => {
     setIsMenuOpen(false);
@@ -144,6 +192,18 @@ export default function Header() {
   const toggleMenu = () => {
     setIsMenuOpen((currentState) => !currentState);
   };
+
+  useEffect(() => {
+    const updateCurrentPath = () => {
+      setCurrentPath(getCurrentPath());
+    };
+
+    window.addEventListener("popstate", updateCurrentPath);
+
+    return () => {
+      window.removeEventListener("popstate", updateCurrentPath);
+    };
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -187,21 +247,36 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
+  const headerPositionClasses = isPageHeader
+    ? "relative"
+    : "absolute inset-x-0 top-0";
+
+  const headerSurfaceClasses = isPageHeader
+    ? "h-[74px] border-b border-[#ebe8e4] bg-white min-[481px]:h-[82px] min-[1025px]:h-[82px]"
+    : "h-[74px] border-b border-white/25 bg-white/[0.82] backdrop-blur-[2px] min-[481px]:h-[82px] min-[1025px]:h-[108px] min-[1025px]:bg-white/[0.77]";
+
   return (
     <>
-      <header className="header-reveal absolute inset-x-0 top-0 z-[100] w-full">
-        <div className="h-[74px] w-full border-b border-white/25 bg-white/[0.82] backdrop-blur-[2px] min-[481px]:h-[82px] min-[1025px]:h-[108px] min-[1025px]:bg-white/[0.77]">
+      <header
+        className={`header-reveal z-[100] w-full ${headerPositionClasses}`}
+      >
+        <div className={`w-full ${headerSurfaceClasses}`}>
           <div className="relative mx-auto flex h-full w-[calc(100%_-_28px)] items-center justify-end min-[481px]:w-[calc(100%_-_42px)] min-[1025px]:grid min-[1025px]:w-[min(calc(100%_-_64px),1150px)] min-[1025px]:grid-cols-[minmax(0,1fr)_220px_minmax(0,1fr)] min-[1025px]:gap-x-9 min-[1281px]:w-[min(calc(100%_-_128px),1232px)] min-[1281px]:grid-cols-[minmax(0,1fr)_250px_minmax(0,1fr)] min-[1281px]:gap-x-[52px]">
             <DesktopNavigation
               links={leftNavigation}
               position="left"
+              currentPath={currentPath}
             />
 
-            <Logo onClick={closeMenu} />
+            <Logo
+              onClick={closeMenu}
+              isPageHeader={isPageHeader}
+            />
 
             <DesktopNavigation
               links={rightNavigation}
               position="right"
+              currentPath={currentPath}
             />
 
             <MenuButton
@@ -243,6 +318,7 @@ export default function Header() {
               link={link}
               index={index}
               isMenuOpen={isMenuOpen}
+              isActive={normalizePath(link.href) === currentPath}
               onClick={closeMenu}
               linkRef={index === 0 ? firstMobileLinkRef : undefined}
             />

@@ -1,3 +1,5 @@
+import { Navigate, Route, Routes } from "react-router-dom";
+
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import About from "./components/About/About";
@@ -9,22 +11,49 @@ import Stats from "./components/Stats/Stats";
 import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 
-export default function App() {
+import AboutPage from "./pages/About/AboutPage";
+import ServicesPage from "./pages/Services/ServicesPage";
+import PortfolioPage from "./pages/Portfolio/PortfolioPage";
+import BlogPage from "./pages/Blog/BlogPage";
+import ContactPage from "./pages/Contact/ContactPage";
+
+function HomePage() {
   return (
     <>
-      <Header />
+      <Header variant="overlay" />
 
-      <main>
+      <main id="main-content">
         <Hero />
         <About />
-        <Services/>
-        <CreativeStory/>
-        <FeaturedStory/>
-        <Testimonials/>
-        <Stats/>
-        <Contact/>
-        <Footer/>
+        <Services />
+        <CreativeStory />
+        <FeaturedStory />
+        <Testimonials />
+        <Stats />
+        <Contact />
       </main>
+
+      <Footer />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+
+      <Route path="/about" element={<AboutPage />} />
+
+      <Route path="/services" element={<ServicesPage />} />
+
+      <Route path="/portfolio" element={<PortfolioPage />} />
+
+      <Route path="/blog" element={<BlogPage />} />
+
+      <Route path="/contact" element={<ContactPage />} />
+
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
