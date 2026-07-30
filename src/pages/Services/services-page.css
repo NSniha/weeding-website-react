@@ -1,0 +1,185 @@
+/* ===================================
+   Services Hero Reveal
+=================================== */
+
+.services-hero {
+  opacity: 0;
+  transition: opacity 900ms var(--ease-elegant);
+}
+
+.services-hero__image {
+  opacity: 0.86;
+  transform: scale(1.055);
+  transition:
+    opacity 1000ms var(--ease-elegant),
+    transform 1500ms var(--ease-elegant);
+}
+
+.services-hero.is-visible {
+  opacity: 1;
+}
+
+.services-hero.is-visible .services-hero__image {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===================================
+   Photography Packages Reveal
+=================================== */
+
+.packages-heading-reveal,
+.package-card-reveal,
+.package-button-reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 850ms var(--ease-elegant),
+    transform 850ms var(--ease-elegant);
+  transition-delay: var(--package-delay, 0ms);
+}
+
+.package-card-reveal {
+  transform: translateY(52px);
+  transition-duration: 950ms;
+}
+
+.package-button-reveal {
+  transform: translateY(28px);
+}
+
+.packages-section.is-visible .packages-heading-reveal,
+.packages-section.is-visible .package-card-reveal,
+.packages-section.is-visible .package-button-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================================
+   Package Image Hover
+=================================== */
+
+.package-card__media img {
+  transform: scale(1);
+  transition: transform 1100ms var(--ease-elegant);
+}
+
+.package-card-reveal:hover .package-card__media img {
+  transform: scale(1.045);
+}
+
+.package-card__title {
+  transition: color 300ms ease;
+}
+
+.package-card-reveal:hover .package-card__title {
+  color: #ad8362;
+}
+
+/* ===================================
+   Service Promise Reveal
+=================================== */
+
+.service-promise__leaf,
+.service-promise__heading {
+  opacity: 0;
+  transition:
+    opacity 850ms var(--ease-elegant),
+    transform 850ms var(--ease-elegant);
+}
+
+.service-promise__leaf {
+  transform: translateY(26px) rotate(-5deg);
+}
+
+.service-promise__heading {
+  transform: translateY(38px);
+  transition-delay: 130ms;
+}
+
+.service-promise.is-visible .service-promise__leaf,
+.service-promise.is-visible .service-promise__heading {
+  opacity: 1;
+  transform: translateY(0) rotate(0);
+}
+
+/* ===================================
+   Process Heading Reveal
+=================================== */
+
+.process-heading-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 800ms var(--ease-elegant),
+    transform 800ms var(--ease-elegant);
+}
+
+.process-heading-delay {
+  transition-delay: 100ms;
+}
+
+.service-process.is-visible .process-heading-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================================
+   Process Cells Reveal
+=================================== */
+
+.process-cell-reveal {
+  opacity: 0;
+  transform: translateY(46px);
+  transition:
+    opacity 900ms var(--ease-elegant),
+    transform 900ms var(--ease-elegant);
+  transition-delay: var(--process-delay, 0ms);
+}
+
+.service-process.is-visible .process-cell-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.process-cell--image img {
+  transform: scale(1.055);
+  transition: transform 1200ms var(--ease-elegant);
+}
+
+.process-cell-reveal:hover .process-cell--image img {
+  transform: scale(1);
+}
+
+/* ===================================
+   Responsive Process Animation
+=================================== */
+
+@media (max-width: 600px) {
+  .process-cell-reveal {
+    transform: translateY(38px);
+  }
+}
+
+/* ===================================
+   Reduced Motion
+=================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .services-hero,
+  .services-hero__image,
+  .packages-heading-reveal,
+  .package-card-reveal,
+  .package-button-reveal,
+  .package-card__media img,
+  .package-card__title,
+  .service-promise__leaf,
+  .service-promise__heading,
+  .process-heading-reveal,
+  .process-cell-reveal,
+  .process-cell--image img {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

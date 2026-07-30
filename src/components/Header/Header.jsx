@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 import "./header.css";
 
@@ -16,26 +17,10 @@ const rightNavigation = [
 
 const mobileNavigation = [...leftNavigation, ...rightNavigation];
 
-function normalizePath(path) {
-  if (!path || path === "/") {
-    return "/";
-  }
-
-  return path.replace(/\/+$/, "");
-}
-
-function getCurrentPath() {
-  if (typeof window === "undefined") {
-    return "/";
-  }
-
-  return normalizePath(window.location.pathname);
-}
-
 function Logo({ onClick, isPageHeader }) {
   return (
-    <a
-      href="/"
+    <Link
+      to="/"
       aria-label="Tessa Morgan Photography home"
       onClick={onClick}
       className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center text-center text-[#191919] no-underline min-[1025px]:static min-[1025px]:translate-x-0 min-[1025px]:translate-y-0"
@@ -59,34 +44,32 @@ function Logo({ onClick, isPageHeader }) {
       >
         Photography
       </span>
-    </a>
+    </Link>
   );
 }
 
-function DesktopNavigation({ links, position, currentPath }) {
+function DesktopNavigation({ links, position }) {
   return (
     <nav
       aria-label={`${position} primary navigation`}
       className="hidden w-full items-center justify-between min-[1025px]:flex"
     >
-      {links.map((link) => {
-        const isActive = normalizePath(link.href) === currentPath;
-
-        return (
-          <a
-            key={link.id}
-            href={link.href}
-            aria-current={isActive ? "page" : undefined}
-            className={`relative inline-flex items-center whitespace-nowrap font-primary text-[16px] font-normal uppercase leading-none tracking-[0.045em] no-underline transition-colors duration-[250ms] after:absolute after:inset-x-0 after:bottom-[-9px] after:h-px after:origin-center after:bg-current after:transition-[opacity,transform] after:duration-[250ms] after:content-[''] hover:text-[#9c795d] hover:after:scale-x-100 hover:after:opacity-100 focus-visible:text-[#9c795d] focus-visible:outline-none focus-visible:after:scale-x-100 focus-visible:after:opacity-100 min-[1281px]:text-[17.5px] min-[1281px]:tracking-[0.055em] ${
+      {links.map((link) => (
+        <NavLink
+          key={link.id}
+          to={link.href}
+          end={link.href === "/"}
+          className={({ isActive }) =>
+            `relative inline-flex items-center whitespace-nowrap font-primary text-[16px] font-normal uppercase leading-none tracking-[0.045em] no-underline transition-colors duration-[250ms] after:absolute after:inset-x-0 after:bottom-[-9px] after:h-px after:origin-center after:bg-current after:transition-[opacity,transform] after:duration-[250ms] after:content-[''] hover:text-[#9c795d] hover:after:scale-x-100 hover:after:opacity-100 focus-visible:text-[#9c795d] focus-visible:outline-none focus-visible:after:scale-x-100 focus-visible:after:opacity-100 min-[1281px]:text-[17.5px] min-[1281px]:tracking-[0.055em] ${
               isActive
                 ? "text-[#9c795d] after:scale-x-100 after:opacity-100"
                 : "text-[#2f2e2d] after:scale-x-0 after:opacity-0"
-            }`}
-          >
-            {link.label}
-          </a>
-        );
-      })}
+            }`
+          }
+        >
+          {link.label}
+        </NavLink>
+      ))}
     </nav>
   );
 }
@@ -130,58 +113,66 @@ function MobileNavigationLink({
   link,
   index,
   isMenuOpen,
-  isActive,
   onClick,
   linkRef,
 }) {
   return (
-    <a
+    <NavLink
       ref={linkRef}
-      href={link.href}
-      aria-current={isActive ? "page" : undefined}
+      to={link.href}
+      end={link.href === "/"}
       onClick={onClick}
       tabIndex={isMenuOpen ? 0 : -1}
       style={{
         transitionDelay: `${120 + index * 55}ms`,
       }}
-      className={`group flex items-center justify-between border-b border-[rgba(31,29,27,0.1)] py-[14px] font-primary text-[18px] font-normal uppercase leading-[1.15] tracking-[0.05em] no-underline transition-[color,padding,opacity,transform] duration-[450ms] hover:px-[7px] hover:text-[#94765e] focus-visible:px-[7px] focus-visible:text-[#94765e] focus-visible:outline-none min-[481px]:py-[15px] min-[481px]:text-[20px] min-[481px]:tracking-[0.055em] ${
-        isActive
-          ? "px-[7px] text-[#94765e]"
-          : "px-[2px] text-[#33312f]"
-      } ${
-        isMenuOpen
-          ? "translate-x-0 opacity-100"
-          : "translate-x-7 opacity-0"
-      }`}
+      className={({ isActive }) =>
+        `group flex items-center justify-between border-b border-[rgba(31,29,27,0.1)] py-[14px] font-primary text-[18px] font-normal uppercase leading-[1.15] tracking-[0.05em] no-underline transition-[color,padding,opacity,transform] duration-[450ms] hover:px-[7px] hover:text-[#94765e] focus-visible:px-[7px] focus-visible:text-[#94765e] focus-visible:outline-none min-[481px]:py-[15px] min-[481px]:text-[20px] min-[481px]:tracking-[0.055em] ${
+          isActive
+            ? "px-[7px] text-[#94765e]"
+            : "px-[2px] text-[#33312f]"
+        } ${
+          isMenuOpen
+            ? "translate-x-0 opacity-100"
+            : "translate-x-7 opacity-0"
+        }`
+      }
     >
-      <span>{link.label}</span>
+      {({ isActive }) => (
+        <>
+          <span>{link.label}</span>
 
-      <svg
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-        className={`h-[17px] w-[17px] transition-[transform,opacity] duration-[250ms] group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:opacity-100 group-focus-visible:translate-x-[2px] group-focus-visible:-translate-y-[2px] group-focus-visible:opacity-100 ${
-          isActive ? "translate-x-[2px] opacity-100" : "opacity-60"
-        }`}
-      >
-        <path
-          d="M7 17L17 7M9 7H17V15"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.25"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </a>
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            className={`h-[17px] w-[17px] transition-[transform,opacity] duration-[250ms] group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:opacity-100 group-focus-visible:translate-x-[2px] group-focus-visible:-translate-y-[2px] group-focus-visible:opacity-100 ${
+              isActive
+                ? "translate-x-[2px] opacity-100"
+                : "opacity-60"
+            }`}
+          >
+            <path
+              d="M7 17L17 7M9 7H17V15"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.25"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </>
+      )}
+    </NavLink>
   );
 }
 
 export default function Header({ variant = "overlay" }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentPath, setCurrentPath] = useState(getCurrentPath);
 
   const menuButtonRef = useRef(null);
   const firstMobileLinkRef = useRef(null);
+
+  const { pathname } = useLocation();
 
   const isPageHeader = variant === "page";
 
@@ -194,16 +185,14 @@ export default function Header({ variant = "overlay" }) {
   };
 
   useEffect(() => {
-    const updateCurrentPath = () => {
-      setCurrentPath(getCurrentPath());
-    };
+    setIsMenuOpen(false);
 
-    window.addEventListener("popstate", updateCurrentPath);
-
-    return () => {
-      window.removeEventListener("popstate", updateCurrentPath);
-    };
-  }, []);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  }, [pathname]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -265,7 +254,6 @@ export default function Header({ variant = "overlay" }) {
             <DesktopNavigation
               links={leftNavigation}
               position="left"
-              currentPath={currentPath}
             />
 
             <Logo
@@ -276,7 +264,6 @@ export default function Header({ variant = "overlay" }) {
             <DesktopNavigation
               links={rightNavigation}
               position="right"
-              currentPath={currentPath}
             />
 
             <MenuButton
@@ -318,7 +305,6 @@ export default function Header({ variant = "overlay" }) {
               link={link}
               index={index}
               isMenuOpen={isMenuOpen}
-              isActive={normalizePath(link.href) === currentPath}
               onClick={closeMenu}
               linkRef={index === 0 ? firstMobileLinkRef : undefined}
             />
