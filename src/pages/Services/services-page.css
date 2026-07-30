@@ -80,27 +80,18 @@
    Service Promise Reveal
 =================================== */
 
-.service-promise__leaf,
-.service-promise__heading {
+.service-promise-reveal {
   opacity: 0;
+  transform: translateY(30px);
   transition:
-    opacity 850ms var(--ease-elegant),
-    transform 850ms var(--ease-elegant);
+    opacity 800ms var(--ease-elegant),
+    transform 800ms var(--ease-elegant);
+  transition-delay: var(--promise-delay, 0ms);
 }
 
-.service-promise__leaf {
-  transform: translateY(26px) rotate(-5deg);
-}
-
-.service-promise__heading {
-  transform: translateY(38px);
-  transition-delay: 130ms;
-}
-
-.service-promise.is-visible .service-promise__leaf,
-.service-promise.is-visible .service-promise__heading {
+.service-promise.is-visible .service-promise-reveal {
   opacity: 1;
-  transform: translateY(0) rotate(0);
+  transform: translateY(0);
 }
 
 /* ===================================
@@ -125,10 +116,11 @@
 }
 
 /* ===================================
-   Process Cells Reveal
+   Process Grid
 =================================== */
 
 .process-cell-reveal {
+  min-width: 0;
   opacity: 0;
   transform: translateY(46px);
   transition:
@@ -142,6 +134,11 @@
   transform: translateY(0);
 }
 
+.process-cell {
+  width: 100%;
+  height: 100%;
+}
+
 .process-cell--image img {
   transform: scale(1.055);
   transition: transform 1200ms var(--ease-elegant);
@@ -152,12 +149,46 @@
 }
 
 /* ===================================
-   Responsive Process Animation
+   Tablet Process Grid
+=================================== */
+
+@media (max-width: 900px) and (min-width: 601px) {
+  .process-cell-reveal:last-child {
+    grid-column: 1 / -1;
+    width: 50%;
+    margin-inline: auto;
+  }
+}
+
+/* ===================================
+   Mobile Animation
 =================================== */
 
 @media (max-width: 600px) {
   .process-cell-reveal {
     transform: translateY(38px);
+  }
+
+  .service-process.is-visible .process-cell-reveal {
+    transform: translateY(0);
+  }
+}
+
+/* ===================================
+   Hover-Capable Devices
+=================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  .package-card-reveal:hover .package-card__media img {
+    transform: scale(1.045);
+  }
+
+  .package-card-reveal:hover .package-card__title {
+    color: #ad8362;
+  }
+
+  .process-cell-reveal:hover .process-cell--image img {
+    transform: scale(1);
   }
 }
 
@@ -173,8 +204,7 @@
   .package-button-reveal,
   .package-card__media img,
   .package-card__title,
-  .service-promise__leaf,
-  .service-promise__heading,
+  .service-promise-reveal,
   .process-heading-reveal,
   .process-cell-reveal,
   .process-cell--image img {
