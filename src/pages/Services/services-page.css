@@ -1,5 +1,5 @@
 /* ===================================
-   Services Hero Reveal
+   Services Hero
 =================================== */
 
 .services-hero {
@@ -25,7 +25,7 @@
 }
 
 /* ===================================
-   Photography Packages Reveal
+   Photography Packages
 =================================== */
 
 .packages-heading-reveal,
@@ -55,29 +55,17 @@
   transform: translateY(0);
 }
 
-/* ===================================
-   Package Image Hover
-=================================== */
-
 .package-card__media img {
   transform: scale(1);
   transition: transform 1100ms var(--ease-elegant);
-}
-
-.package-card-reveal:hover .package-card__media img {
-  transform: scale(1.045);
 }
 
 .package-card__title {
   transition: color 300ms ease;
 }
 
-.package-card-reveal:hover .package-card__title {
-  color: #ad8362;
-}
-
 /* ===================================
-   Service Promise Reveal
+   Service Promise
 =================================== */
 
 .service-promise-reveal {
@@ -95,7 +83,7 @@
 }
 
 /* ===================================
-   Process Heading Reveal
+   Process Heading
 =================================== */
 
 .process-heading-reveal {
@@ -144,8 +132,152 @@
   transition: transform 1200ms var(--ease-elegant);
 }
 
-.process-cell-reveal:hover .process-cell--image img {
-  transform: scale(1);
+/* ===================================
+   FAQ Reveal
+=================================== */
+
+.faq-heading-reveal,
+.faq-item-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 800ms var(--ease-elegant),
+    transform 800ms var(--ease-elegant);
+}
+
+.faq-heading-delay {
+  transition-delay: 100ms;
+}
+
+.faq-item-reveal {
+  transform: translateY(35px);
+  transition-delay: var(--faq-delay, 0ms);
+}
+
+.service-faq.is-visible .faq-heading-reveal,
+.service-faq.is-visible .faq-item-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================================
+   FAQ Accordion
+=================================== */
+
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 450ms var(--ease-elegant),
+    opacity 300ms ease;
+}
+
+.faq-answer__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.faq-item.is-open .faq-answer {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.faq-plus {
+  transition:
+    color 300ms ease,
+    transform 350ms var(--ease-elegant);
+}
+
+.faq-plus__vertical {
+  transform-origin: center;
+  transition:
+    opacity 300ms ease,
+    transform 400ms var(--ease-elegant);
+}
+
+.faq-item.is-open .faq-plus {
+  transform: rotate(180deg);
+}
+
+.faq-item.is-open .faq-plus__vertical {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq-item:hover .faq-plus,
+.faq-item:focus-within .faq-plus {
+  color: #a8754e;
+}
+
+/* ===================================
+   Quality Service
+=================================== */
+
+.quality-service__left-media,
+.quality-service__panel,
+.quality-service__title,
+.quality-service__rings-media {
+  opacity: 0;
+  transition:
+    opacity 950ms var(--ease-elegant),
+    transform 950ms var(--ease-elegant);
+}
+
+.quality-service__left-media {
+  transform: translateX(-55px);
+}
+
+.quality-service__panel {
+  transform: translateY(45px);
+  transition-delay: 130ms;
+}
+
+.quality-service__title {
+  transform: translateY(-28px);
+  transition-delay: 230ms;
+}
+
+.quality-service__rings-media {
+  transform: translateX(55px);
+  transition-delay: 320ms;
+}
+
+.quality-service.is-visible .quality-service__left-media,
+.quality-service.is-visible .quality-service__panel,
+.quality-service.is-visible .quality-service__title,
+.quality-service.is-visible .quality-service__rings-media {
+  opacity: 1;
+  transform: translate(0);
+}
+
+.quality-service__left-media img,
+.quality-service__rings-media img {
+  transform: scale(1.045);
+  transition: transform 1200ms var(--ease-elegant);
+}
+
+/* ===================================
+   Hover Effects
+=================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  .package-card-reveal:hover .package-card__media img {
+    transform: scale(1.045);
+  }
+
+  .package-card-reveal:hover .package-card__title {
+    color: #ad8362;
+  }
+
+  .process-cell-reveal:hover .process-cell--image img {
+    transform: scale(1);
+  }
+
+  .quality-service__left-media:hover img,
+  .quality-service__rings-media:hover img {
+    transform: scale(1);
+  }
 }
 
 /* ===================================
@@ -161,7 +293,27 @@
 }
 
 /* ===================================
-   Mobile Animation
+   Responsive Quality Service
+=================================== */
+
+@media (max-width: 800px) {
+  .quality-service__left-media,
+  .quality-service__panel,
+  .quality-service__title,
+  .quality-service__rings-media {
+    transform: translateY(38px);
+  }
+
+  .quality-service.is-visible .quality-service__left-media,
+  .quality-service.is-visible .quality-service__panel,
+  .quality-service.is-visible .quality-service__title,
+  .quality-service.is-visible .quality-service__rings-media {
+    transform: translateY(0);
+  }
+}
+
+/* ===================================
+   Mobile
 =================================== */
 
 @media (max-width: 600px) {
@@ -171,24 +323,6 @@
 
   .service-process.is-visible .process-cell-reveal {
     transform: translateY(0);
-  }
-}
-
-/* ===================================
-   Hover-Capable Devices
-=================================== */
-
-@media (hover: hover) and (pointer: fine) {
-  .package-card-reveal:hover .package-card__media img {
-    transform: scale(1.045);
-  }
-
-  .package-card-reveal:hover .package-card__title {
-    color: #ad8362;
-  }
-
-  .process-cell-reveal:hover .process-cell--image img {
-    transform: scale(1);
   }
 }
 
@@ -207,9 +341,28 @@
   .service-promise-reveal,
   .process-heading-reveal,
   .process-cell-reveal,
-  .process-cell--image img {
+  .process-cell--image img,
+  .faq-heading-reveal,
+  .faq-item-reveal,
+  .faq-answer,
+  .faq-plus,
+  .faq-plus__vertical,
+  .quality-service__left-media,
+  .quality-service__panel,
+  .quality-service__title,
+  .quality-service__rings-media,
+  .quality-service__left-media img,
+  .quality-service__rings-media img {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .faq-answer {
+    display: block;
+  }
+
+  .faq-item:not(.is-open) .faq-answer {
+    display: none;
   }
 }
