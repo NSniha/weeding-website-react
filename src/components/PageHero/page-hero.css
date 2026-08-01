@@ -1,0 +1,38 @@
+/* ===================================
+   Shared Subpage Hero
+=================================== */
+
+.page-hero {
+  opacity: 0;
+  transition: opacity 900ms var(--ease-elegant);
+}
+
+.page-hero__image {
+  opacity: 0.86;
+  transform: scale(1.055);
+  transition:
+    opacity 1000ms var(--ease-elegant),
+    transform 1500ms var(--ease-elegant);
+}
+
+.page-hero.is-visible {
+  opacity: 1;
+}
+
+.page-hero.is-visible .page-hero__image {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===================================
+   Reduced Motion
+=================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .page-hero,
+  .page-hero__image {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

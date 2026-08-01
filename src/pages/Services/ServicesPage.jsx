@@ -338,7 +338,7 @@ function ServicePromise() {
     <section
       ref={elementRef}
       aria-labelledby="service-promise-heading"
-      className={`service-promise flex min-h-[545px] w-full items-center overflow-hidden bg-surface-soft pb-[86px] pt-[90px] max-[1200px]:min-h-[480px] max-[1200px]:py-[75px] max-[900px]:min-h-[430px] max-[900px]:py-[70px] max-[600px]:min-h-[390px] max-[600px]:py-[60px] max-[380px]:min-h-[360px] ${
+      className={`service-promise flex min-h-[350px] my-14 w-full items-center overflow-hidden bg-surface-soft pb-[86px] pt-[90px] max-[1200px]:min-h-[480px] max-[1200px]:py-[75px] max-[900px]:min-h-[430px] max-[900px]:py-[70px] max-[600px]:min-h-[390px] max-[600px]:py-[60px] max-[380px]:min-h-[360px] ${
         isVisible ? "is-visible" : ""
       }`}
     >
@@ -566,7 +566,7 @@ function QualityService() {
     <section
       ref={elementRef}
       aria-labelledby="quality-service-heading"
-      className={`quality-service overflow-hidden bg-white pb-[110px] pt-[44px] max-[1280px]:pb-[100px] max-[1024px]:pb-[90px] max-[900px]:pt-[36px] max-[768px]:pb-[80px] max-[480px]:pb-[68px] max-[480px]:pt-[28px] ${
+      className={`quality-service overflow-hidden bg-white pb-8 pt-[50px] max-[1280px]:pb-8 max-[1024px]:pb-[90px] max-[900px]:pt-[36px] max-[768px]:pb-[80px] max-[480px]:pb-[68px] max-[480px]:pt-[28px] ${
         isVisible ? "is-visible" : ""
       }`}
     >
