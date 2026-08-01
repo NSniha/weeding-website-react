@@ -3,9 +3,11 @@ import { useEffect, useRef, useState } from "react";
 export default function useRevealOnScroll({
   threshold = 0.18,
   rootMargin = "0px 0px -60px",
+  once = true,
+  disabled = false,
 } = {}) {
   const elementRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(disabled);
 
   useEffect(() => {
     const element = elementRef.current;
@@ -18,27 +20,45 @@ export default function useRevealOnScroll({
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    if (prefersReducedMotion) {
+    const isObserverSupported =
+      typeof window.IntersectionObserver !== "undefined";
+
+    if (disabled || prefersReducedMotion || !isObserverSupported) {
       setIsVisible(true);
       return undefined;
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+
+          if (once) {
+            observer.unobserve(entry.target);
+          }
+
           return;
         }
 
-        setIsVisible(true);
-        observer.unobserve(element);
+        if (!once) {
+          setIsVisible(false);
+        }
       },
-      { threshold, rootMargin },
+      {
+        threshold,
+        rootMargin,
+      },
     );
 
     observer.observe(element);
 
-    return () => observer.disconnect();
-  }, [rootMargin, threshold]);
+    return () => {
+      observer.disconnect();
+    };
+  }, [disabled, once, rootMargin, threshold]);
 
-  return { elementRef, isVisible };
+  return {
+    elementRef,
+    isVisible,
+  };
 }
