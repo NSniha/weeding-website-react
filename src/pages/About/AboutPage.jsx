@@ -13,7 +13,7 @@ import bouquetSoftImage from "../../assets/images/about-bouquet-soft.png";
 import storyLensBeachImage from "../../assets/images/about-lens-beach.png";
 import storyLensArchitectureImage from "../../assets/images/about-lens-architecture.png";
 
-import floralDivider from "../../assets/icons/floral-divider.svg";
+import floralDivider from "../../assets/icons/award-leaf-bottom.svg";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -111,10 +111,10 @@ function MyStory() {
           </h1>
         </header>
 
-        <div className="mt-[65px] grid grid-cols-[0.94fr_1.06fr] items-stretch gap-[64px] max-[1280px]:mt-[60px] max-[1280px]:gap-[52px] max-[1024px]:mt-14 max-[1024px]:gap-10 max-[800px]:grid-cols-1 max-[800px]:gap-0 max-[768px]:mt-12 max-[480px]:mt-[41px]">
+        <div className="mt-[65px] grid w-full grid-cols-[0.94fr_1.06fr] items-stretch gap-[64px] max-[1280px]:mt-[60px] max-[1280px]:gap-[52px] max-[1024px]:mt-14 max-[1024px]:gap-10 max-[800px]:grid-cols-1 max-[800px]:gap-0 max-[768px]:mt-12 max-[480px]:mt-[41px]">
           <figure
             style={getRevealStyle(190)}
-            className="about-reveal about-reveal--left about-story__media m-0 aspect-[4/4.65] min-w-0 overflow-hidden bg-[#efefed] max-[800px]:mx-auto max-[800px]:w-full max-[800px]:max-w-[620px] max-[600px]:aspect-[4/4.8]"
+            className="about-reveal about-reveal--left about-story__media m-0 aspect-[4/4.65] w-full min-w-0 overflow-hidden bg-[#efefed] max-[600px]:aspect-[4/4.8]"
           >
             <img
               src={storyPortraitImage}
@@ -127,7 +127,7 @@ function MyStory() {
 
           <div
             style={getRevealStyle(300)}
-            className="about-reveal about-reveal--right flex min-w-0 flex-col justify-center py-[10px] max-[800px]:mx-auto max-[800px]:w-full max-[800px]:max-w-[620px] max-[800px]:px-5 max-[800px]:pb-0 max-[800px]:pt-[50px] max-[480px]:px-1"
+            className="about-reveal about-reveal--right flex w-full min-w-0 flex-col justify-center py-[10px] max-[800px]:px-5 max-[800px]:pb-0 max-[800px]:pt-[50px] max-[480px]:px-1"
           >
             <div className="space-y-[22px] font-primary text-[21px] font-normal leading-[1.38] tracking-[-0.005em] text-body max-[1200px]:text-[19px] max-[600px]:space-y-[19px] max-[600px]:text-[17px] max-[380px]:text-[16px]">
               <p className="m-0">
@@ -184,12 +184,12 @@ function StoryGallery() {
       }`}
     >
       <div className="site-container">
-        <div className="grid grid-cols-4 gap-[52px] max-[1280px]:gap-[38px] max-[1024px]:gap-7 max-[760px]:grid-cols-2 max-[760px]:gap-5 max-[480px]:gap-[14px]">
+        <div className="grid w-full grid-cols-4 gap-[52px] max-[1280px]:gap-[38px] max-[1024px]:gap-7 max-[760px]:grid-cols-2 max-[760px]:gap-5 max-[480px]:gap-[14px]">
           {galleryImages.map((galleryImage, index) => (
             <figure
               key={galleryImage.id}
               style={getRevealStyle(100 + index * 110)}
-              className="about-reveal about-gallery__item m-0 aspect-[3/4.35] min-w-0 overflow-hidden bg-[#ded8cf]"
+              className="about-reveal about-gallery__item m-0 aspect-[3/4.35] w-full min-w-0 overflow-hidden bg-[#ded8cf]"
             >
               <img
                 src={galleryImage.image}
@@ -213,18 +213,18 @@ function FactCard({ fact, className, delay }) {
   return (
     <article
       style={getRevealStyle(delay)}
-      className={`about-reveal about-facts__cell about-facts__card flex min-w-0 flex-col items-center justify-center bg-white px-[30px] py-[35px] text-center max-[1100px]:px-[24px] max-[600px]:min-h-[300px] max-[600px]:px-[27px] ${className}`}
+      className={`about-reveal about-facts__cell about-facts__card flex min-w-0 flex-col items-center justify-center bg-white px-[42px] py-[42px] text-center max-[1280px]:px-[35px] max-[1100px]:px-7 max-[900px]:px-[38px] max-[600px]:min-h-[360px] max-[480px]:min-h-[330px] max-[480px]:px-[27px] max-[380px]:min-h-[315px] max-[380px]:px-5 ${className}`}
     >
-      <p className="m-0 font-number text-[58px] font-normal leading-[0.85] tracking-[-0.02em] text-accent max-[1024px]:text-[54px] max-[600px]:text-[51px]">
+      <p className="m-0 font-number text-[67px] font-normal leading-[0.85] tracking-[-0.02em] text-accent max-[1280px]:text-[63px] max-[1024px]:text-[59px] max-[768px]:text-[55px] max-[480px]:text-[51px]">
         {fact.number}
       </p>
 
       <span
         aria-hidden="true"
-        className="mt-[20px] block h-px w-[92px] bg-[#d8b99c] max-[600px]:w-[82px]"
+        className="mt-[25px] block h-px w-[112px] bg-[#d4ae8b] max-[480px]:mt-[22px] max-[480px]:w-[96px]"
       />
 
-      <p className="mb-0 mt-[21px] max-w-[230px] font-primary text-[18px] font-normal leading-[1.42] text-body max-[1200px]:text-[17px] max-[600px]:max-w-[310px] max-[600px]:text-[17px] max-[380px]:text-[16px]">
+      <p className="mb-0 mt-[21px] max-w-[275px] font-primary text-[21px] font-normal leading-[1.38] tracking-[-0.005em] text-body max-[1200px]:max-w-[250px] max-[1200px]:text-[19px] max-[900px]:max-w-[285px] max-[600px]:max-w-[340px] max-[600px]:text-[17px] max-[380px]:text-[16px]">
         {fact.description}
       </p>
     </article>
@@ -289,7 +289,7 @@ function AboutFacts() {
           </h2>
         </header>
 
-        <div className="about-facts__grid mx-auto mt-[65px] w-full max-w-[930px] max-[1280px]:mt-[60px] max-[1024px]:mt-14 max-[768px]:mt-12 max-[480px]:mt-[41px]">
+        <div className="about-facts__grid mt-[65px] w-full max-[1280px]:mt-[60px] max-[1024px]:mt-14 max-[768px]:mt-12 max-[480px]:mt-[41px]">
           <FactImage
             image={galleryImageThree}
             imageAlt="Bride walking through a woodland wedding setting"
@@ -349,27 +349,29 @@ function StoryLens() {
       }`}
     >
       <div className="site-container">
-        <div className="about-lens__stage relative min-h-[500px] w-full max-[900px]:mx-auto max-[900px]:flex max-[900px]:min-h-0 max-[900px]:max-w-[650px] max-[900px]:flex-col">
+        <div className="about-lens__stage relative min-h-[500px] w-full max-[900px]:flex max-[900px]:min-h-0 max-[900px]:flex-col">
           <div
             aria-hidden="true"
-            className="about-lens__background absolute left-1/2 top-[130px] z-0 h-[166px] w-screen -translate-x-1/2 bg-[#f4f4f4] max-[900px]:hidden"
+            className="about-lens__background absolute inset-x-0 top-[130px] z-0 h-[166px] w-full bg-[#f4f4f4] max-[900px]:hidden"
           />
 
           <div className="relative z-[3] w-[54%] pt-[24px] max-[1024px]:w-[51%] max-[900px]:order-1 max-[900px]:w-full max-[900px]:pt-0 max-[900px]:text-center">
-            <p
-              style={getRevealStyle(0)}
-              className="about-reveal section-eyebrow text-left max-[900px]:text-center"
-            >
-              Crafting Memories
-            </p>
+            <header className="about-lens__header">
+              <p
+                style={getRevealStyle(0)}
+                className="about-reveal section-eyebrow"
+              >
+                Crafting Memories
+              </p>
 
-            <h2
-              id="story-lens-heading"
-              style={getRevealStyle(100)}
-              className="about-reveal mb-0 mt-[14px] font-primary text-[61px] font-normal leading-[0.98] tracking-[0.005em] text-heading max-[1280px]:text-[57px] max-[1024px]:text-[52px] max-[900px]:text-[54px] max-[600px]:text-[46px] max-[480px]:text-[42px] max-[380px]:text-[39px]"
-            >
-              Your Story, My Lens
-            </h2>
+              <h2
+                id="story-lens-heading"
+                style={getRevealStyle(100)}
+                className="about-reveal section-title"
+              >
+                Your Story, My Lens
+              </h2>
+            </header>
 
             <div
               style={getRevealStyle(210)}

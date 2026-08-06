@@ -50,12 +50,17 @@
   transition: transform 1200ms var(--ease-elegant);
 }
 
+.about-gallery.is-visible .about-gallery__image {
+  transform: scale(1);
+}
+
 /* ===================================
    Facts Grid
 =================================== */
 
 .about-facts__grid {
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-areas:
     "image-one fact-one image-two"
@@ -97,13 +102,27 @@
   transition: transform 1200ms var(--ease-elegant);
 }
 
+.about-facts.is-visible .about-facts__image {
+  transform: scale(1);
+}
+
 /* ===================================
    Story Lens
 =================================== */
 
+.about-lens__header {
+  text-align: left;
+}
+
+.about-lens__header .section-title {
+  margin-top: 14px;
+  text-align: left;
+}
+
 .about-lens__background {
   opacity: 0;
-  transform: translateX(-50%) scaleX(0.96);
+  transform: scaleX(0.96);
+  transform-origin: center;
   transition:
     opacity 900ms var(--ease-elegant),
     transform 900ms var(--ease-elegant);
@@ -111,7 +130,7 @@
 
 .about-lens.is-visible .about-lens__background {
   opacity: 1;
-  transform: translateX(-50%) scaleX(1);
+  transform: scaleX(1);
 }
 
 .about-lens__image {
@@ -137,12 +156,12 @@
 }
 
 /* ===================================
-   Tablet Facts Grid
+   Tablet
 =================================== */
 
 @media (max-width: 900px) {
   .about-facts__grid {
-    max-width: 650px;
+    width: 100%;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
       "image-one fact-one"
@@ -153,10 +172,18 @@
   .about-facts__cell {
     aspect-ratio: 4 / 5;
   }
+
+  .about-lens__header {
+    text-align: center;
+  }
+
+  .about-lens__header .section-title {
+    text-align: center;
+  }
 }
 
 /* ===================================
-   Mobile Facts Grid
+   Mobile
 =================================== */
 
 @media (max-width: 600px) {
@@ -171,7 +198,7 @@
   }
 
   .about-facts__grid {
-    max-width: 430px;
+    width: 100%;
     grid-template-columns: 1fr;
     grid-template-areas:
       "image-one"
