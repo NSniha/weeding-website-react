@@ -1,30 +1,4 @@
 /* ===================================
-   Services Hero
-=================================== */
-
-.services-hero {
-  opacity: 0;
-  transition: opacity 900ms var(--ease-elegant);
-}
-
-.services-hero__image {
-  opacity: 0.86;
-  transform: scale(1.055);
-  transition:
-    opacity 1000ms var(--ease-elegant),
-    transform 1500ms var(--ease-elegant);
-}
-
-.services-hero.is-visible {
-  opacity: 1;
-}
-
-.services-hero.is-visible .services-hero__image {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* ===================================
    Photography Packages
 =================================== */
 
@@ -331,8 +305,6 @@
 =================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .services-hero,
-  .services-hero__image,
   .packages-heading-reveal,
   .package-card-reveal,
   .package-button-reveal,

@@ -1,0 +1,38 @@
+/* ===================================
+   Subpage Hero Reveal
+=================================== */
+
+.subpage-hero {
+  opacity: 0;
+  transition: opacity 900ms var(--ease-elegant);
+}
+
+.subpage-hero__image {
+  opacity: 0.86;
+  transform: scale(1.055);
+  transition:
+    opacity 1000ms var(--ease-elegant),
+    transform 1500ms var(--ease-elegant);
+}
+
+.subpage-hero.is-visible {
+  opacity: 1;
+}
+
+.subpage-hero.is-visible .subpage-hero__image {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===================================
+   Reduced Motion
+=================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .subpage-hero,
+  .subpage-hero__image {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

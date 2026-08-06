@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import serviceHeroImage from "../../assets/images/page-hero.png";
 import weddingPackageImage from "../../assets/images/service-wedding.png";
 import portraitPackageImage from "../../assets/images/service-portrait.png";
 import engagementPackageImage from "../../assets/images/service-engagement.png";
@@ -19,6 +18,7 @@ import awardLeafIcon from "../../assets/icons/award-leaf.svg";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import SubpageHero from "../../components/SubpageHero/SubpageHero";
 import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 
 import "./services-page.css";
@@ -192,31 +192,6 @@ function getFaqRevealStyle(delay) {
   };
 }
 
-function ServicesHero() {
-  const { elementRef, isVisible } = useRevealOnScroll({
-    threshold: 0.08,
-    rootMargin: "0px 0px -20px",
-  });
-
-  return (
-    <section
-      ref={elementRef}
-      aria-label="Wedding photography services"
-      className={`services-hero relative h-[392px] w-full overflow-hidden bg-[#ddd8cf] max-[1280px]:h-[365px] max-[1024px]:h-[335px] max-[768px]:h-[300px] max-[600px]:h-[265px] max-[480px]:h-[235px] max-[380px]:h-[215px] ${
-        isVisible ? "is-visible" : ""
-      }`}
-    >
-      <img
-        src={serviceHeroImage}
-        alt="Bride and groom sharing a quiet wedding moment"
-        loading="eager"
-        decoding="async"
-        className="services-hero__image block h-full w-full object-cover object-center"
-      />
-    </section>
-  );
-}
-
 function PackageCard({ photographyPackage, index, showRightBorder }) {
   return (
     <article
@@ -307,9 +282,7 @@ function PhotographyPackages() {
               <PackageCard
                 photographyPackage={photographyPackage}
                 index={index}
-                showRightBorder={
-                  index === photographyPackages.length - 1
-                }
+                showRightBorder={index === photographyPackages.length - 1}
               />
             </div>
           ))}
@@ -626,7 +599,10 @@ export default function ServicesPage() {
       <Header variant="page" />
 
       <main id="main-content">
-        <ServicesHero />
+        <SubpageHero
+          ariaLabel="Wedding photography services"
+          imageAlt="Bride and groom sharing a quiet wedding moment"
+        />
 
         <PhotographyPackages />
 
