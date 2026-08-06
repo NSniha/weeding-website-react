@@ -1,0 +1,210 @@
+/* ===================================
+   Shared About Reveal
+=================================== */
+
+.about-reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 850ms var(--ease-elegant),
+    transform 850ms var(--ease-elegant);
+  transition-delay: var(--about-delay, 0ms);
+}
+
+.about-reveal--left {
+  transform: translateX(-55px);
+}
+
+.about-reveal--right {
+  transform: translateX(55px);
+}
+
+.about-reveal-scope.is-visible .about-reveal {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* ===================================
+   My Story
+=================================== */
+
+.about-story__image {
+  transform: scale(1.055);
+  transition: transform 1400ms var(--ease-elegant);
+}
+
+.about-story.is-visible .about-story__image {
+  transform: scale(1);
+}
+
+/* ===================================
+   Story Gallery
+=================================== */
+
+.about-gallery__item {
+  transform: translateY(45px);
+}
+
+.about-gallery__image {
+  transform: scale(1.045);
+  transition: transform 1200ms var(--ease-elegant);
+}
+
+/* ===================================
+   Facts Grid
+=================================== */
+
+.about-facts__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas:
+    "image-one fact-one image-two"
+    "fact-two image-three fact-three";
+}
+
+.about-facts__cell {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+}
+
+.about-facts__image-one {
+  grid-area: image-one;
+}
+
+.about-facts__fact-one {
+  grid-area: fact-one;
+}
+
+.about-facts__image-two {
+  grid-area: image-two;
+}
+
+.about-facts__fact-two {
+  grid-area: fact-two;
+}
+
+.about-facts__image-three {
+  grid-area: image-three;
+}
+
+.about-facts__fact-three {
+  grid-area: fact-three;
+}
+
+.about-facts__image {
+  transform: scale(1.05);
+  transition: transform 1200ms var(--ease-elegant);
+}
+
+/* ===================================
+   Story Lens
+=================================== */
+
+.about-lens__background {
+  opacity: 0;
+  transform: translateX(-50%) scaleX(0.96);
+  transition:
+    opacity 900ms var(--ease-elegant),
+    transform 900ms var(--ease-elegant);
+}
+
+.about-lens.is-visible .about-lens__background {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+}
+
+.about-lens__image {
+  transform: scale(1.055);
+  transition: transform 1300ms var(--ease-elegant);
+}
+
+.about-lens.is-visible .about-lens__image {
+  transform: scale(1);
+}
+
+/* ===================================
+   Hover Effects
+=================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  .about-story__media:hover .about-story__image,
+  .about-gallery__item:hover .about-gallery__image,
+  .about-facts__media:hover .about-facts__image,
+  .about-lens__media:hover .about-lens__image {
+    transform: scale(1.04);
+  }
+}
+
+/* ===================================
+   Tablet Facts Grid
+=================================== */
+
+@media (max-width: 900px) {
+  .about-facts__grid {
+    max-width: 650px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "image-one fact-one"
+      "fact-two image-two"
+      "image-three fact-three";
+  }
+
+  .about-facts__cell {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* ===================================
+   Mobile Facts Grid
+=================================== */
+
+@media (max-width: 600px) {
+  .about-reveal--left,
+  .about-reveal--right {
+    transform: translateY(38px);
+  }
+
+  .about-reveal-scope.is-visible .about-reveal--left,
+  .about-reveal-scope.is-visible .about-reveal--right {
+    transform: translateY(0);
+  }
+
+  .about-facts__grid {
+    max-width: 430px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "image-one"
+      "fact-one"
+      "image-two"
+      "fact-two"
+      "image-three"
+      "fact-three";
+  }
+
+  .about-facts__media {
+    aspect-ratio: 4 / 4.8;
+  }
+
+  .about-facts__card {
+    height: auto;
+    aspect-ratio: auto;
+  }
+}
+
+/* ===================================
+   Reduced Motion
+=================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .about-reveal,
+  .about-story__image,
+  .about-gallery__image,
+  .about-facts__image,
+  .about-lens__background,
+  .about-lens__image {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
