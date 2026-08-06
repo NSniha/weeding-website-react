@@ -4,10 +4,10 @@ import storyPortraitImage from "../../assets/images/about-story.png";
 
 import galleryImageOne from "../../assets/images/about-gallery-1.png";
 import galleryImageTwo from "../../assets/images/about-gallery-2.png";
-import galleryImageThree from "../../assets/images/about-gallery-3.png";
+import galleryImageThree from "../../assets/images/process-bride.png";
 import galleryImageFour from "../../assets/images/about-gallery-4.png";
 
-import bouquetDetailImage from "../../assets/images/about-bouquet-detail.png";
+import bouquetDetailImage from "../../assets/images/process-bride.png";
 import bouquetSoftImage from "../../assets/images/about-bouquet-soft.png";
 
 import storyLensBeachImage from "../../assets/images/about-lens-beach.png";
