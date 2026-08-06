@@ -7,7 +7,7 @@ import galleryImageTwo from "../../assets/images/about-gallery-2.png";
 import galleryImageThree from "../../assets/images/process-bride.png";
 import galleryImageFour from "../../assets/images/about-gallery-4.png";
 
-import bouquetDetailImage from "../../assets/images/process-bride.png";
+import bouquetDetailImage from "../../assets/images/process-couple.png";
 import bouquetSoftImage from "../../assets/images/about-bouquet-soft.png";
 
 import storyLensBeachImage from "../../assets/images/about-lens-beach.png";
@@ -21,6 +21,12 @@ import SubpageHero from "../../components/SubpageHero/SubpageHero";
 import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 
 import "./about-page.css";
+
+const storyParagraphs = [
+  "Photography has always been my way of preserving the moments that pass too quickly—the quiet glances, joyful laughter, and meaningful details that make every celebration unique.",
+  "My approach is calm, thoughtful, and deeply personal. I take time to understand your story so that your photographs feel honest, effortless, and completely your own.",
+  "Each gallery is created with care, blending natural emotion with an elegant editorial perspective to produce images you will treasure for generations.",
+];
 
 const galleryImages = [
   {
@@ -79,11 +85,43 @@ function getRevealStyle(delay) {
   };
 }
 
+function SectionHeading({
+  eyebrow,
+  title,
+  headingId,
+  headingTag: HeadingTag = "h2",
+  uppercase = false,
+  align = "center",
+}) {
+  const alignmentClasses =
+    align === "left"
+      ? "text-left max-[900px]:text-center"
+      : "text-center";
+
+  return (
+    <header className={`about-section-heading ${alignmentClasses}`}>
+      <p
+        style={getRevealStyle(80)}
+        className="about-heading-reveal section-eyebrow"
+      >
+        {eyebrow}
+      </p>
+
+      <HeadingTag
+        id={headingId}
+        style={getRevealStyle(180)}
+        className={`about-heading-reveal about-heading-reveal--title section-title ${
+          uppercase ? "uppercase" : ""
+        }`}
+      >
+        {title}
+      </HeadingTag>
+    </header>
+  );
+}
+
 function MyStory() {
-  const { elementRef, isVisible } = useRevealOnScroll({
-    threshold: 0.1,
-    rootMargin: "0px 0px -70px",
-  });
+  const { elementRef, isVisible } = useRevealOnScroll();
 
   return (
     <section
@@ -94,26 +132,17 @@ function MyStory() {
       }`}
     >
       <div className="site-container">
-        <header className="section-header">
-          <p
-            style={getRevealStyle(0)}
-            className="about-reveal section-eyebrow"
-          >
-            About
-          </p>
-
-          <h1
-            id="about-story-heading"
-            style={getRevealStyle(100)}
-            className="about-reveal section-title uppercase"
-          >
-            My Story
-          </h1>
-        </header>
+        <SectionHeading
+          eyebrow="About"
+          title="My Story"
+          headingId="about-story-heading"
+          headingTag="h1"
+          uppercase
+        />
 
         <div className="mt-[65px] grid w-full grid-cols-[0.94fr_1.06fr] items-stretch gap-[64px] max-[1280px]:mt-[60px] max-[1280px]:gap-[52px] max-[1024px]:mt-14 max-[1024px]:gap-10 max-[800px]:grid-cols-1 max-[800px]:gap-0 max-[768px]:mt-12 max-[480px]:mt-[41px]">
           <figure
-            style={getRevealStyle(190)}
+            style={getRevealStyle(280)}
             className="about-reveal about-reveal--left about-story__media m-0 aspect-[4/4.65] w-full min-w-0 overflow-hidden bg-[#efefed] max-[600px]:aspect-[4/4.8]"
           >
             <img
@@ -125,43 +154,35 @@ function MyStory() {
             />
           </figure>
 
-          <div
-            style={getRevealStyle(300)}
-            className="about-reveal about-reveal--right flex w-full min-w-0 flex-col justify-center py-[10px] max-[800px]:px-5 max-[800px]:pb-0 max-[800px]:pt-[50px] max-[480px]:px-1"
-          >
+          <div className="flex w-full min-w-0 flex-col justify-center py-[10px] max-[800px]:px-5 max-[800px]:pb-0 max-[800px]:pt-[50px] max-[480px]:px-1">
             <div className="space-y-[22px] font-primary text-[21px] font-normal leading-[1.38] tracking-[-0.005em] text-body max-[1200px]:text-[19px] max-[600px]:space-y-[19px] max-[600px]:text-[17px] max-[380px]:text-[16px]">
-              <p className="m-0">
-                Photography has always been my way of preserving the moments
-                that pass too quickly—the quiet glances, joyful laughter, and
-                meaningful details that make every celebration unique.
-              </p>
-
-              <p className="m-0">
-                My approach is calm, thoughtful, and deeply personal. I take
-                time to understand your story so that your photographs feel
-                honest, effortless, and completely your own.
-              </p>
-
-              <p className="m-0">
-                Each gallery is created with care, blending natural emotion
-                with an elegant editorial perspective to produce images you
-                will treasure for generations.
-              </p>
+              {storyParagraphs.map((paragraph, index) => (
+                <p
+                  key={paragraph}
+                  style={getRevealStyle(300 + index * 100)}
+                  className="about-reveal about-reveal--right m-0"
+                >
+                  {paragraph}
+                </p>
+              ))}
             </div>
 
             <img
               src={floralDivider}
               alt=""
               aria-hidden="true"
-              className="mx-auto mt-[29px] h-auto w-[92px] object-contain max-[600px]:mt-[25px] max-[600px]:w-[80px]"
+              style={getRevealStyle(620)}
+              className="about-reveal about-story__divider mx-auto mt-[29px] h-auto w-[92px] object-contain max-[600px]:mt-[25px] max-[600px]:w-[80px]"
             />
 
-            <Link
-              to="/portfolio"
-              className={`${actionButtonClasses} mx-auto mt-[25px]`}
+            <div
+              style={getRevealStyle(720)}
+              className="about-reveal mt-[25px] flex justify-center"
             >
-              View Portfolio
-            </Link>
+              <Link to="/portfolio" className={actionButtonClasses}>
+                View Portfolio
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -170,16 +191,13 @@ function MyStory() {
 }
 
 function StoryGallery() {
-  const { elementRef, isVisible } = useRevealOnScroll({
-    threshold: 0.1,
-    rootMargin: "0px 0px -60px",
-  });
+  const { elementRef, isVisible } = useRevealOnScroll();
 
   return (
     <section
       ref={elementRef}
       aria-label="Selected wedding photographs"
-      className={`about-reveal-scope about-gallery overflow-hidden bg-white pb-[92px] pt-[70px] max-[1280px]:pb-[84px] max-[1280px]:pt-[64px] max-[1024px]:pb-[76px] max-[1024px]:pt-[58px] max-[768px]:pb-[68px] max-[768px]:pt-[52px] max-[480px]:pb-[60px] max-[480px]:pt-[46px] ${
+      className={`about-reveal-scope about-gallery overflow-hidden bg-white pb-14 pt-14 max-[1280px]:pb-[84px] max-[1280px]:pt-[64px] max-[1024px]:pb-[76px] max-[1024px]:pt-[58px] max-[768px]:pb-[68px] max-[768px]:pt-[52px] max-[480px]:pb-[60px] max-[480px]:pt-[46px] ${
         isVisible ? "is-visible" : ""
       }`}
     >
@@ -188,7 +206,7 @@ function StoryGallery() {
           {galleryImages.map((galleryImage, index) => (
             <figure
               key={galleryImage.id}
-              style={getRevealStyle(100 + index * 110)}
+              style={getRevealStyle(80 + index * 120)}
               className="about-reveal about-gallery__item m-0 aspect-[3/4.35] w-full min-w-0 overflow-hidden bg-[#ded8cf]"
             >
               <img
@@ -258,10 +276,7 @@ function FactImage({
 }
 
 function AboutFacts() {
-  const { elementRef, isVisible } = useRevealOnScroll({
-    threshold: 0.1,
-    rootMargin: "0px 0px -70px",
-  });
+  const { elementRef, isVisible } = useRevealOnScroll();
 
   return (
     <section
@@ -272,61 +287,50 @@ function AboutFacts() {
       }`}
     >
       <div className="site-container">
-        <header className="section-header">
-          <p
-            style={getRevealStyle(0)}
-            className="about-reveal section-eyebrow"
-          >
-            Get to Know Me
-          </p>
+        <SectionHeading
+          eyebrow="Get to Know Me"
+          title="A Few Facts About Myself"
+          headingId="about-facts-heading"
+        />
 
-          <h2
-            id="about-facts-heading"
-            style={getRevealStyle(100)}
-            className="about-reveal section-title"
-          >
-            A Few Facts About Myself
-          </h2>
-        </header>
-
-        <div className="about-facts__grid mt-[65px] w-full max-[1280px]:mt-[60px] max-[1024px]:mt-14 max-[768px]:mt-12 max-[480px]:mt-[41px]">
+        <div className="about-facts__grid mt-10 w-full max-[1280px]:mt-10 max-[1024px]:mt-14 max-[768px]:mt-12 max-[480px]:mt-[41px]">
           <FactImage
             image={galleryImageThree}
             imageAlt="Bride walking through a woodland wedding setting"
             className="about-facts__image-one"
-            delay={180}
+            delay={280}
           />
 
           <FactCard
             fact={personalFacts[0]}
             className="about-facts__fact-one"
-            delay={270}
+            delay={380}
           />
 
           <FactImage
             image={bouquetDetailImage}
             imageAlt="Bride and groom holding a softly colored wedding bouquet"
             className="about-facts__image-two"
-            delay={360}
+            delay={480}
           />
 
           <FactCard
             fact={personalFacts[1]}
             className="about-facts__fact-two"
-            delay={450}
+            delay={580}
           />
 
           <FactImage
             image={bouquetSoftImage}
             imageAlt="Pastel bridal bouquet held beside the bride"
             className="about-facts__image-three"
-            delay={540}
+            delay={680}
           />
 
           <FactCard
             fact={personalFacts[2]}
             className="about-facts__fact-three"
-            delay={630}
+            delay={780}
           />
         </div>
       </div>
@@ -335,16 +339,13 @@ function AboutFacts() {
 }
 
 function StoryLens() {
-  const { elementRef, isVisible } = useRevealOnScroll({
-    threshold: 0.12,
-    rootMargin: "0px 0px -70px",
-  });
+  const { elementRef, isVisible } = useRevealOnScroll();
 
   return (
     <section
       ref={elementRef}
       aria-labelledby="story-lens-heading"
-      className={`about-reveal-scope about-lens overflow-hidden bg-white pb-[105px] pt-[88px] max-[1280px]:pb-[96px] max-[1280px]:pt-[80px] max-[1024px]:pb-[88px] max-[1024px]:pt-[74px] max-[768px]:pb-[78px] max-[768px]:pt-[68px] max-[480px]:pb-[65px] max-[480px]:pt-[58px] ${
+      className={`about-reveal-scope about-lens overflow-hidden bg-white pb-10 pt-[88px] max-[1280px]:pb-10 max-[1280px]:pt-[80px] max-[1024px]:pb-[88px] max-[1024px]:pt-[74px] max-[768px]:pb-[78px] max-[768px]:pt-[68px] max-[480px]:pb-[65px] max-[480px]:pt-[58px] ${
         isVisible ? "is-visible" : ""
       }`}
     >
@@ -356,26 +357,16 @@ function StoryLens() {
           />
 
           <div className="relative z-[3] w-[54%] pt-[24px] max-[1024px]:w-[51%] max-[900px]:order-1 max-[900px]:w-full max-[900px]:pt-0 max-[900px]:text-center">
-            <header className="about-lens__header">
-              <p
-                style={getRevealStyle(0)}
-                className="about-reveal section-eyebrow"
-              >
-                Crafting Memories
-              </p>
-
-              <h2
-                id="story-lens-heading"
-                style={getRevealStyle(100)}
-                className="about-reveal section-title"
-              >
-                Your Story, My Lens
-              </h2>
-            </header>
+            <SectionHeading
+              eyebrow="Crafting Memories"
+              title="Your Story, My Lens"
+              headingId="story-lens-heading"
+              align="left"
+            />
 
             <div
-              style={getRevealStyle(210)}
-              className="about-reveal mt-[37px] max-w-[470px] max-[900px]:mx-auto max-[900px]:mt-[31px] max-[900px]:bg-[#f4f4f4] max-[900px]:px-[42px] max-[900px]:py-[38px] max-[600px]:px-[30px] max-[600px]:py-[34px] max-[480px]:px-[24px]"
+              style={getRevealStyle(300)}
+              className="about-reveal about-reveal--left mt-[37px] max-w-[470px] max-[900px]:mx-auto max-[900px]:mt-[31px] max-[900px]:bg-[#f4f4f4] max-[900px]:px-[42px] max-[900px]:py-[38px] max-[600px]:px-[30px] max-[600px]:py-[34px] max-[480px]:px-[24px]"
             >
               <p className="m-0 font-primary text-[21px] font-normal leading-[1.38] tracking-[-0.005em] text-body max-[1200px]:text-[19px] max-[600px]:text-[17px] max-[380px]:text-[16px]">
                 Your wedding day is a once-in-a-lifetime celebration, and
@@ -386,20 +377,17 @@ function StoryLens() {
             </div>
 
             <div
-              style={getRevealStyle(310)}
-              className="about-reveal mt-[51px] max-[900px]:mt-[32px]"
+              style={getRevealStyle(420)}
+              className="about-reveal about-reveal--left mt-[51px] max-[900px]:mt-[32px]"
             >
-              <Link
-                to="/contact"
-                className={actionButtonClasses}
-              >
+              <Link to="/contact" className={actionButtonClasses}>
                 Book Now
               </Link>
             </div>
           </div>
 
           <figure
-            style={getRevealStyle(240)}
+            style={getRevealStyle(300)}
             className="about-reveal about-reveal--right about-lens__media about-lens__media--beach absolute right-[23%] top-0 z-[2] m-0 h-[320px] w-[24%] overflow-hidden bg-[#ded8cf] max-[1100px]:right-[22%] max-[1100px]:h-[300px] max-[1024px]:right-[21%] max-[1024px]:h-[280px] max-[900px]:relative max-[900px]:right-auto max-[900px]:top-auto max-[900px]:order-2 max-[900px]:mt-[48px] max-[900px]:h-auto max-[900px]:w-[58%] max-[900px]:self-start max-[900px]:aspect-[3/4] max-[600px]:mt-10 max-[600px]:w-[72%]"
           >
             <img
@@ -412,7 +400,7 @@ function StoryLens() {
           </figure>
 
           <figure
-            style={getRevealStyle(360)}
+            style={getRevealStyle(440)}
             className="about-reveal about-reveal--right about-lens__media about-lens__media--architecture absolute bottom-0 right-0 z-[4] m-0 h-[325px] w-[25%] overflow-hidden bg-[#ded8cf] max-[1100px]:h-[305px] max-[1024px]:h-[285px] max-[900px]:relative max-[900px]:bottom-auto max-[900px]:right-auto max-[900px]:order-3 max-[900px]:mt-[-115px] max-[900px]:h-auto max-[900px]:w-[58%] max-[900px]:self-end max-[900px]:aspect-[3/4] max-[600px]:mt-[-88px] max-[600px]:w-[72%]"
           >
             <img

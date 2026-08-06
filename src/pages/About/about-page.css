@@ -1,40 +1,86 @@
 /* ===================================
-   Shared About Reveal
+   Shared Reveal System
 =================================== */
 
+.about-heading-reveal,
 .about-reveal {
   opacity: 0;
-  transform: translateY(34px);
+  transform: translateY(35px);
   transition:
     opacity 850ms var(--ease-elegant),
     transform 850ms var(--ease-elegant);
   transition-delay: var(--about-delay, 0ms);
 }
 
-.about-reveal--left {
-  transform: translateX(-55px);
-}
-
-.about-reveal--right {
-  transform: translateX(55px);
-}
-
+.about-reveal-scope.is-visible .about-heading-reveal,
 .about-reveal-scope.is-visible .about-reveal {
   opacity: 1;
   transform: translate(0);
 }
 
 /* ===================================
+   Section Heading Reveal
+=================================== */
+
+.about-section-heading .about-heading-reveal:first-child {
+  transition-delay: 80ms;
+}
+
+.about-section-heading .about-heading-reveal--title {
+  transition-delay: 180ms;
+}
+
+.about-section-heading .section-title {
+  margin-top: 17px;
+}
+
+/* ===================================
+   Directional Reveal
+=================================== */
+
+.about-reveal--left {
+  transform: translateX(-60px);
+}
+
+.about-reveal--right {
+  transform: translateX(60px);
+}
+
+.about-reveal-scope.is-visible .about-reveal--left,
+.about-reveal-scope.is-visible .about-reveal--right {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===================================
    My Story
 =================================== */
 
+.about-story__media {
+  position: relative;
+}
+
 .about-story__image {
-  transform: scale(1.055);
-  transition: transform 1400ms var(--ease-elegant);
+  transform: scale(1.07);
+  transition: transform 1200ms var(--ease-elegant);
 }
 
 .about-story.is-visible .about-story__image {
   transform: scale(1);
+}
+
+.about-story__divider {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 750ms var(--ease-elegant),
+    transform 750ms var(--ease-elegant);
+  transition-delay: 420ms;
+}
+
+.about-story.is-visible .about-story__divider {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ===================================
@@ -42,11 +88,11 @@
 =================================== */
 
 .about-gallery__item {
-  transform: translateY(45px);
+  transform: translateY(35px);
 }
 
 .about-gallery__image {
-  transform: scale(1.045);
+  transform: scale(1.07);
   transition: transform 1200ms var(--ease-elegant);
 }
 
@@ -97,8 +143,12 @@
   grid-area: fact-three;
 }
 
+.about-facts__media {
+  overflow: hidden;
+}
+
 .about-facts__image {
-  transform: scale(1.05);
+  transform: scale(1.07);
   transition: transform 1200ms var(--ease-elegant);
 }
 
@@ -110,15 +160,6 @@
    Story Lens
 =================================== */
 
-.about-lens__header {
-  text-align: left;
-}
-
-.about-lens__header .section-title {
-  margin-top: 14px;
-  text-align: left;
-}
-
 .about-lens__background {
   opacity: 0;
   transform: scaleX(0.96);
@@ -126,6 +167,7 @@
   transition:
     opacity 900ms var(--ease-elegant),
     transform 900ms var(--ease-elegant);
+  transition-delay: 180ms;
 }
 
 .about-lens.is-visible .about-lens__background {
@@ -133,9 +175,13 @@
   transform: scaleX(1);
 }
 
+.about-lens__media {
+  overflow: hidden;
+}
+
 .about-lens__image {
-  transform: scale(1.055);
-  transition: transform 1300ms var(--ease-elegant);
+  transform: scale(1.07);
+  transition: transform 1200ms var(--ease-elegant);
 }
 
 .about-lens.is-visible .about-lens__image {
@@ -161,7 +207,6 @@
 
 @media (max-width: 900px) {
   .about-facts__grid {
-    width: 100%;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
       "image-one fact-one"
@@ -173,11 +218,12 @@
     aspect-ratio: 4 / 5;
   }
 
-  .about-lens__header {
+  .about-section-heading.text-left {
     text-align: center;
   }
 
-  .about-lens__header .section-title {
+  .about-section-heading.text-left .section-title,
+  .about-section-heading.text-left .section-eyebrow {
     text-align: center;
   }
 }
@@ -187,18 +233,25 @@
 =================================== */
 
 @media (max-width: 600px) {
-  .about-reveal--left,
-  .about-reveal--right {
-    transform: translateY(38px);
+  .about-heading-reveal,
+  .about-reveal {
+    transform: translateY(35px);
   }
 
+  .about-reveal--left,
+  .about-reveal--right {
+    transform: translateY(35px);
+  }
+
+  .about-reveal-scope.is-visible .about-heading-reveal,
+  .about-reveal-scope.is-visible .about-reveal,
   .about-reveal-scope.is-visible .about-reveal--left,
   .about-reveal-scope.is-visible .about-reveal--right {
+    opacity: 1;
     transform: translateY(0);
   }
 
   .about-facts__grid {
-    width: 100%;
     grid-template-columns: 1fr;
     grid-template-areas:
       "image-one"
@@ -224,8 +277,12 @@
 =================================== */
 
 @media (prefers-reduced-motion: reduce) {
+  .about-heading-reveal,
   .about-reveal,
+  .about-reveal--left,
+  .about-reveal--right,
   .about-story__image,
+  .about-story__divider,
   .about-gallery__image,
   .about-facts__image,
   .about-lens__background,
