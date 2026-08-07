@@ -493,6 +493,49 @@ function ContactInfoItem({ item, index }) {
   );
 }
 
+function ContactDetails() {
+  const { elementRef, isVisible } = useRevealOnScroll();
+
+  return (
+    <section
+      ref={elementRef}
+      aria-label="Contact information"
+      className={`contact-reveal-scope contact-details relative isolate min-h-[610px] w-full overflow-hidden bg-[#d8d2ca] max-[1280px]:min-h-[570px] max-[1024px]:min-h-[530px] max-[760px]:min-h-0 ${
+        isVisible ? "is-visible" : ""
+      }`}
+    >
+      <figure
+        style={getRevealStyle(80)}
+        className="contact-reveal contact-details__background absolute inset-0 z-0 m-0 h-full w-full overflow-hidden max-[760px]:relative max-[760px]:aspect-[4/3.15]"
+      >
+        <img
+          src={contactDetailsImage}
+          alt="Elegant wedding floral arrangement and dessert table"
+          loading="lazy"
+          decoding="async"
+          className="contact-details__background-image block h-full w-full object-cover object-center"
+        />
+      </figure>
+
+      <div className="site-container relative z-[2] flex min-h-[610px] items-stretch justify-end max-[1280px]:min-h-[570px] max-[1024px]:min-h-[530px] max-[760px]:min-h-0 max-[760px]:p-0">
+        <aside
+          style={getRevealStyle(180)}
+          className="contact-reveal contact-reveal--right contact-details__panel mr-[7%] flex w-[34%] min-w-[350px] flex-col justify-center bg-white/[0.91] px-[46px] py-[48px] backdrop-blur-[1px] max-[1280px]:mr-[5%] max-[1280px]:w-[36%] max-[1100px]:mr-[3%] max-[1100px]:w-[39%] max-[900px]:mr-0 max-[900px]:w-[43%] max-[900px]:px-[34px] max-[760px]:mr-0 max-[760px]:w-full max-[760px]:min-w-0 max-[760px]:bg-[#f7f5f2] max-[760px]:px-[34px] max-[760px]:py-[64px] max-[600px]:px-[28px] max-[480px]:px-[22px]"
+        >
+          <div className="flex flex-col gap-[62px] max-[1280px]:gap-[54px] max-[1024px]:gap-[48px] max-[760px]:gap-[50px]">
+            {contactItems.map((item, index) => (
+              <ContactInfoItem
+                key={item.id}
+                item={item}
+                index={index}
+              />
+            ))}
+          </div>
+        </aside>
+      </div>
+    </section>
+  );
+}
 
 export default function ContactPage() {
   return (
