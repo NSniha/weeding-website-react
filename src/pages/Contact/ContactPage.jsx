@@ -500,7 +500,7 @@ function ContactDetails() {
     <section
       ref={elementRef}
       aria-label="Contact information"
-      className={`contact-reveal-scope contact-details relative isolate min-h-[610px] w-full overflow-hidden bg-[#d8d2ca] max-[1280px]:min-h-[570px] max-[1024px]:min-h-[530px] max-[760px]:min-h-0 ${
+      className={`contact-reveal-scope contact-details relative isolate min-h-[610px] w-full overflow-hidden bg-[#d8d2ca] max-[1280px]:min-h-[570px] max-[1024px]:min-h-[530px] mb-28 max-[760px]:min-h-0 ${
         isVisible ? "is-visible" : ""
       }`}
     >
