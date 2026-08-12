@@ -199,6 +199,63 @@ function HighlightedWorks() {
   );
 }
 
+function PortfolioPromise() {
+  const { elementRef, isVisible } = useRevealOnScroll();
+
+  return (
+    <section
+      ref={elementRef}
+      aria-labelledby="portfolio-promise-heading"
+      className={`portfolio-reveal-scope portfolio-promise relative isolate flex min-h-[500px] w-full items-center overflow-hidden bg-[#d8d1c7] max-[1280px]:min-h-[465px] max-[1024px]:min-h-[430px] max-[768px]:min-h-[390px] max-[600px]:min-h-[355px] ${
+        isVisible ? "is-visible" : ""
+      }`}
+    >
+      <figure
+        style={getRevealStyle(0)}
+        className="portfolio-reveal portfolio-promise__media absolute inset-0 -z-[2] m-0 overflow-hidden"
+      >
+        <img
+          src={portfolioPromiseImage}
+          alt="Bride and groom sharing a romantic wedding moment"
+          loading="lazy"
+          decoding="async"
+          className="portfolio-promise__image block h-full w-full object-cover object-center"
+        />
+      </figure>
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-[1] bg-black/[0.025]"
+      />
+
+      <div className="site-container">
+        <div
+          style={getRevealStyle(160)}
+          className="portfolio-reveal portfolio-promise__box mx-auto w-full max-w-[970px] bg-white/[0.86] p-[15px] max-[1280px]:max-w-[900px] max-[1024px]:max-w-[790px] max-[768px]:p-[12px] max-[600px]:p-[9px]"
+        >
+          <div className="flex min-h-[238px] flex-col items-center justify-center border border-[#c8a27d] px-[54px] py-[36px] text-center max-[1024px]:min-h-[218px] max-[768px]:min-h-[198px] max-[768px]:px-[36px] max-[600px]:min-h-[182px] max-[600px]:px-[22px]">
+            <h2
+              id="portfolio-promise-heading"
+              style={getRevealStyle(280)}
+              className="portfolio-reveal m-0 font-script text-[59px] font-normal leading-[0.9] tracking-[0.005em] text-accent max-[1280px]:text-[56px] max-[1024px]:text-[52px] max-[600px]:text-[48px] max-[480px]:text-[44px]"
+            >
+              My Promise
+            </h2>
+
+            <p
+              style={getRevealStyle(400)}
+              className="portfolio-reveal mx-auto mb-0 mt-[25px] max-w-[720px] font-primary text-[21px] font-normal leading-[1.38] tracking-[-0.005em] text-heading max-[1200px]:text-[19px] max-[600px]:mt-[21px] max-[600px]:text-[17px] max-[380px]:text-[16px]"
+            >
+              I guarantee breathtaking wedding photos that perfectly capture
+              the magic of your special day, or your money back
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function PortfolioPage() {
   return (
     <div className="min-h-screen bg-white">
