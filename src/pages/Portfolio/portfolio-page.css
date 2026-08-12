@@ -1,0 +1,217 @@
+/* ===================================
+   Shared Portfolio Reveal
+=================================== */
+
+.portfolio-reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 850ms var(--ease-elegant),
+    transform 850ms var(--ease-elegant);
+  transition-delay: var(--portfolio-delay, 0ms);
+}
+
+.portfolio-reveal--left {
+  transform: translateX(-60px);
+}
+
+.portfolio-reveal--right {
+  transform: translateX(60px);
+}
+
+.portfolio-reveal-scope.is-visible .portfolio-reveal {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* ===================================
+   Portfolio Cards
+=================================== */
+
+.portfolio-card {
+  position: relative;
+}
+
+.portfolio-card__link {
+  position: relative;
+}
+
+.portfolio-card__media {
+  position: relative;
+}
+
+.portfolio-card__image {
+  transform: scale(1.07);
+  transition: transform 1200ms var(--ease-elegant);
+}
+
+.portfolio-works.is-visible .portfolio-card__image {
+  transform: scale(1);
+}
+
+.portfolio-card__content {
+  position: relative;
+  transition:
+    background-color 350ms ease,
+    transform 450ms var(--ease-elegant);
+}
+
+.portfolio-card__name {
+  transition: color 300ms ease;
+}
+
+.portfolio-card__category {
+  transition:
+    color 300ms ease,
+    letter-spacing 350ms ease;
+}
+
+/* Small animated line */
+.portfolio-card__content::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: #bd8d67;
+  transform: translateX(-50%);
+  transition: width 450ms var(--ease-elegant);
+}
+
+.portfolio-card__link:focus-visible {
+  outline: 1px solid #c49b78;
+  outline-offset: 5px;
+}
+
+/* ===================================
+   Promise
+=================================== */
+
+.portfolio-promise__background {
+  transform: scale(1.07);
+  transition: transform 1400ms var(--ease-elegant);
+}
+
+.portfolio-promise.is-visible .portfolio-promise__background {
+  transform: scale(1);
+}
+
+.portfolio-promise__panel {
+  transition:
+    opacity 850ms var(--ease-elegant),
+    transform 850ms var(--ease-elegant),
+    background-color 350ms ease;
+}
+
+/* ===================================
+   Stay Beautiful
+=================================== */
+
+.stay-beautiful__background {
+  opacity: 0;
+  transform: translateY(-50%) scaleX(0.96);
+  transform-origin: left center;
+  transition:
+    opacity 900ms var(--ease-elegant),
+    transform 900ms var(--ease-elegant);
+}
+
+.stay-beautiful.is-visible .stay-beautiful__background {
+  opacity: 1;
+  transform: translateY(-50%) scaleX(1);
+}
+
+.stay-beautiful__image {
+  transform: scale(1.07);
+  transition: transform 1200ms var(--ease-elegant);
+}
+
+.stay-beautiful.is-visible .stay-beautiful__image {
+  transform: scale(1);
+}
+
+/* ===================================
+   Desktop Hover
+=================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  .portfolio-card__link:hover .portfolio-card__image {
+    transform: scale(1.045);
+  }
+
+  .portfolio-card__link:hover .portfolio-card__content {
+    background: #f0ede9;
+    transform: translateY(-2px);
+  }
+
+  .portfolio-card__link:hover .portfolio-card__name {
+    color: #ad8362;
+  }
+
+  .portfolio-card__link:hover .portfolio-card__category {
+    color: #a97955;
+    letter-spacing: 0.3em;
+  }
+
+  .portfolio-card__link:hover .portfolio-card__content::after {
+    width: 100%;
+  }
+
+  .portfolio-promise__panel:hover {
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .stay-beautiful__media:hover .stay-beautiful__image {
+    transform: scale(1.04);
+  }
+}
+
+/* ===================================
+   Tablet
+=================================== */
+
+@media (max-width: 900px) {
+  .portfolio-reveal--left,
+  .portfolio-reveal--right {
+    transform: translateY(35px);
+  }
+
+  .portfolio-reveal-scope.is-visible .portfolio-reveal--left,
+  .portfolio-reveal-scope.is-visible .portfolio-reveal--right {
+    transform: translateY(0);
+  }
+}
+
+/* ===================================
+   Mobile
+=================================== */
+
+@media (max-width: 600px) {
+  .portfolio-card__content::after {
+    display: none;
+  }
+}
+
+/* ===================================
+   Reduced Motion
+=================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-reveal,
+  .portfolio-reveal--left,
+  .portfolio-reveal--right,
+  .portfolio-card__image,
+  .portfolio-card__content,
+  .portfolio-card__name,
+  .portfolio-card__category,
+  .portfolio-card__content::after,
+  .portfolio-promise__background,
+  .portfolio-promise__panel,
+  .stay-beautiful__background,
+  .stay-beautiful__image {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
