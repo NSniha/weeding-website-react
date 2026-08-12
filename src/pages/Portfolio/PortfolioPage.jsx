@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import portfolioWeddingOne from "../../assets/images/portfolio-wedding-1.png";
+import portfolioWeddingOne from "../../assets/images/testimonial-1.png";
 import portfolioWeddingTwo from "../../assets/images/portfolio-wedding-2.png";
 import portfolioWeddingThree from "../../assets/images/portfolio-wedding-3.png";
 
@@ -13,7 +13,7 @@ import portfolioPortraitTwo from "../../assets/images/portfolio-portrait-2.png";
 import portfolioPortraitThree from "../../assets/images/portfolio-portrait-3.png";
 
 import portfolioPromiseImage from "../../assets/images/portfolio-promise.png";
-import portfolioBeautifulImage from "../../assets/images/portfolio-beautiful.png";
+import portfolioBeautifulImage from "../../assets/images/about-bouquet-soft.png";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
