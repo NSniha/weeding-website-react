@@ -256,6 +256,80 @@ function PortfolioPromise() {
   );
 }
 
+function StayBeautiful() {
+  const { elementRef, isVisible } = useRevealOnScroll();
+
+  return (
+    <section
+      ref={elementRef}
+      aria-labelledby="stay-beautiful-heading"
+      className={`portfolio-reveal-scope stay-beautiful relative overflow-hidden bg-white pb-[105px] pt-[130px] max-[1280px]:pb-[98px] max-[1280px]:pt-[120px] max-[1024px]:pb-[90px] max-[1024px]:pt-[105px] max-[900px]:pb-[90px] max-[900px]:pt-[90px] max-[600px]:pb-[72px] max-[600px]:pt-[72px] ${
+        isVisible ? "is-visible" : ""
+      }`}
+    >
+      <div className="site-container">
+        <div className="stay-beautiful__stage relative h-[560px] w-full max-[1280px]:h-[530px] max-[1100px]:h-[500px] max-[900px]:flex max-[900px]:h-auto max-[900px]:flex-col">
+          <div
+            aria-hidden="true"
+            className="stay-beautiful__strip absolute left-1/2 top-[78px] z-0 h-[340px] w-screen -translate-x-1/2 bg-[#f4f4f4] max-[1280px]:top-[72px] max-[1280px]:h-[325px] max-[1100px]:top-[68px] max-[1100px]:h-[310px] max-[900px]:hidden"
+          />
+
+          <div className="relative z-[2] w-[43%] pt-[112px] max-[1280px]:pt-[102px] max-[1100px]:w-[44%] max-[1100px]:pt-[94px] max-[900px]:order-2 max-[900px]:w-full max-[900px]:bg-[#f4f4f4] max-[900px]:px-[52px] max-[900px]:py-[60px] max-[900px]:text-center max-[600px]:px-[34px] max-[600px]:py-[50px] max-[480px]:px-[24px]">
+            <p
+              style={getRevealStyle(80)}
+              className="portfolio-reveal portfolio-reveal--left section-eyebrow text-left max-[900px]:text-center"
+            >
+              You&apos;re Perfect
+            </p>
+
+            <h2
+              id="stay-beautiful-heading"
+              style={getRevealStyle(180)}
+              className="portfolio-reveal portfolio-reveal--left mb-0 mt-[14px] font-script text-[59px] font-normal leading-[0.9] tracking-[0.005em] text-heading max-[1280px]:text-[56px] max-[1024px]:text-[52px] max-[600px]:text-[48px] max-[480px]:text-[44px] max-[380px]:text-[41px]"
+            >
+              Stay Beautiful
+            </h2>
+
+            <p
+              style={getRevealStyle(300)}
+              className="portfolio-reveal portfolio-reveal--left mb-0 mt-[25px] max-w-[465px] font-primary text-[21px] font-normal leading-[1.38] tracking-[-0.005em] text-body max-[1200px]:text-[19px] max-[900px]:mx-auto max-[600px]:mt-[22px] max-[600px]:text-[17px] max-[380px]:text-[16px]"
+            >
+              Every celebration deserves to be remembered with honesty,
+              elegance, and emotion. Let&apos;s create a gallery that feels
+              completely true to you.
+            </p>
+
+            <div
+              style={getRevealStyle(420)}
+              className="portfolio-reveal portfolio-reveal--left mt-[38px] max-[900px]:flex max-[900px]:justify-center max-[600px]:mt-[34px]"
+            >
+              <Link
+                to="/contact"
+                className={primaryButtonClasses}
+              >
+                Enquire Now
+              </Link>
+            </div>
+          </div>
+
+          <figure
+            style={getRevealStyle(220)}
+            className="portfolio-reveal portfolio-reveal--right stay-beautiful__media absolute right-[3%] top-0 z-[3] m-0 h-[560px] w-[46%] overflow-hidden bg-[#e4e3e0] max-[1280px]:right-[2%] max-[1280px]:h-[530px] max-[1280px]:w-[47%] max-[1100px]:right-0 max-[1100px]:h-[500px] max-[1100px]:w-[48%] max-[900px]:relative max-[900px]:right-auto max-[900px]:top-auto max-[900px]:order-1 max-[900px]:h-auto max-[900px]:w-full max-[900px]:aspect-[4/4.4]"
+          >
+            <img
+              src={portfolioBeautifulImage}
+              alt="Bride holding a soft pastel wedding bouquet"
+              loading="lazy"
+              decoding="async"
+              className="stay-beautiful__image block h-full w-full object-cover object-center"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function PortfolioPage() {
   return (
     <div className="min-h-screen bg-white">
