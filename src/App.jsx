@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 import AboutPage from "./pages/About/AboutPage";
 import ServicesPage from "./pages/Services/ServicesPage";
 import PortfolioPage from "./pages/Portfolio/PortfolioPage";
+import PortfolioDetailsPage from "./pages/PortfolioDetailsPage/PortfolioDetailsPage";
 import BlogPage from "./pages/Blog/BlogPage";
 import ContactPage from "./pages/Contact/ContactPage";
 
@@ -48,6 +49,11 @@ export default function App() {
       <Route path="/services" element={<ServicesPage />} />
 
       <Route path="/portfolio" element={<PortfolioPage />} />
+
+      <Route
+        path="/portfolio/:slug"
+        element={<PortfolioDetailsPage />}
+      />
 
       <Route path="/blog" element={<BlogPage />} />
 
