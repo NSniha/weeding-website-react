@@ -17,56 +17,65 @@ import creativeLeaf from "../../assets/icons/creative-leaf.svg";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import SubpageHero from "../../components/SubpageHero/SubpageHero";
 import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 
 import "./portfolio-details-page.css";
 
-const imagePool = [
+const galleryPool = [
   {
     src: portfolioWeddingOne,
-    alt: "A newly married couple sharing a quiet moment together",
+    alt: "A newly married couple sharing a quiet wedding moment",
+  },
+  {
+    src: portfolioWeddingTwo,
+    alt: "A romantic wedding portrait filled with natural emotion",
+  },
+  {
+    src: portfolioWeddingThree,
+    alt: "A joyful couple celebrating together on their wedding day",
   },
   {
     src: portfolioEngagementOne,
     alt: "A couple embracing during an intimate outdoor session",
   },
   {
+    src: portfolioEngagementTwo,
+    alt: "A relaxed engagement portrait surrounded by natural light",
+  },
+  {
+    src: portfolioEngagementThree,
+    alt: "A couple enjoying a romantic outdoor engagement session",
+  },
+  {
     src: portfolioPortraitOne,
     alt: "An elegant bridal portrait in soft natural light",
   },
   {
-    src: portfolioWeddingTwo,
-    alt: "A couple celebrating together on their wedding day",
-  },
-  {
     src: portfolioPortraitTwo,
-    alt: "A romantic portrait surrounded by soft countryside light",
-  },
-  {
-    src: portfolioWeddingThree,
-    alt: "A joyful wedding portrait filled with natural emotion",
-  },
-  {
-    src: portfolioEngagementTwo,
-    alt: "An intimate engagement portrait of a couple together",
+    alt: "A graceful portrait photographed in the countryside",
   },
   {
     src: portfolioPortraitThree,
-    alt: "A graceful outdoor portrait in warm natural light",
-  },
-  {
-    src: portfolioEngagementThree,
-    alt: "A couple enjoying a relaxed engagement session outdoors",
+    alt: "An elegant outdoor portrait with soft romantic styling",
   },
 ];
 
-function buildGallery(startIndex) {
-  return Array.from({ length: 6 }, (_, index) => {
-    return imagePool[(startIndex + index) % imagePool.length];
+function createGallery(cover, coverAlt, startIndex) {
+  const remainingImages = Array.from({ length: 5 }, (_, index) => {
+    return galleryPool[(startIndex + index) % galleryPool.length];
   });
+
+  return [
+    {
+      src: cover,
+      alt: coverAlt,
+    },
+    ...remainingImages,
+  ];
 }
 
-const projects = [
+const portfolioProjects = [
   {
     id: 1,
     name: "Sarah & Luke",
@@ -75,9 +84,9 @@ const projects = [
     date: "18 May 2026",
     cover: portfolioWeddingOne,
     coverAlt: "Sarah and Luke sharing a quiet wedding moment",
-    galleryStart: 0,
     description:
-      "A gentle spring celebration filled with quiet glances, effortless elegance, and the people who matter most. Sarah and Luke wanted their photographs to feel honest rather than posed, allowing every embrace, laugh, and fleeting detail to become part of a beautifully personal story.",
+      "Sarah and Luke celebrated their wedding with an atmosphere that felt intimate, graceful, and completely their own. From quiet exchanges before the ceremony to joyful moments surrounded by family and friends, every photograph was created to preserve the emotion of the day with honesty and timeless elegance.",
+    galleryStart: 1,
   },
   {
     id: 2,
@@ -87,9 +96,9 @@ const projects = [
     date: "24 January 2026",
     cover: portfolioWeddingTwo,
     coverAlt: "Richard and Jane celebrating their winter wedding",
-    galleryStart: 2,
     description:
-      "Richard and Jane created an intimate winter celebration shaped by candlelight, heartfelt conversation, and understated details. Their gallery preserves the warmth of the day with a refined editorial approach while keeping every moment completely natural.",
+      "Richard and Jane chose a beautifully intimate winter celebration filled with warm light, thoughtful details, and heartfelt moments. Their gallery balances refined editorial portraits with the genuine interactions that made their wedding feel so personal.",
+    galleryStart: 2,
   },
   {
     id: 3,
@@ -99,9 +108,9 @@ const projects = [
     date: "12 September 2025",
     cover: portfolioWeddingThree,
     coverAlt: "Gareth and Eva smiling together on their wedding day",
-    galleryStart: 4,
     description:
-      "An elegant late-summer wedding where joyful energy met timeless romance. Gareth and Eva's story unfolded through spontaneous laughter, soft portraits, and meaningful moments shared with the people closest to them.",
+      "Gareth and Eva's celebration was full of movement, laughter, and effortless romance. Their photographs tell the story of a joyful day through elegant portraits, emotional exchanges, and the smaller details that made the experience unforgettable.",
+    galleryStart: 3,
   },
   {
     id: 4,
@@ -111,9 +120,9 @@ const projects = [
     date: "07 February 2026",
     cover: portfolioEngagementOne,
     coverAlt: "Sarah and Luke during their engagement session",
-    galleryStart: 1,
     description:
-      "A relaxed engagement session designed around movement, conversation, and the natural connection Sarah and Luke share. The result is a collection of photographs that feels warm, effortless, and unmistakably theirs.",
+      "A relaxed engagement session shaped around movement, conversation, and natural connection. Sarah and Luke wanted photographs that felt effortless and sincere, creating a collection filled with warmth, intimacy, and quiet anticipation.",
+    galleryStart: 4,
   },
   {
     id: 5,
@@ -123,9 +132,9 @@ const projects = [
     date: "18 October 2025",
     cover: portfolioEngagementTwo,
     coverAlt: "Richard and Jane embracing during their engagement session",
-    galleryStart: 3,
     description:
-      "Set against the soft colors of autumn, Richard and Jane's engagement session focused on quiet intimacy and genuine interaction. Every frame was created to feel editorial yet completely unforced.",
+      "Soft autumn light and a peaceful setting created the perfect atmosphere for Richard and Jane's engagement story. Their session combines natural expressions with an editorial approach while keeping every moment relaxed and genuine.",
+    galleryStart: 5,
   },
   {
     id: 6,
@@ -135,9 +144,9 @@ const projects = [
     date: "05 July 2025",
     cover: portfolioEngagementThree,
     coverAlt: "Gareth and Eva enjoying an outdoor engagement session",
-    galleryStart: 5,
     description:
-      "A sunlit afternoon of exploration and laughter became the perfect setting for Gareth and Eva's engagement story. Their photographs are light, romantic, and full of the energy that defines them as a couple.",
+      "Gareth and Eva spent the afternoon exploring, laughing, and enjoying time together in beautiful natural surroundings. Their engagement gallery feels light, romantic, and full of the connection that defines their relationship.",
+    galleryStart: 6,
   },
   {
     id: 7,
@@ -147,9 +156,9 @@ const projects = [
     date: "14 March 2026",
     cover: portfolioPortraitOne,
     coverAlt: "Portrait session with Sarah",
-    galleryStart: 6,
     description:
-      "Sarah's portrait session celebrates graceful simplicity, soft movement, and confident femininity. The photographs combine natural expression with an editorial sensibility to create a collection that feels both modern and timeless.",
+      "Sarah's portrait session was created around quiet confidence, soft movement, and elegant simplicity. Natural light and thoughtful direction resulted in photographs that feel refined while remaining completely authentic.",
+    galleryStart: 7,
   },
   {
     id: 8,
@@ -159,9 +168,9 @@ const projects = [
     date: "22 August 2025",
     cover: portfolioPortraitTwo,
     coverAlt: "Portrait session with Jane in a field",
-    galleryStart: 7,
     description:
-      "A quiet countryside portrait session shaped by warm light, subtle movement, and authentic expression. Jane's gallery was created to feel thoughtful, refined, and beautifully uncomplicated.",
+      "A peaceful countryside setting allowed Jane's portrait session to unfold naturally. Warm light, subtle movement, and an understated editorial approach created a collection that feels timeless, feminine, and effortless.",
+    galleryStart: 8,
   },
   {
     id: 9,
@@ -171,13 +180,17 @@ const projects = [
     date: "02 June 2026",
     cover: portfolioPortraitThree,
     coverAlt: "Outdoor portrait session with Angeline",
-    galleryStart: 8,
     description:
-      "Angeline's portrait story blends effortless confidence with a softer, romantic atmosphere. Natural light and relaxed direction allowed every photograph to feel personal, expressive, and completely genuine.",
+      "Angeline's portrait story blends confidence with a softer romantic atmosphere. Every photograph focuses on natural expression and graceful movement, resulting in a gallery that feels personal, modern, and beautifully understated.",
+    galleryStart: 0,
   },
 ].map((project) => ({
   ...project,
-  gallery: buildGallery(project.galleryStart),
+  gallery: createGallery(
+    project.cover,
+    project.coverAlt,
+    project.galleryStart,
+  ),
 }));
 
 function getRevealStyle(delay) {
@@ -189,143 +202,141 @@ function getRevealStyle(delay) {
 function GalleryImage({
   image,
   index,
-  className,
-  imageClassName = "",
   onOpen,
+  className = "",
+  imageClassName = "",
 }) {
   return (
     <button
       type="button"
-      aria-label={`Open gallery image ${index + 1}`}
+      aria-label={`Open gallery photograph ${index + 1}`}
       onClick={(event) => onOpen(index, event.currentTarget)}
-      className={`portfolio-detail-gallery-button portfolio-detail-reveal group relative m-0 block w-full cursor-zoom-in overflow-hidden border-0 bg-[#e2ded8] p-0 text-left focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-accent ${className}`}
-      style={getRevealStyle(420 + index * 95)}
+      style={getRevealStyle(440 + index * 90)}
+      className={`portfolio-detail-reveal portfolio-gallery-item group relative block w-full cursor-zoom-in overflow-hidden border-0 bg-[#ded8cf] p-0 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-accent ${className}`}
     >
       <img
         src={image.src}
         alt={image.alt}
         loading="lazy"
         decoding="async"
-        className={`portfolio-detail-gallery-image block h-full w-full object-cover object-center ${imageClassName}`}
+        className={`portfolio-gallery-image block h-full w-full object-cover object-center ${imageClassName}`}
       />
     </button>
   );
 }
 
-function PortfolioStory({ project, onOpenLightbox }) {
+function PortfolioGallery({ project, onOpenLightbox }) {
   const { elementRef, isVisible } = useRevealOnScroll({
     threshold: 0.08,
-    rootMargin: "0px 0px -50px",
+    rootMargin: "0px 0px -55px",
   });
 
   return (
     <section
       ref={elementRef}
       aria-labelledby="portfolio-detail-heading"
-      className={`portfolio-detail-scope overflow-hidden bg-white pb-[112px] pt-[170px] max-[1280px]:pb-[104px] max-[1280px]:pt-[160px] max-[1024px]:pb-[94px] max-[1024px]:pt-[148px] max-[768px]:pb-[82px] max-[768px]:pt-[132px] max-[600px]:pb-[70px] max-[600px]:pt-[118px] ${
+      className={`portfolio-detail-scope overflow-hidden bg-white pb-[110px] pt-[94px] max-[1280px]:pb-[100px] max-[1280px]:pt-[88px] max-[1024px]:pb-[90px] max-[1024px]:pt-[82px] max-[768px]:pb-[80px] max-[768px]:pt-[72px] max-[600px]:pb-[70px] max-[600px]:pt-[62px] ${
         isVisible ? "is-visible" : ""
       }`}
     >
       <div className="site-container">
-        <div className="mx-auto w-full max-w-[970px]">
-          <header className="text-center">
-            <p
-              style={getRevealStyle(50)}
-              className="portfolio-detail-reveal section-eyebrow"
-            >
-              Gallery
-            </p>
-
-            <h1
-              id="portfolio-detail-heading"
-              style={getRevealStyle(140)}
-              className="portfolio-detail-reveal mb-0 mt-[25px] font-primary text-[clamp(44px,4.2vw,60px)] font-normal uppercase leading-[1.02] tracking-[0.055em] text-heading max-[600px]:mt-[20px] max-[600px]:text-[clamp(36px,10vw,46px)] max-[480px]:tracking-[0.035em]"
-            >
-              {project.name}
-            </h1>
-
-            <div
-              style={getRevealStyle(230)}
-              className="portfolio-detail-reveal mx-auto mt-[30px] flex items-center justify-center gap-[112px] font-primary text-[18px] font-normal leading-none text-[#555351] max-[900px]:gap-[72px] max-[600px]:mt-[25px] max-[600px]:flex-col max-[600px]:gap-[13px] max-[600px]:text-[17px]"
-            >
-              <p className="m-0">
-                Date:{" "}
-                <span className="ml-[7px] font-script text-[25px] leading-none text-accent max-[600px]:text-[23px]">
-                  {project.date}
-                </span>
-              </p>
-
-              <p className="m-0">
-                Category:{" "}
-                <span className="ml-[7px] font-script text-[25px] leading-none text-accent max-[600px]:text-[23px]">
-                  {project.category}
-                </span>
-              </p>
-            </div>
-          </header>
-
-          <button
-            type="button"
-            aria-label={`Open featured photograph from ${project.name}`}
-            onClick={(event) => onOpenLightbox(0, event.currentTarget)}
-            style={getRevealStyle(320)}
-            className="portfolio-detail-reveal portfolio-detail-cover group relative mt-[24px] block aspect-[2/1] w-full cursor-zoom-in overflow-hidden border-0 bg-[#ddd7cf] p-0 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-accent max-[700px]:aspect-[4/3]"
-          >
-            <img
-              src={project.gallery[0].src}
-              alt={project.gallery[0].alt}
-              decoding="async"
-              className="portfolio-detail-cover-image block h-full w-full object-cover object-center"
-            />
-          </button>
-
+        <header className="section-header">
           <p
-            style={getRevealStyle(400)}
-            className="portfolio-detail-reveal mx-auto mb-0 mt-[57px] max-w-[665px] text-center font-primary text-[19px] font-normal leading-[1.42] tracking-[0.005em] text-[#504e4c] max-[900px]:mt-[50px] max-[600px]:mt-[40px] max-[600px]:max-w-[480px] max-[600px]:text-[17px] max-[380px]:text-[16px]"
+            style={getRevealStyle(80)}
+            className="portfolio-detail-reveal section-eyebrow"
           >
-            {project.description}
+            Gallery
           </p>
 
-          <div className="mt-[58px] max-[900px]:mt-[50px] max-[600px]:mt-[42px]">
-            <div className="grid grid-cols-[0.72fr_1fr] gap-[70px] max-[1100px]:gap-[52px] max-[900px]:gap-[36px] max-[700px]:grid-cols-1 max-[700px]:gap-6">
-              <GalleryImage
-                image={project.gallery[1]}
-                index={1}
-                onOpen={onOpenLightbox}
-                className="h-[485px] max-[1100px]:h-[440px] max-[900px]:h-[390px] max-[700px]:h-auto max-[700px]:aspect-[4/5]"
-              />
+          <h1
+            id="portfolio-detail-heading"
+            style={getRevealStyle(170)}
+            className="portfolio-detail-reveal section-title uppercase"
+          >
+            {project.name}
+          </h1>
 
-              <GalleryImage
-                image={project.gallery[2]}
-                index={2}
-                onOpen={onOpenLightbox}
-                className="h-[485px] max-[1100px]:h-[440px] max-[900px]:h-[390px] max-[700px]:h-auto max-[700px]:aspect-[4/4.4]"
-              />
-            </div>
+          <div
+            style={getRevealStyle(260)}
+            className="portfolio-detail-reveal mx-auto mt-[30px] flex items-center justify-center gap-[118px] font-primary text-[21px] font-normal leading-none text-[#555351] max-[1200px]:text-[19px] max-[1024px]:gap-[82px] max-[700px]:gap-[52px] max-[600px]:mt-[25px] max-[600px]:flex-col max-[600px]:gap-[13px] max-[600px]:text-[17px] max-[380px]:text-[16px]"
+          >
+            <p className="m-0">
+              Date:
+              <span className="ml-[8px] font-script text-[28px] font-normal leading-none text-accent max-[600px]:text-[24px]">
+                {project.date}
+              </span>
+            </p>
 
-            <div className="mt-[58px] grid grid-cols-[1.64fr_1fr] gap-[74px] max-[1100px]:mt-[52px] max-[1100px]:gap-[54px] max-[900px]:mt-[42px] max-[900px]:gap-[38px] max-[700px]:mt-6 max-[700px]:grid-cols-1 max-[700px]:gap-6">
-              <GalleryImage
-                image={project.gallery[3]}
-                index={3}
-                onOpen={onOpenLightbox}
-                className="h-[485px] max-[1100px]:h-[440px] max-[900px]:h-[390px] max-[700px]:h-auto max-[700px]:aspect-[4/4.3]"
-              />
+            <p className="m-0">
+              Category:
+              <span className="ml-[8px] font-script text-[28px] font-normal leading-none text-accent max-[600px]:text-[24px]">
+                {project.category}
+              </span>
+            </p>
+          </div>
+        </header>
 
-              <GalleryImage
-                image={project.gallery[4]}
-                index={4}
-                onOpen={onOpenLightbox}
-                className="h-[485px] max-[1100px]:h-[440px] max-[900px]:h-[390px] max-[700px]:h-auto max-[700px]:aspect-[4/5.2]"
-              />
-            </div>
+        <button
+          type="button"
+          aria-label={`Open featured photograph from ${project.name}`}
+          onClick={(event) => onOpenLightbox(0, event.currentTarget)}
+          style={getRevealStyle(340)}
+          className="portfolio-detail-reveal portfolio-featured-image group mt-[34px] block aspect-[2.18/1] w-full cursor-zoom-in overflow-hidden border-0 bg-[#ded8cf] p-0 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-accent max-[1024px]:aspect-[2/1] max-[700px]:mt-[29px] max-[700px]:aspect-[4/3]"
+        >
+          <img
+            src={project.gallery[0].src}
+            alt={project.gallery[0].alt}
+            decoding="async"
+            className="portfolio-featured-image__photo block h-full w-full object-cover object-center"
+          />
+        </button>
+
+        <p
+          style={getRevealStyle(430)}
+          className="portfolio-detail-reveal mx-auto mb-0 mt-[58px] max-w-[760px] text-center font-primary text-[21px] font-normal leading-[1.38] tracking-[-0.005em] text-body max-[1200px]:text-[19px] max-[1024px]:mt-[52px] max-[600px]:mt-[40px] max-[600px]:max-w-[520px] max-[600px]:text-[17px] max-[380px]:text-[16px]"
+        >
+          {project.description}
+        </p>
+
+        <div className="mt-[64px] max-[1024px]:mt-[58px] max-[600px]:mt-[46px]">
+          <div className="grid w-full grid-cols-[0.76fr_1.06fr] gap-x-[70px] max-[1280px]:gap-x-[58px] max-[1024px]:gap-x-[42px] max-[800px]:gap-x-[30px] max-[700px]:grid-cols-1 max-[700px]:gap-y-[26px]">
+            <GalleryImage
+              image={project.gallery[1]}
+              index={1}
+              onOpen={onOpenLightbox}
+              className="h-[560px] max-[1280px]:h-[520px] max-[1024px]:h-[470px] max-[800px]:h-[420px] max-[700px]:h-auto max-[700px]:aspect-[4/5]"
+            />
 
             <GalleryImage
-              image={project.gallery[5]}
-              index={5}
+              image={project.gallery[2]}
+              index={2}
               onOpen={onOpenLightbox}
-              className="mt-[58px] aspect-[2/1] max-[1100px]:mt-[52px] max-[900px]:mt-[42px] max-[700px]:mt-6 max-[700px]:aspect-[4/3]"
+              className="h-[560px] max-[1280px]:h-[520px] max-[1024px]:h-[470px] max-[800px]:h-[420px] max-[700px]:h-auto max-[700px]:aspect-[4/4.5]"
             />
           </div>
+
+          <div className="mt-[66px] grid w-full grid-cols-[1.38fr_0.84fr] gap-x-[76px] max-[1280px]:mt-[60px] max-[1280px]:gap-x-[62px] max-[1024px]:mt-[54px] max-[1024px]:gap-x-[44px] max-[800px]:gap-x-[30px] max-[700px]:mt-[26px] max-[700px]:grid-cols-1 max-[700px]:gap-y-[26px]">
+            <GalleryImage
+              image={project.gallery[3]}
+              index={3}
+              onOpen={onOpenLightbox}
+              className="h-[520px] max-[1280px]:h-[490px] max-[1024px]:h-[450px] max-[800px]:h-[400px] max-[700px]:h-auto max-[700px]:aspect-[4/4.1]"
+            />
+
+            <GalleryImage
+              image={project.gallery[4]}
+              index={4}
+              onOpen={onOpenLightbox}
+              className="h-[520px] max-[1280px]:h-[490px] max-[1024px]:h-[450px] max-[800px]:h-[400px] max-[700px]:h-auto max-[700px]:aspect-[4/5]"
+            />
+          </div>
+
+          <GalleryImage
+            image={project.gallery[5]}
+            index={5}
+            onOpen={onOpenLightbox}
+            className="mt-[66px] aspect-[2.18/1] max-[1280px]:mt-[60px] max-[1024px]:mt-[54px] max-[1024px]:aspect-[2/1] max-[700px]:mt-[26px] max-[700px]:aspect-[4/3]"
+          />
         </div>
       </div>
     </section>
@@ -334,12 +345,12 @@ function PortfolioStory({ project, onOpenLightbox }) {
 
 function MoreWorks({ currentProject }) {
   const { elementRef, isVisible } = useRevealOnScroll({
-    threshold: 0.1,
-    rootMargin: "0px 0px -40px",
+    threshold: 0.12,
+    rootMargin: "0px 0px -45px",
   });
 
   const moreWorks = useMemo(() => {
-    return projects
+    return portfolioProjects
       .filter((project) => project.slug !== currentProject.slug)
       .slice(0, 4);
   }, [currentProject.slug]);
@@ -348,55 +359,53 @@ function MoreWorks({ currentProject }) {
     <section
       ref={elementRef}
       aria-labelledby="more-works-heading"
-      className={`more-works-scope overflow-hidden bg-white pb-[108px] max-[1280px]:pb-[98px] max-[1024px]:pb-[88px] max-[768px]:pb-[76px] max-[600px]:pb-[65px] ${
+      className={`portfolio-more-works portfolio-detail-scope overflow-hidden bg-white pb-[110px] max-[1280px]:pb-[100px] max-[1024px]:pb-[90px] max-[768px]:pb-[80px] max-[600px]:pb-[70px] ${
         isVisible ? "is-visible" : ""
       }`}
     >
       <div className="site-container">
-        <div className="mx-auto w-full max-w-[970px]">
-          <header className="text-center">
-            <img
-              src={creativeLeaf}
-              alt=""
-              aria-hidden="true"
-              style={getRevealStyle(60)}
-              className="portfolio-detail-reveal mx-auto h-auto w-[44px] object-contain max-[600px]:w-[39px]"
-            />
+        <header className="section-header">
+          <img
+            src={creativeLeaf}
+            alt=""
+            aria-hidden="true"
+            style={getRevealStyle(60)}
+            className="portfolio-detail-reveal mx-auto h-auto w-[49px] object-contain max-[600px]:w-[43px]"
+          />
 
-            <h2
-              id="more-works-heading"
-              style={getRevealStyle(150)}
-              className="portfolio-detail-reveal mb-0 mt-[20px] font-primary text-[42px] font-normal leading-none tracking-[0.04em] text-heading max-[768px]:text-[39px] max-[600px]:mt-[17px] max-[600px]:text-[36px]"
+          <h2
+            id="more-works-heading"
+            style={getRevealStyle(150)}
+            className="portfolio-detail-reveal mb-0 mt-[19px] font-primary text-[44px] font-normal leading-none tracking-[0.035em] text-heading max-[1024px]:text-[42px] max-[600px]:mt-[16px] max-[600px]:text-[38px] max-[380px]:text-[35px]"
+          >
+            More Works
+          </h2>
+        </header>
+
+        <div className="mt-[54px] grid w-full grid-cols-4 gap-x-[42px] max-[1280px]:mt-[50px] max-[1280px]:gap-x-[34px] max-[1024px]:gap-x-[28px] max-[760px]:grid-cols-2 max-[760px]:gap-x-[24px] max-[760px]:gap-y-[30px] max-[600px]:mt-[42px] max-[480px]:gap-x-[16px]">
+          {moreWorks.map((work, index) => (
+            <article
+              key={work.id}
+              style={getRevealStyle(250 + index * 90)}
+              className="portfolio-detail-reveal min-w-0"
             >
-              More Works
-            </h2>
-          </header>
-
-          <div className="mt-[50px] grid grid-cols-4 gap-[37px] max-[1024px]:gap-[28px] max-[760px]:grid-cols-2 max-[760px]:gap-[28px] max-[600px]:mt-[40px] max-[480px]:gap-[18px]">
-            {moreWorks.map((work, index) => (
-              <article
-                key={work.id}
-                style={getRevealStyle(250 + index * 90)}
-                className="portfolio-detail-reveal min-w-0"
+              <Link
+                to={`/portfolio/${work.slug}`}
+                aria-label={`View ${work.name} ${work.category} portfolio`}
+                className="portfolio-more-card group block text-inherit no-underline focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-accent"
               >
-                <Link
-                  to={`/portfolio/${work.slug}`}
-                  aria-label={`View ${work.name} ${work.category} gallery`}
-                  className="more-work-card group block text-inherit no-underline focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-accent"
-                >
-                  <figure className="m-0 aspect-[4/4.7] w-full overflow-hidden bg-[#ddd8d1]">
-                    <img
-                      src={work.cover}
-                      alt={work.coverAlt}
-                      loading="lazy"
-                      decoding="async"
-                      className="more-work-card__image block h-full w-full object-cover object-center"
-                    />
-                  </figure>
-                </Link>
-              </article>
-            ))}
-          </div>
+                <figure className="m-0 aspect-[4/4.7] w-full overflow-hidden bg-[#ded8cf]">
+                  <img
+                    src={work.cover}
+                    alt={work.coverAlt}
+                    loading="lazy"
+                    decoding="async"
+                    className="portfolio-more-card__image block h-full w-full object-cover object-center"
+                  />
+                </figure>
+              </Link>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -406,10 +415,10 @@ function MoreWorks({ currentProject }) {
 function GalleryLightbox({
   project,
   activeIndex,
+  closeButtonRef,
   onClose,
   onPrevious,
   onNext,
-  closeButtonRef,
 }) {
   if (activeIndex === null) {
     return null;
@@ -422,24 +431,24 @@ function GalleryLightbox({
       role="dialog"
       aria-modal="true"
       aria-label={`${project.name} gallery viewer`}
-      className="portfolio-lightbox fixed inset-0 z-[250] flex items-center justify-center bg-black/[0.9] px-[76px] py-[60px] max-[768px]:px-[48px] max-[600px]:px-[20px] max-[600px]:py-[70px]"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
           onClose();
         }
       }}
+      className="portfolio-lightbox fixed inset-0 z-[300] flex items-center justify-center bg-black/[0.91] px-[78px] py-[58px] max-[768px]:px-[52px] max-[600px]:px-[20px] max-[600px]:py-[65px]"
     >
       <button
         ref={closeButtonRef}
         type="button"
         aria-label="Close gallery"
         onClick={onClose}
-        className="absolute right-[28px] top-[24px] flex h-[46px] w-[46px] cursor-pointer items-center justify-center border-0 bg-transparent text-white/90 transition-[opacity,transform] duration-300 hover:rotate-90 hover:opacity-70 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white max-[600px]:right-[14px] max-[600px]:top-[14px]"
+        className="absolute right-[27px] top-[22px] flex h-[48px] w-[48px] cursor-pointer items-center justify-center border-0 bg-transparent text-white transition-[opacity,transform] duration-300 hover:rotate-90 hover:opacity-70 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white max-[600px]:right-[12px] max-[600px]:top-[12px]"
       >
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
-          className="h-[29px] w-[29px]"
+          className="h-[30px] w-[30px]"
         >
           <path
             d="M5 5L19 19M19 5L5 19"
@@ -453,14 +462,14 @@ function GalleryLightbox({
 
       <button
         type="button"
-        aria-label="Previous image"
+        aria-label="Previous photograph"
         onClick={onPrevious}
-        className="absolute left-[22px] top-1/2 flex h-[54px] w-[54px] -translate-y-1/2 cursor-pointer items-center justify-center border-0 bg-transparent text-white/90 transition-[opacity,transform] duration-300 hover:-translate-x-[4px] hover:-translate-y-1/2 hover:opacity-70 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white max-[600px]:left-[4px] max-[600px]:h-[44px] max-[600px]:w-[44px]"
+        className="absolute left-[20px] top-1/2 flex h-[55px] w-[55px] -translate-y-1/2 cursor-pointer items-center justify-center border-0 bg-transparent text-white transition-[opacity,transform] duration-300 hover:-translate-x-[4px] hover:-translate-y-1/2 hover:opacity-70 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white max-[600px]:left-[2px] max-[600px]:h-[44px] max-[600px]:w-[44px]"
       >
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
-          className="h-[34px] w-[34px]"
+          className="h-[35px] w-[35px]"
         >
           <path
             d="M15 5L8 12L15 19"
@@ -484,14 +493,14 @@ function GalleryLightbox({
 
       <button
         type="button"
-        aria-label="Next image"
+        aria-label="Next photograph"
         onClick={onNext}
-        className="absolute right-[22px] top-1/2 flex h-[54px] w-[54px] -translate-y-1/2 cursor-pointer items-center justify-center border-0 bg-transparent text-white/90 transition-[opacity,transform] duration-300 hover:translate-x-[4px] hover:-translate-y-1/2 hover:opacity-70 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white max-[600px]:right-[4px] max-[600px]:h-[44px] max-[600px]:w-[44px]"
+        className="absolute right-[20px] top-1/2 flex h-[55px] w-[55px] -translate-y-1/2 cursor-pointer items-center justify-center border-0 bg-transparent text-white transition-[opacity,transform] duration-300 hover:translate-x-[4px] hover:-translate-y-1/2 hover:opacity-70 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white max-[600px]:right-[2px] max-[600px]:h-[44px] max-[600px]:w-[44px]"
       >
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
-          className="h-[34px] w-[34px]"
+          className="h-[35px] w-[35px]"
         >
           <path
             d="M9 5L16 12L9 19"
@@ -504,7 +513,7 @@ function GalleryLightbox({
         </svg>
       </button>
 
-      <p className="absolute bottom-[22px] left-1/2 m-0 -translate-x-1/2 font-primary text-[15px] tracking-[0.12em] text-white/75 max-[600px]:bottom-[18px]">
+      <p className="absolute bottom-[22px] left-1/2 m-0 -translate-x-1/2 font-primary text-[15px] tracking-[0.12em] text-white/75">
         {activeIndex + 1} / {project.gallery.length}
       </p>
     </div>
@@ -515,7 +524,7 @@ export default function PortfolioDetailsPage() {
   const { slug } = useParams();
 
   const project = useMemo(() => {
-    return projects.find((item) => item.slug === slug);
+    return portfolioProjects.find((item) => item.slug === slug);
   }, [slug]);
 
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -546,10 +555,14 @@ export default function PortfolioDetailsPage() {
   }, []);
 
   const showPreviousImage = useCallback(() => {
-    if (!project) return;
+    if (!project) {
+      return;
+    }
 
     setLightboxIndex((currentIndex) => {
-      if (currentIndex === null) return null;
+      if (currentIndex === null) {
+        return null;
+      }
 
       return currentIndex === 0
         ? project.gallery.length - 1
@@ -558,10 +571,14 @@ export default function PortfolioDetailsPage() {
   }, [project]);
 
   const showNextImage = useCallback(() => {
-    if (!project) return;
+    if (!project) {
+      return;
+    }
 
     setLightboxIndex((currentIndex) => {
-      if (currentIndex === null) return null;
+      if (currentIndex === null) {
+        return null;
+      }
 
       return (currentIndex + 1) % project.gallery.length;
     });
@@ -573,6 +590,7 @@ export default function PortfolioDetailsPage() {
     }
 
     const previousOverflow = document.body.style.overflow;
+
     document.body.style.overflow = "hidden";
 
     const focusTimer = window.setTimeout(() => {
@@ -616,7 +634,12 @@ export default function PortfolioDetailsPage() {
       <Header variant="page" />
 
       <main id="main-content">
-        <PortfolioStory
+        <SubpageHero
+          ariaLabel={`${project.name} ${project.category} portfolio gallery`}
+          imageAlt="Bride and groom sharing a quiet wedding moment"
+        />
+
+        <PortfolioGallery
           project={project}
           onOpenLightbox={openLightbox}
         />
@@ -629,10 +652,10 @@ export default function PortfolioDetailsPage() {
       <GalleryLightbox
         project={project}
         activeIndex={lightboxIndex}
+        closeButtonRef={closeButtonRef}
         onClose={closeLightbox}
         onPrevious={showPreviousImage}
         onNext={showNextImage}
-        closeButtonRef={closeButtonRef}
       />
     </div>
   );
