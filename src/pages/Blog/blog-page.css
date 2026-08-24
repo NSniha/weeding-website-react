@@ -1,0 +1,73 @@
+/* ===================================
+   Blog Reveal
+=================================== */
+
+.blog-reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 850ms var(--ease-elegant),
+    transform 850ms var(--ease-elegant);
+  transition-delay: var(--blog-delay, 0ms);
+}
+
+.blog-reveal-scope.is-visible .blog-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================================
+   Blog Card
+=================================== */
+
+.blog-card {
+  position: relative;
+}
+
+.blog-card__media {
+  position: relative;
+}
+
+.blog-card__image {
+  transform: scale(1.065);
+  transition: transform 1200ms var(--ease-elegant);
+}
+
+.blog-reveal-scope.is-visible .blog-card__image {
+  transform: scale(1);
+}
+
+.blog-card__title {
+  transition:
+    color 300ms ease,
+    transform 400ms var(--ease-elegant);
+}
+
+/* ===================================
+   Desktop Interaction
+=================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  .blog-card:hover .blog-card__image {
+    transform: scale(1.045);
+  }
+
+  .blog-card:hover .blog-card__title {
+    color: #ad8362;
+    transform: translateY(-2px);
+  }
+}
+
+/* ===================================
+   Reduced Motion
+=================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-reveal,
+  .blog-card__image,
+  .blog-card__title {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
