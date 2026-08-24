@@ -9,8 +9,7 @@
 A multi-page wedding photography studio website built with React, React Router, and Tailwind CSS. The project includes a full marketing site — home, about, services, portfolio, blog, and contact — with reusable UI components and client-side routing.
 
 ## Preview
-<img width="1280" height="800" alt="Linkedin-Feature" src="https://github.com/user-attachments/assets/494eaebe-41c5-48b1-b867-006734e31b18" />
-
+<img width="1280" height="800" alt="weeding-preview" src="https://github.com/user-attachments/assets/4713726b-f3bf-4200-8744-a0520d5df6b8" />
 
 ## Features
 
