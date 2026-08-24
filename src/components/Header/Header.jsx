@@ -59,13 +59,7 @@ function DesktopNavigation({ links, position }) {
           key={link.id}
           to={link.href}
           end={link.href === "/"}
-          className={({ isActive }) =>
-            `relative inline-flex items-center whitespace-nowrap font-primary text-[16px] font-normal uppercase leading-none tracking-[0.045em] no-underline transition-colors duration-[250ms] after:absolute after:inset-x-0 after:bottom-[-9px] after:h-px after:origin-center after:bg-current after:transition-[opacity,transform] after:duration-[250ms] after:content-[''] hover:text-[#9c795d] hover:after:scale-x-100 hover:after:opacity-100 focus-visible:text-[#9c795d] focus-visible:outline-none focus-visible:after:scale-x-100 focus-visible:after:opacity-100 min-[1281px]:text-[17.5px] min-[1281px]:tracking-[0.055em] ${
-              isActive
-                ? "text-[#9c795d] after:scale-x-100 after:opacity-100"
-                : "text-[#2f2e2d] after:scale-x-0 after:opacity-0"
-            }`
-          }
+          className="header-nav-link whitespace-nowrap font-primary text-[16px] font-normal uppercase leading-none tracking-[0.045em] text-[#2f2e2d] no-underline min-[1281px]:text-[17.5px] min-[1281px]:tracking-[0.055em]"
         >
           {link.label}
         </NavLink>

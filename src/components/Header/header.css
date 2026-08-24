@@ -19,3 +19,54 @@
     animation: none;
   }
 }
+
+/* ===================================
+   Header Navigation Interaction
+=================================== */
+
+.header-nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 250ms ease;
+}
+
+.header-nav-link::after {
+  position: absolute;
+  right: 0;
+  bottom: -7px;
+  left: 0;
+  height: 1px;
+  background: #a98362;
+  content: "";
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition:
+    opacity 250ms ease,
+    transform 250ms ease;
+}
+
+.header-nav-link:hover,
+.header-nav-link:focus-visible {
+  color: #a27b5b;
+  outline: none;
+}
+
+.header-nav-link:hover::after,
+.header-nav-link:focus-visible::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* ===================================
+   Reduced Motion
+=================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .header-nav-link,
+  .header-nav-link::after {
+    transition: none;
+  }
+}
