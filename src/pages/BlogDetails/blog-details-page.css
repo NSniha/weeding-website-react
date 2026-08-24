@@ -29,10 +29,18 @@
   transform: scale(1);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .blog-detail-image-button:hover .blog-detail-image {
-    transform: scale(1.04);
-  }
+.blog-detail-image-button {
+  position: relative;
+}
+
+.blog-detail-image-button::after {
+  position: absolute;
+  inset: 0;
+  background: rgba(58, 48, 40, 0.08);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 350ms ease;
 }
 
 /* ===================================
@@ -49,7 +57,7 @@
 .blog-detail-bottom-link::after {
   position: absolute;
   right: 0;
-  bottom: -5px;
+  bottom: -6px;
   left: 0;
   height: 1px;
   background: #b9906e;
@@ -72,6 +80,20 @@
 .blog-detail-bottom-link:focus-visible::after {
   opacity: 1;
   transform: scaleX(1);
+}
+
+/* ===================================
+   Desktop Interaction
+=================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  .blog-detail-image-button:hover .blog-detail-image {
+    transform: scale(1.04);
+  }
+
+  .blog-detail-image-button:hover::after {
+    opacity: 1;
+  }
 }
 
 /* ===================================
@@ -115,6 +137,7 @@
 @media (prefers-reduced-motion: reduce) {
   .blog-detail-reveal,
   .blog-detail-image,
+  .blog-detail-image-button::after,
   .blog-detail-bottom-link,
   .blog-detail-bottom-link::after,
   .blog-lightbox,

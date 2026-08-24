@@ -235,7 +235,7 @@ function PortfolioGallery({ project, onOpenLightbox }) {
     <section
       ref={elementRef}
       aria-labelledby="portfolio-detail-heading"
-      className={`portfolio-detail-scope overflow-hidden bg-white pb-[110px] pt-[94px] max-[1280px]:pb-[100px] max-[1280px]:pt-[88px] max-[1024px]:pb-[90px] max-[1024px]:pt-[82px] max-[768px]:pb-[80px] max-[768px]:pt-[72px] max-[600px]:pb-[70px] max-[600px]:pt-[62px] ${
+      className={`portfolio-detail-scope overflow-hidden bg-white pb-[100px] pt-[85px] max-[1280px]:pb-[100px] max-[1280px]:pt-[88px] max-[1024px]:pb-[90px] max-[1024px]:pt-[82px] max-[768px]:pb-[80px] max-[768px]:pt-[72px] max-[600px]:pb-[70px] max-[600px]:pt-[62px] ${
         isVisible ? "is-visible" : ""
       }`}
     >
@@ -359,7 +359,7 @@ function MoreWorks({ currentProject }) {
     <section
       ref={elementRef}
       aria-labelledby="more-works-heading"
-      className={`portfolio-more-works portfolio-detail-scope overflow-hidden bg-white pb-[110px] max-[1280px]:pb-[100px] max-[1024px]:pb-[90px] max-[768px]:pb-[80px] max-[600px]:pb-[70px] ${
+      className={`portfolio-more-works portfolio-detail-scope overflow-hidden bg-white pb-[60px] max-[1280px]:pb-[100px] max-[1024px]:pb-[90px] max-[768px]:pb-[80px] max-[600px]:pb-[70px] ${
         isVisible ? "is-visible" : ""
       }`}
     >

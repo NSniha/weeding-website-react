@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 
-import blogImageOne from "../../assets/images/about-bouquet-soft.png";
-import blogImageTwo from "../../assets/images/portfolio-portrait-2.png";
-import blogImageThree from "../../assets/images/portfolio-wedding-2.png";
-import blogImageFour from "../../assets/images/portfolio-engagement-2.png";
-import blogImageFive from "../../assets/images/portfolio-portrait-3.png";
-import blogImageSix from "../../assets/images/portfolio-engagement-3.png";
+import blogImageOne from "../../assets/images/blog-01.png";
+import blogImageTwo from "../../assets/images/blog-02.png";
+import blogImageThree from "../../assets/images/blog-03.png";
+import blogImageFour from "../../assets/images/blog-04.png";
+import blogImageFive from "../../assets/images/blog-05.png";
+import blogImageSix from "../../assets/images/blog-06.png";
 
 import quoteMark from "../../assets/icons/quote-mark.svg";
 
@@ -212,18 +212,13 @@ function getRevealStyle(delay) {
   };
 }
 
-function ArticleImage({
-  image,
-  index,
-  onOpen,
-  className = "",
-}) {
+function ArticleImage({ image, index, onOpen, className = "" }) {
   return (
     <button
       type="button"
       aria-label={`Open article photograph ${index + 1}`}
       onClick={(event) => onOpen(index, event.currentTarget)}
-      style={getRevealStyle(120 + index * 90)}
+      style={getRevealStyle(100 + index * 100)}
       className={`blog-detail-reveal blog-detail-image-button group relative block w-full cursor-zoom-in overflow-hidden border-0 bg-[#ded8cf] p-0 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-accent ${className}`}
     >
       <img
@@ -237,7 +232,7 @@ function ArticleImage({
   );
 }
 
-function BlogArticleIntro({ post, onOpen }) {
+function BlogArticle({ post, onOpen }) {
   const { elementRef, isVisible } = useRevealOnScroll({
     threshold: 0.08,
     rootMargin: "0px 0px -55px",
@@ -247,185 +242,143 @@ function BlogArticleIntro({ post, onOpen }) {
     <section
       ref={elementRef}
       aria-labelledby="blog-detail-heading"
-      className={`blog-detail-scope overflow-hidden bg-white pt-[94px] max-[1280px]:pt-[88px] max-[1024px]:pt-[82px] max-[768px]:pt-[72px] max-[600px]:pt-[62px] ${
+      className={`blog-detail-scope overflow-hidden bg-white pb-[60px] pt-[85px] max-[1280px]:pb-[100px] max-[1280px]:pt-[88px] max-[1024px]:pb-[90px] max-[1024px]:pt-[82px] max-[768px]:pb-[80px] max-[768px]:pt-[72px] max-[600px]:pb-[70px] max-[600px]:pt-[62px] ${
         isVisible ? "is-visible" : ""
       }`}
     >
       <div className="site-container">
-        <div className="mx-auto w-full max-w-[900px]">
-          <header className="section-header">
-            <p
-              style={getRevealStyle(60)}
-              className="blog-detail-reveal section-eyebrow"
-            >
-              Blog
-            </p>
-
-            <h1
-              id="blog-detail-heading"
-              style={getRevealStyle(150)}
-              className="blog-detail-reveal mx-auto max-w-[850px] section-title uppercase"
-            >
-              {post.title}
-            </h1>
-
-            <div
-              style={getRevealStyle(240)}
-              className="blog-detail-reveal mt-[50px] grid grid-cols-2 gap-[60px] text-left font-primary text-[21px] font-normal leading-none text-[#555351] max-[1200px]:text-[19px] max-[700px]:mt-[40px] max-[600px]:grid-cols-1 max-[600px]:gap-[13px] max-[600px]:text-center max-[600px]:text-[17px] max-[380px]:text-[16px]"
-            >
-              <p className="m-0">
-                Date:
-                <span className="ml-[9px] font-script text-[28px] font-normal leading-none text-accent max-[600px]:text-[24px]">
-                  {post.date}
-                </span>
-              </p>
-
-              <p className="m-0">
-                Category:
-                <span className="ml-[9px] font-script text-[28px] font-normal leading-none text-accent max-[600px]:text-[24px]">
-                  {post.category}
-                </span>
-              </p>
-            </div>
-          </header>
-
-          <ArticleImage
-            image={post.gallery[0]}
-            index={0}
-            onOpen={onOpen}
-            className="mt-[30px] aspect-[1.67/1] max-[700px]:aspect-[4/3]"
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function BlogArticleBody({ post, onOpen }) {
-  const { elementRef, isVisible } = useRevealOnScroll({
-    threshold: 0.1,
-    rootMargin: "0px 0px -55px",
-  });
-
-  return (
-    <section
-      ref={elementRef}
-      className={`blog-detail-scope overflow-hidden bg-white pt-[70px] max-[1024px]:pt-[62px] max-[600px]:pt-[48px] ${
-        isVisible ? "is-visible" : ""
-      }`}
-    >
-      <div className="site-container">
-        <div className="mx-auto w-full max-w-[900px]">
-          <div
-            style={getRevealStyle(60)}
-            className="blog-detail-reveal mx-auto max-w-[760px]"
-          >
-            {post.paragraphs.map((paragraph, index) => (
-              <p
-                key={paragraph}
-                className={`m-0 font-primary text-[21px] font-normal leading-[1.5] tracking-[-0.005em] text-body max-[1200px]:text-[19px] max-[600px]:text-[17px] max-[380px]:text-[16px] ${
-                  index > 0
-                    ? "mt-[28px] max-[600px]:mt-[23px]"
-                    : ""
-                }`}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <blockquote
-            style={getRevealStyle(180)}
-            className="blog-detail-reveal mx-auto mb-0 mt-[55px] max-w-[760px] max-[600px]:mt-[45px]"
-          >
-            <img
-              src={quoteMark}
-              alt=""
-              aria-hidden="true"
-              className="mb-[14px] block h-auto w-[34px] object-contain opacity-80 max-[600px]:w-[30px]"
-            />
-
-            <p className="m-0 max-w-[720px] font-primary text-[39px] font-normal leading-[1.28] tracking-[0.005em] text-heading max-[1024px]:text-[36px] max-[768px]:text-[33px] max-[600px]:text-[29px] max-[380px]:text-[26px]">
-              {post.quote}
-            </p>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function BlogArticleGallery({ post, onOpen }) {
-  const { elementRef, isVisible } = useRevealOnScroll({
-    threshold: 0.1,
-    rootMargin: "0px 0px -55px",
-  });
-
-  return (
-    <section
-      ref={elementRef}
-      className={`blog-detail-scope overflow-hidden bg-white pb-[106px] pt-[62px] max-[1280px]:pb-[98px] max-[1024px]:pb-[90px] max-[1024px]:pt-[56px] max-[768px]:pb-[80px] max-[600px]:pb-[70px] max-[600px]:pt-[45px] ${
-        isVisible ? "is-visible" : ""
-      }`}
-    >
-      <div className="site-container">
-        <div className="mx-auto w-full max-w-[900px]">
-          <div className="grid grid-cols-2 gap-[48px] max-[900px]:gap-[34px] max-[600px]:grid-cols-1 max-[600px]:gap-[24px]">
-            <ArticleImage
-              image={post.gallery[1]}
-              index={1}
-              onOpen={onOpen}
-              className="aspect-[1.2/1]"
-            />
-
-            <ArticleImage
-              image={post.gallery[2]}
-              index={2}
-              onOpen={onOpen}
-              className="aspect-[1.2/1]"
-            />
-          </div>
-
+        <header className="section-header">
           <p
-            style={getRevealStyle(340)}
-            className="blog-detail-reveal mx-auto mb-0 mt-[48px] max-w-[760px] font-primary text-[21px] font-normal leading-[1.5] tracking-[-0.005em] text-body max-[1200px]:text-[19px] max-[600px]:mt-[38px] max-[600px]:text-[17px] max-[380px]:text-[16px]"
+            style={getRevealStyle(60)}
+            className="blog-detail-reveal section-eyebrow"
           >
-            {post.closing}
+            Blog
           </p>
 
-          <div
-            style={getRevealStyle(440)}
-            className="blog-detail-reveal mt-[105px] border-t border-[#d6d2cd] pt-[19px] max-[1024px]:mt-[88px] max-[600px]:mt-[68px] max-[600px]:pt-[17px]"
+          <h1
+            id="blog-detail-heading"
+            style={getRevealStyle(150)}
+            className="blog-detail-reveal mx-auto mb-0 mt-[17px] max-w-[980px] font-primary text-[clamp(43px,4vw,58px)] font-normal uppercase leading-[1.08] tracking-[0.055em] text-heading max-[1024px]:max-w-[820px] max-[768px]:text-[clamp(38px,6vw,50px)] max-[600px]:mt-[14px] max-[600px]:max-w-[520px] max-[600px]:text-[clamp(34px,9vw,44px)] max-[600px]:tracking-[0.04em] max-[380px]:text-[32px]"
           >
-            <div className="flex items-center justify-between gap-8">
-              <Link
-                to="/blog"
-                className="blog-detail-bottom-link inline-flex items-center font-primary text-[19px] font-normal tracking-[0.025em] text-[#575451] no-underline max-[600px]:text-[17px]"
+            {post.title}
+          </h1>
+
+          <div
+            style={getRevealStyle(240)}
+            className="blog-detail-reveal mx-auto mt-[45px] grid w-full grid-cols-2 items-center gap-[70px] font-primary text-[21px] font-normal leading-none text-[#555351] max-[1200px]:text-[19px] max-[768px]:mt-[38px] max-[600px]:grid-cols-1 max-[600px]:gap-[13px] max-[600px]:text-center max-[600px]:text-[17px] max-[380px]:text-[16px]"
+          >
+            <p className="m-0 text-left max-[600px]:text-center">
+              Date:
+              <span className="ml-[8px] font-script text-[28px] font-normal leading-none text-accent max-[600px]:text-[24px]">
+                {post.date}
+              </span>
+            </p>
+
+            <p className="m-0 text-left max-[600px]:text-center">
+              Category:
+              <span className="ml-[8px] font-script text-[28px] font-normal leading-none text-accent max-[600px]:text-[24px]">
+                {post.category}
+              </span>
+            </p>
+          </div>
+        </header>
+
+        <ArticleImage
+          image={post.gallery[0]}
+          index={0}
+          onOpen={onOpen}
+          className="mt-[30px] aspect-[2.08/1] max-[1024px]:aspect-[1.9/1] max-[700px]:mt-[27px] max-[700px]:aspect-[4/3]"
+        />
+
+        <div
+          style={getRevealStyle(360)}
+          className="blog-detail-reveal mx-auto mt-[68px] max-w-[820px] max-[1024px]:mt-[60px] max-[600px]:mt-[45px]"
+        >
+          {post.paragraphs.map((paragraph, index) => (
+            <p
+              key={paragraph}
+              className={`m-0 font-primary text-[21px] font-normal leading-[1.5] tracking-[-0.005em] text-body max-[1200px]:text-[19px] max-[600px]:text-[17px] max-[380px]:text-[16px] ${
+                index > 0
+                  ? "mt-[30px] max-[600px]:mt-[24px]"
+                  : ""
+              }`}
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <blockquote
+          style={getRevealStyle(460)}
+          className="blog-detail-reveal mx-auto mb-0 mt-[56px] max-w-[820px] max-[600px]:mt-[46px]"
+        >
+          <img
+            src={quoteMark}
+            alt=""
+            aria-hidden="true"
+            className="mb-[15px] block h-auto w-[38px] object-contain opacity-80 max-[600px]:w-[32px]"
+          />
+
+          <p className="m-0 max-w-[790px] font-primary text-[40px] font-normal leading-[1.3] tracking-[0.004em] text-heading max-[1200px]:text-[37px] max-[900px]:text-[34px] max-[600px]:text-[29px] max-[380px]:text-[26px]">
+            {post.quote}
+          </p>
+        </blockquote>
+
+        <div className="mt-[64px] grid w-full grid-cols-2 gap-[58px] max-[1280px]:gap-[48px] max-[1024px]:mt-[58px] max-[1024px]:gap-[38px] max-[768px]:gap-[28px] max-[600px]:mt-[46px] max-[600px]:grid-cols-1 max-[600px]:gap-[24px]">
+          <ArticleImage
+            image={post.gallery[1]}
+            index={1}
+            onOpen={onOpen}
+            className="aspect-[1.36/1] max-[600px]:aspect-[4/3]"
+          />
+
+          <ArticleImage
+            image={post.gallery[2]}
+            index={2}
+            onOpen={onOpen}
+            className="aspect-[1.36/1] max-[600px]:aspect-[4/3]"
+          />
+        </div>
+
+        <p
+          style={getRevealStyle(680)}
+          className="blog-detail-reveal mx-auto mb-0 mt-[52px] max-w-[820px] font-primary text-[21px] font-normal leading-[1.5] tracking-[-0.005em] text-body max-[1200px]:text-[19px] max-[600px]:mt-[40px] max-[600px]:text-[17px] max-[380px]:text-[16px]"
+        >
+          {post.closing}
+        </p>
+
+        <div
+          style={getRevealStyle(780)}
+          className="blog-detail-reveal mt-[110px] border-t border-[#d6d2cd] pt-[21px] max-[1024px]:mt-[92px] max-[768px]:mt-[82px] max-[600px]:mt-[68px] max-[600px]:pt-[18px]"
+        >
+          <div className="flex w-full items-center justify-between gap-8">
+            <Link
+              to="/blog"
+              className="blog-detail-bottom-link inline-flex items-center font-primary text-[21px] font-normal tracking-[0.02em] text-[#575451] no-underline max-[1200px]:text-[19px] max-[600px]:text-[17px]"
+            >
+              <span
+                aria-hidden="true"
+                className="mr-[9px]"
               >
-                <span
-                  aria-hidden="true"
-                  className="mr-[8px]"
-                >
-                  ←
-                </span>
+                ←
+              </span>
 
-                Go Back
-              </Link>
+              Go Back
+            </Link>
 
-              <Link
-                to="/portfolio"
-                className="blog-detail-bottom-link inline-flex items-center text-right font-primary text-[19px] font-normal tracking-[0.025em] text-[#575451] no-underline max-[600px]:text-[17px]"
+            <Link
+              to="/portfolio"
+              className="blog-detail-bottom-link inline-flex items-center text-right font-primary text-[21px] font-normal tracking-[0.02em] text-[#575451] no-underline max-[1200px]:text-[19px] max-[600px]:text-[17px]"
+            >
+              View Gallery
+
+              <span
+                aria-hidden="true"
+                className="ml-[9px]"
               >
-                View Gallery
-
-                <span
-                  aria-hidden="true"
-                  className="ml-[8px]"
-                >
-                  →
-                </span>
-              </Link>
-            </div>
+                →
+              </span>
+            </Link>
           </div>
         </div>
       </div>
@@ -660,16 +613,7 @@ export default function BlogDetailsPage() {
           imageAlt="A romantic wedding moment photographed by Tessa Morgan"
         />
 
-        <BlogArticleIntro
-          post={post}
-          onOpen={openLightbox}
-        />
-
-        <BlogArticleBody
-          post={post}
-        />
-
-        <BlogArticleGallery
+        <BlogArticle
           post={post}
           onOpen={openLightbox}
         />

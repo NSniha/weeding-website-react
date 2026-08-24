@@ -263,7 +263,7 @@ function StayBeautiful() {
     <section
       ref={elementRef}
       aria-labelledby="stay-beautiful-heading"
-      className={`portfolio-reveal-scope stay-beautiful relative overflow-hidden bg-white pb-[105px] pt-[130px] max-[1280px]:pb-[98px] max-[1280px]:pt-[120px] max-[1024px]:pb-[90px] max-[1024px]:pt-[105px] max-[900px]:pb-[90px] max-[900px]:pt-[90px] max-[600px]:pb-[72px] max-[600px]:pt-[72px] ${
+      className={`portfolio-reveal-scope stay-beautiful relative overflow-hidden bg-white pb-[60px] pt-[130px] max-[1280px]:pb-[98px] max-[1280px]:pt-[120px] max-[1024px]:pb-[90px] max-[1024px]:pt-[105px] max-[900px]:pb-[90px] max-[900px]:pt-[90px] max-[600px]:pb-[72px] max-[600px]:pt-[72px] ${
         isVisible ? "is-visible" : ""
       }`}
     >

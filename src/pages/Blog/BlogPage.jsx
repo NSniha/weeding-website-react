@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-import blogImageOne from "../../assets/images/about-bouquet-soft.png";
-import blogImageTwo from "../../assets/images/portfolio-portrait-2.png";
-import blogImageThree from "../../assets/images/portfolio-wedding-2.png";
-import blogImageFour from "../../assets/images/portfolio-engagement-2.png";
-import blogImageFive from "../../assets/images/portfolio-portrait-3.png";
-import blogImageSix from "../../assets/images/portfolio-engagement-3.png";
+import blogImageOne from "../../assets/images/blog-01.png";
+import blogImageTwo from "../../assets/images/blog-02.png";
+import blogImageThree from "../../assets/images/blog-03.png";
+import blogImageFour from "../../assets/images/blog-04.png";
+import blogImageFive from "../../assets/images/blog-05.png";
+import blogImageSix from "../../assets/images/blog-06.png";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -150,7 +150,7 @@ function LatestStories() {
     <section
       ref={elementRef}
       aria-labelledby="blog-heading"
-      className={`blog-reveal-scope overflow-hidden bg-white pb-[110px] pt-[94px] max-[1280px]:pb-[100px] max-[1280px]:pt-[88px] max-[1024px]:pb-[90px] max-[1024px]:pt-[82px] max-[768px]:pb-[80px] max-[768px]:pt-[72px] max-[600px]:pb-[70px] max-[600px]:pt-[62px] ${
+      className={`blog-reveal-scope overflow-hidden bg-white pb-[60px] pt-[84px] max-[1280px]:pb-[100px] max-[1280px]:pt-[88px] max-[1024px]:pb-[90px] max-[1024px]:pt-[82px] max-[768px]:pb-[80px] max-[768px]:pt-[72px] max-[600px]:pb-[70px] max-[600px]:pt-[62px] ${
         isVisible ? "is-visible" : ""
       }`}
     >

@@ -16,6 +16,7 @@ import ServicesPage from "./pages/Services/ServicesPage";
 import PortfolioPage from "./pages/Portfolio/PortfolioPage";
 import PortfolioDetailsPage from "./pages/PortfolioDetailsPage/PortfolioDetailsPage";
 import BlogPage from "./pages/Blog/BlogPage";
+import BlogDetailsPage from "./pages/BlogDetails/BlogDetailsPage";
 import ContactPage from "./pages/Contact/ContactPage";
 
 function HomePage() {
@@ -56,6 +57,11 @@ export default function App() {
       />
 
       <Route path="/blog" element={<BlogPage />} />
+
+      <Route
+        path="/blog/:slug"
+        element={<BlogDetailsPage />}
+      />
 
       <Route path="/contact" element={<ContactPage />} />
 
